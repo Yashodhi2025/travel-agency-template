@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "installedAt": "2026-11-26T06:32:24.448Z",
+  "fonts": [
+    {
+      "id": "inter",
+      "fontsourcePackage": "inter",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ],
+      "variable": true
+    }
+  ]
+}
