@@ -72,6 +72,10 @@ export function HeroSection() {
       'destinations',
       'tours',
       'experiences',
+      'stays',
+      'offers',
+      'journal',
+      'plan_your_trip',
       'about_us',
       'services',
       'contact',
@@ -82,6 +86,10 @@ export function HeroSection() {
     if (!selectedPages.includes('destinations') && clean.includes('/destinations')) return '/#destinations';
     if (!selectedPages.includes('tours') && clean.includes('/tours')) return '/#packages';
     if (!selectedPages.includes('experiences') && clean.includes('/experiences')) return '/#experiences';
+    if (!selectedPages.includes('stays') && clean.includes('/stays')) return '/#stays';
+    if (!selectedPages.includes('offers') && clean.includes('/offers')) return '/#offers';
+    if (!selectedPages.includes('journal') && clean.includes('/journal')) return '/#stories';
+    if (!selectedPages.includes('plan_your_trip') && clean.includes('/plan-your-trip')) return '/#tailor-made';
     if (!selectedPages.includes('contact') && clean.includes('/contact')) return '/#tailor-made';
     return clean;
   };
@@ -434,11 +442,15 @@ export function HeroSection() {
                 <span aria-hidden="true">→</span>
               </a>
 
-              {selectedPages.includes('contact') && (
+              {(selectedPages.includes('plan_your_trip') || selectedPages.includes('contact')) && (
                 <button
                   type="button"
-                  data-target-page="contact"
-                  onClick={() => scrollToSection('/#tailor-made')}
+                  data-target-page={selectedPages.includes('plan_your_trip') ? 'plan_your_trip' : 'contact'}
+                  onClick={() =>
+                    scrollToSection(
+                      selectedPages.includes('plan_your_trip') ? '/plan-your-trip/' : '/#tailor-made',
+                    )
+                  }
                   className="lux-btn-outline-light !min-h-[42px]"
                 >
                   <span data-preview-field-path="home.secondaryCtaLabel">

@@ -39,6 +39,23 @@ export function MobileConciergeBar() {
     `Hello ${brand}, I would like to discuss a tailor-made Sri Lanka journey.`,
   );
 
+  const selectedPages = Array.isArray(siteData?.requirements?.requiredPages)
+    ? siteData.requirements.requiredPages
+    : siteData?.template?.structure?.pages || [
+        'home',
+        'destinations',
+        'tours',
+        'experiences',
+        'stays',
+        'offers',
+        'journal',
+        'plan_your_trip',
+        'about_us',
+        'services',
+        'contact',
+      ];
+  const planHref = selectedPages.includes('plan_your_trip') ? '/plan-your-trip/' : '/#tailor-made';
+
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-around gap-1.5 border-t border-[var(--lux-border-strong)] bg-[var(--lux-bg)]/95 px-3 py-2 shadow-lg backdrop-blur-md lg:hidden"
@@ -65,7 +82,7 @@ export function MobileConciergeBar() {
         </a>
       )}
       <a
-        href={withBasePath('/#tailor-made')}
+        href={withBasePath(planHref)}
         data-preview-static="mobile-bar-plan"
         className="flex min-h-[40px] flex-1 items-center justify-center rounded bg-[#C6A46A] px-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#101917] no-underline"
       >

@@ -34,6 +34,10 @@
         "destinations",
         "tours",
         "experiences",
+        "stays",
+        "offers",
+        "journal",
+        "plan_your_trip",
         "about_us",
         "services",
         "contact"
@@ -66,6 +70,10 @@
       "destinations",
       "tours",
       "experiences",
+      "stays",
+      "offers",
+      "journal",
+      "plan_your_trip",
       "about_us",
       "services",
       "contact"
@@ -111,7 +119,11 @@
         "experiences": "Experiences",
         "services": "Services",
         "about_us": "About Us",
-        "contact": "Contact"
+        "contact": "Contact",
+        "stays": "Hotels & Stays",
+        "offers": "Special Offers",
+        "journal": "Travel Journal",
+        "plan_your_trip": "Plan Your Trip"
       },
       "footerHeading": "Seasonal Travel Notes",
       "newsletterDescription": "Receive seasonal Sri Lanka travel windows, Avurudu holiday ideas, and curated route inspirations.",
@@ -981,70 +993,252 @@
       "staysViewAllLabel": "View All Stays",
       "stays": [
         {
+          "id": "southern-east-beach-resorts",
           "title": "Southern & East Coast Beach Resorts",
           "subtitle": "Bentota · Mirissa · Trincomalee",
           "category": "Beach Resorts",
           "description": "Direct golden-sand access, oceanfront pools, and relaxed tropical dining ideal for sunlit coastal rest.",
+          "overview": "Unwind beside Sri Lanka’s warmest shores with curated beachfront resorts matched to the sunniest season — Bentota, Mirissa, and Tangalle from November to April, or Trincomalee and Pasikudah from May to September. Every stay is selected for calm swimming access, attentive hospitality, and straightforward expressway or coastal transfers.",
+          "roomTypes": "Ocean-View Deluxe Rooms | Beachfront Suites | Interconnecting Family Rooms | Garden Pool Cabanas",
+          "amenities": "Direct Beach Access | Swimming Pool | Sri Lankan & International Dining | Airport & Expressway Transfers | Air Conditioning & Wi-Fi | Concierge Excursion Desk",
+          "suitableFor": "Families, Couples, Beach Holidays, Weekend Breaks",
+          "nearbyAttractions": "Galle Fort Heritage Ramparts | Madu River Mangrove Lagoon | Coconut Tree Hill Mirissa | Pigeon Island & Nilaveli Bay",
+          "importantInfo": "Displayed rates are illustrative nightly guides in LKR and vary by season, meal plan (BB/HB/FB), and room availability. Confirm live room categories and holiday surcharges directly with our team.",
           "imageUrl": "/images/family-beach-holiday.webp",
           "imageAlt": "Sun-drenched tropical beach resort shoreline with leaning coconut palms",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/family-beach-holiday.webp",
+              "caption": "Palm-fringed golden beach and calm coastal waters"
+            },
+            {
+              "imageUrl": "/images/dest-mirissa.webp",
+              "caption": "Sunlit crescent bay along the southern shoreline"
+            },
+            {
+              "imageUrl": "/images/dest-trincomalee.webp",
+              "caption": "Calm turquoise waters during the East Coast season"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 38000,
           "priceLabel": "Illustrative from LKR 38,000 / night",
-          "ctaLabel": "Enquire beach stays",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=southern-east-beach-resorts"
         },
         {
+          "id": "heritage-coastal-boutique-hotels",
           "title": "Heritage & Coastal Boutique Hotels",
           "subtitle": "Galle Fort · Kandy · Colombo",
           "category": "Boutique Hotels",
           "description": "Intimate restored colonial manors and design-led sanctuaries celebrating Sri Lankan craft and personal hospitality.",
+          "overview": "Step into storied courtyards, arched verandas, and small-scale boutique properties tucked inside historic Galle Fort, royal Kandy’s wooded hills, and Colombo’s leafy neighbourhoods. Ideal for travellers who appreciate local architecture, quiet pools, and personalised culinary care.",
+          "roomTypes": "Heritage Courtyard Rooms | Veranda Junior Suites | Restored Colonial Master Suites",
+          "amenities": "Courtyard Plunge Pool | Curated Local Breakfast | Private Dining Veranda | Walking Access to Heritage Sights | Complimentary Wi-Fi | Private Chauffeur Parking",
+          "suitableFor": "Couples, Honeymooners, Architecture & Culture Enthusiasts, Solo Travellers",
+          "nearbyAttractions": "Galle Fort Lighthouse & Bastions | Temple of the Sacred Tooth Relic | Royal Botanical Gardens Peradeniya | Historic Colombo Promenade",
+          "importantInfo": "Boutique properties typically feature fewer than 20 rooms and fill early during December–April and Esala Perahera. All displayed nightly rates are illustrative guides only.",
           "imageUrl": "/images/hero-galle.webp",
           "imageAlt": "Historic Galle Fort heritage architecture overlooking the Indian Ocean",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-galle.webp",
+              "caption": "Coral-stone ramparts and coastal boutique atmosphere in Galle Fort"
+            },
+            {
+              "imageUrl": "/images/dest-kandy.webp",
+              "caption": "Kandy hillside sanctuary above the sacred lake"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 48000,
           "priceLabel": "Illustrative from LKR 48,000 / night",
-          "ctaLabel": "Enquire boutique stays",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=heritage-coastal-boutique-hotels"
         },
         {
-          "title": "Highland Mountain Retreats",
+          "id": "hill-country-tea-bungalows",
+          "title": "Hill-Country Tea Bungalows & Retreats",
           "subtitle": "Ella · Nuwara Eliya · Haputale",
-          "category": "Mountain Retreats",
-          "description": "Timber decks perched above cloud-draped tea valleys with crisp morning air, fireside lounges, and panoramic views.",
+          "category": "Hill-Country Bungalows",
+          "description": "Timber decks and classic planter bungalows perched above cloud-draped tea valleys with crisp mountain air.",
+          "overview": "Wake to valley mist, freshly brewed single-estate Ceylon tea, and sweeping green ridgelines across Ella, Nuwara Eliya, Hatton, and Haputale. Whether you prefer a storied tea planter’s bungalow with hearthside dining or a contemporary cliffside suite overlooking Ella Gap, our highland selection prioritises serenity and views.",
+          "roomTypes": "Valley-View Suites | Historic Planter Bungalow Rooms | Whole-Bungalow Family Bookings | Loft Mountain Cabins",
+          "amenities": "Panoramic Tea-Valley Views | Estate Walking Trails | Cozy Fireside Lounge | Fresh Highland Cuisine | Scenic Rail Transfer Coordination | Warm Bedding & Hot Water",
+          "suitableFor": "Couples, Families, Avurudu & Long-Weekend Travellers, Tea & Nature Lovers",
+          "nearbyAttractions": "Nine Arch Bridge Ella | Little Adam’s Peak | Gregory Lake & Hakgala Gardens | Lipton’s Seat & Working Tea Factories",
+          "importantInfo": "Evenings in Nuwara Eliya and Haputale can drop to 12–16°C; warm layers are recommended. Scenic train tickets from Kandy/Nanu Oya to Ella should be requested well ahead of peak holidays.",
           "imageUrl": "/images/stay-mountain-retreat.webp",
           "imageAlt": "Mountain retreat timber deck overlooking misty green tea ridges at dawn",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/stay-mountain-retreat.webp",
+              "caption": "Timber viewing terrace hovering over misty emerald tea hills"
+            },
+            {
+              "imageUrl": "/images/hero-tea.webp",
+              "caption": "Terraced highland estates surrounding tea-country bungalows"
+            },
+            {
+              "imageUrl": "/images/hero-ella.webp",
+              "caption": "Scenic railway corridor winding through Ella’s hills"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 35000,
           "priceLabel": "Illustrative from LKR 35,000 / night",
-          "ctaLabel": "Enquire highland stays",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=hill-country-tea-bungalows"
         },
         {
-          "title": "Tropical Modernist Private Villas",
-          "subtitle": "South Coast · Cultural Triangle",
-          "category": "Private Villas",
+          "id": "tropical-modernist-luxury-villas",
+          "title": "Tropical Modernist Luxury Villas",
+          "subtitle": "South Coast · Cultural Triangle · Bentota",
+          "category": "Luxury Villas",
           "description": "Secluded staffed villas with open-air pavilions, private pools, and custom family or honeymoon dining.",
+          "overview": "Designed for complete privacy and unhurried togetherness, our luxury villa collection pairs Sri Lanka’s renowned tropical modernist architecture with dedicated villa staff, private swimming pools, lush walled gardens, and bespoke chef-prepared Sri Lankan or international menus.",
+          "roomTypes": "1–2 Bedroom Honeymoon Pool Villas | 3–5 Bedroom Exclusive-Use Family Estates | Oceanfront Staffed Villas",
+          "amenities": "Private Swimming Pool | Dedicated In-Villa Chef & Butler Service | Open-Air Living Pavilions | Private Garden or Oceanfront Lawn | Bespoke Dietary & Celebration Planning | Private Airport Transfers",
+          "suitableFor": "Honeymooners, Multi-Generational Families, Celebrations, Executive Retreats",
+          "nearbyAttractions": "Southern Coast Beaches | Galle Fort Boutiques | Sigiriya & Dambulla Heritage Sites | Bentota River Cruises",
+          "importantInfo": "Exclusive-use luxury villas are quoted by bedroom count, season, and meal preferences. Displayed rates are illustrative guides and subject to property-specific minimum night stays during festive peaks.",
           "imageUrl": "/images/exp-villa.webp",
           "imageAlt": "Secluded Sri Lankan private villa with reflection pool and tropical gardens",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/exp-villa.webp",
+              "caption": "Tranquil reflection pool and tropical modernist living pavilion"
+            },
+            {
+              "imageUrl": "/images/exp-wellness.webp",
+              "caption": "Serene garden spa and open-air relaxation courtyard"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 95000,
           "priceLabel": "Illustrative from LKR 95,000 / night",
-          "ctaLabel": "Enquire private villas",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=tropical-modernist-luxury-villas"
         },
         {
-          "title": "Wilderness Eco Lodges & Safari Camps",
-          "subtitle": "Yala · Wilpattu · Sigiriya",
+          "id": "wilderness-eco-lodges",
+          "title": "Forest Canopy & Lakefront Eco Lodges",
+          "subtitle": "Sigiriya · Knuckles · Wilpattu",
           "category": "Eco Lodges",
-          "description": "Low-impact nature lodges and canvas camps designed to keep you close to birdsong, forest canopies, and dawn game drives.",
-          "imageUrl": "/images/yala-wildlife.webp",
-          "imageAlt": "Untamed Sri Lankan wilderness sanctuary at sunrise near Yala",
-          "priceLabel": "Illustrative from LKR 52,000 / night",
-          "ctaLabel": "Enquire eco lodges",
-          "ctaUrl": "/#tailor-made"
+          "description": "Low-impact nature lodges built with local timber and earth, immersed in birdsong, forest canopies, and calm village lakes.",
+          "overview": "Disconnect from city noise at thoughtfully constructed eco lodges bordering Sri Lanka’s dry-zone forests, ancient reservoirs, and misty Knuckles foothills. Built to harmonise with local ecosystems, these retreats pair natural ventilation, solar power, and farm-to-table village cooking with guided nature walks.",
+          "roomTypes": "Elevated Forest Chalets | Lakefront Eco Cabins | Organic Garden Mud-House Suites",
+          "amenities": "Guided Birding & Nature Walks | Village Clay-Pot Dining | Natural Pool or Lake Views | Low-Plastic Eco Operations | Quiet Stargazing Decks | Private Guided Excursions",
+          "suitableFor": "Nature Lovers, Slow Travellers, Photographers, Eco-Conscious Couples & Families",
+          "nearbyAttractions": "Sigiriya Lion Rock & Pidurangala | Knuckles Conservation Forest | Minneriya & Kaudulla Reservoirs | Wilpattu Villu Lakes",
+          "importantInfo": "Eco lodges embrace natural surroundings; wildlife and birdsong are part of the experience. Confirm air-conditioning vs natural-breeze chalet preferences when requesting your quotation.",
+          "imageUrl": "/images/hero-sigiriya.webp",
+          "imageAlt": "Emerald jungle canopy and ancient rock views surrounding Sri Lankan eco lodges",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-sigiriya.webp",
+              "caption": "Morning mist rising across the Cultural Triangle forest canopy"
+            },
+            {
+              "imageUrl": "/images/dest-anuradhapura.webp",
+              "caption": "Ancient reservoirs and peaceful dry-zone heritage"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 44000,
+          "priceLabel": "Illustrative from LKR 44,000 / night",
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=wilderness-eco-lodges"
         },
         {
-          "title": "Family-Friendly Resorts & Bungalows",
+          "id": "family-friendly-resorts",
+          "title": "Family-Friendly Resorts & Coastal Hotels",
           "subtitle": "Negombo · Bentota · Kandy",
-          "category": "Family-Friendly",
-          "description": "Spacious interconnecting rooms, calm gardens, child-friendly pools, and flexible dining for multi-generational holidays.",
+          "category": "Family-Friendly Hotels",
+          "description": "Spacious interconnecting rooms, calm lawns, child-friendly pools, and flexible dining for relaxed multi-generational holidays.",
+          "overview": "Carefully matched for Sri Lankan school-holiday breaks and visiting families with children or elders. Featuring level garden pathways, shallow kids’ pools, generous family suites, and kid-friendly Sri Lankan and international buffets — all within easy driving reach of Colombo and CMB Airport.",
+          "roomTypes": "Interconnecting Family Rooms | Spacious Triple & Quad Suites | Ground-Floor Garden Rooms for Elders",
+          "amenities": "Kids’ Splash Pool & Main Pool | Spacious Lawns & Activity Rooms | Flexible Kid-Friendly Menus | Baby Cots & Extra Beds on Request | Easy Van & Coach Access | 24-Hour Front Desk",
+          "suitableFor": "Sri Lankan & International Families, School Holidays, Multi-Generational Groups",
+          "nearbyAttractions": "Negombo Lagoon & Beach | Bentota Water Sports & River Safari | Pinnawala & Kandy Cultural Sights | Colombo City & Expressway Hubs",
+          "importantInfo": "Child pricing policies (typically under 5 free, 6–11 discounted with extra bed) vary by property. Share children’s ages in your inquiry so we match the best family room configuration.",
           "imageUrl": "/images/hero-coast.webp",
           "imageAlt": "Calm golden southwest beach ideal for family holidays in Sri Lanka",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-coast.webp",
+              "caption": "Wide golden sands and gentle palms suited for relaxed family afternoons"
+            },
+            {
+              "imageUrl": "/images/family-beach-holiday.webp",
+              "caption": "Sunlit tropical resort coast along Sri Lanka’s west and south"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 32000,
           "priceLabel": "Illustrative from LKR 32,000 / night",
-          "ctaLabel": "Enquire family stays",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=family-friendly-resorts"
+        },
+        {
+          "id": "value-guesthouses-homestays",
+          "title": "Warm Local Guesthouses & Value Stays",
+          "subtitle": "Ella · Mirissa · Anuradhapura · Kandy",
+          "category": "Budget Guesthouses",
+          "description": "Clean, welcoming family-run guesthouses with home-cooked breakfasts and genuine local insight for smart-budget travel.",
+          "overview": "Travel further across Sri Lanka without stretching your budget. Our vetted value guesthouse and boutique B&B style options focus on spotless en-suite rooms, warm Sri Lankan host hospitality, generous homemade breakfasts, and convenient locations close to town centres, train stations, and beaches.",
+          "roomTypes": "Clean A/C Double Rooms | Family Triple Rooms | Garden-View Homestay Suites",
+          "amenities": "Homemade Sri Lankan & Continental Breakfast | En-Suite Hot Water Bathrooms | Free Wi-Fi | Helpful Local Host Tips | Luggage Storage | Easy Tuk-Tuk & Driver Access",
+          "suitableFor": "Budget-Conscious Travellers, Friends, Local Weekend Groups, Backpackers & Students",
+          "nearbyAttractions": "Ella Town & Hiking Trails | Mirissa & Weligama Surf Beaches | Anuradhapura Sacred City | Kandy Town & Railway Station",
+          "importantInfo": "Great value for domestic road trips and longer island circuits. Rates are illustrative LKR guides; availability during Poya long weekends and school holidays fills rapidly.",
+          "imageUrl": "/images/dest-kandy.webp",
+          "imageAlt": "Scenic Sri Lankan lakeside town and green hillside guesthouse setting",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/dest-kandy.webp",
+              "caption": "Charming hillside viewpoints around Kandy and central Sri Lanka"
+            },
+            {
+              "imageUrl": "/images/dest-arugam-bay.webp",
+              "caption": "Laid-back coastal surf towns with welcoming guesthouses"
+            }
+          ],
+          "showPrice": true,
+          "indicativePrice": 14500,
+          "priceLabel": "Illustrative from LKR 14,500 / night",
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=value-guesthouses-homestays"
+        },
+        {
+          "id": "safari-wildlife-retreats",
+          "title": "Safari Camps & Wildlife Retreats",
+          "subtitle": "Yala · Udawalawe · Wilpattu",
+          "category": "Wildlife Retreats",
+          "description": "Atmospheric tented safari camps and bush lodges positioned minutes from national park gates for effortless dawn game drives.",
+          "overview": "Stay right at the edge of Sri Lanka’s great wildlife reserves so you are first through the park gates at golden sunrise. From comfortable bush chalets near Udawalawe’s elephant plains to luxury canvas-and-timber safari camps bordering Yala and Wilpattu, every retreat pairs wilderness atmosphere with warm evening lantern-lit dining.",
+          "roomTypes": "Deluxe Safari Tents | Bush-View Wildlife Chalets | Family Safari Cottages",
+          "amenities": "Dedicated 4x4 Safari Jeep Coordination | Early-Morning Picnic Breakfast Packs | Lantern-Lit Outdoor Dining | Naturalist Guidance | Cooling Pool After Game Drives | Private Park Gate Transfers",
+          "suitableFor": "Wildlife Photographers, Families, Adventure Couples, Inbound Safari Guests",
+          "nearbyAttractions": "Yala National Park Blocks 1 & 5 | Udawalawe Elephant Plains | Wilpattu National Park | Bundala Bird Sanctuary",
+          "importantInfo": "National park entry fees and private 4x4 safari jeeps can be bundled into one custom quotation. Yala Block 1 typically observes an annual maintenance closure during part of September.",
+          "imageUrl": "/images/yala-wildlife.webp",
+          "imageAlt": "Untamed Sri Lankan wilderness sanctuary at sunrise near Yala",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/yala-wildlife.webp",
+              "caption": "Golden-hour wildlife habitats bordering Yala National Park"
+            },
+            {
+              "imageUrl": "/images/dest-arugam-bay.webp",
+              "caption": "Nearby southeast coastal lagoons and wild birdlife"
+            }
+          ],
+          "showPrice": false,
+          "indicativePrice": 0,
+          "priceLabel": "Custom Safari Quote",
+          "ctaLabel": "View Stay",
+          "ctaUrl": "/stays/detail/?id=safari-wildlife-retreats"
         }
       ],
       "offersEyebrow": "SPECIAL OFFERS",
@@ -1053,60 +1247,112 @@
       "featuredOffersCount": 2,
       "seasonalOffers": [
         {
+          "id": "avurudu-hill-country-escape",
           "title": "Avurudu Hill Country Family Escape",
-          "category": "Avurudu Holiday Offer",
+          "category": "Avurudu Holiday",
           "discountLabel": "Illustrative · Early Planner Rate",
-          "description": "Three nights across Nuwara Eliya and Ella with private A/C transport, scenic rail coordination, and family stays.",
+          "description": "Three restful nights across Nuwara Eliya and Ella with private A/C transport from Colombo, tea estate visits, and cozy family accommodation.",
           "imageUrl": "/images/hero-tea.webp",
           "imageAlt": "Lush green Sri Lankan tea plantations for an Avurudu family holiday",
           "currency": "LKR",
           "priceLabel": "From LKR 92,000 / person",
-          "terms": "Illustrative demo offer · Subject to availability & seasonal dates",
+          "travelWindow": "Sample travel window: 10 Apr – 22 Apr 2027",
+          "terms": "Illustrative seasonal guide per adult sharing. Final quote varies by hotel tier, child ages, and holiday peak availability.",
           "expiryDate": "2027-04-14T23:59:59+05:30",
+          "expiryMessage": "This Avurudu planning window has ended — contact us for current highland family rates.",
+          "relatedPackageId": "ella-nuwara-eliya-family-break",
           "ctaLabel": "Enquire Offer",
-          "ctaUrl": "/#tailor-made"
+          "ctaUrl": "/plan-your-trip/"
         },
         {
-          "title": "Long-Weekend Southern Coast Break",
-          "category": "Weekend Offer",
-          "discountLabel": "Illustrative · Sample Weekend Rate",
-          "description": "Two-night expressway getaway from Colombo to Galle Fort and Mirissa with flexible private chauffeur pickup.",
+          "id": "long-weekend-south-coast",
+          "title": "Poya Long-Weekend Southern Coast Break",
+          "category": "Long Weekend",
+          "discountLabel": "Illustrative · Expressway Break",
+          "description": "Two-night coastal escape from Colombo via Southern Expressway to Galle Fort and Mirissa with flexible chauffeur pickup and beach leisure.",
           "imageUrl": "/images/family-beach-holiday.webp",
           "imageAlt": "Golden southern Sri Lankan beach at late afternoon for a weekend break",
           "currency": "LKR",
           "priceLabel": "From LKR 64,000 / couple",
-          "terms": "Illustrative demo offer · Valid for sample weekend departures",
-          "expiryDate": "2027-02-28T23:59:59+05:30",
+          "travelWindow": "Sample travel window: Nov 2026 – Apr 2027 weekends",
+          "terms": "Illustrative couple guide on Bed & Breakfast basis. Subject to live resort room confirmation and expressway departure dates.",
+          "expiryDate": "2027-03-31T23:59:59+05:30",
+          "expiryMessage": "This seasonal weekend preview has concluded — enquire for upcoming Poya holiday rates.",
+          "relatedPackageId": "down-south-coastal-weekend",
           "ctaLabel": "Plan Weekend Escape",
-          "ctaUrl": "/#tailor-made"
+          "ctaUrl": "/plan-your-trip/"
         },
         {
+          "id": "honeymoon-highlands-ocean",
           "title": "Honeymoon Highlands & Ocean Retreat",
-          "category": "Honeymoon Offer",
-          "discountLabel": "Illustrative · Sample Couple Rate",
-          "description": "Six nights uniting a misty tea-country retreat and a southern coastal villa with sunset dining for two.",
+          "category": "Honeymoon",
+          "discountLabel": "Illustrative · Couple Special",
+          "description": "Six intimate nights uniting a misty tea-country planter bungalow and a southern coastal boutique suite with curated sunset dining for two.",
           "imageUrl": "/images/dest-mirissa.webp",
           "imageAlt": "Romantic palm headland overlooking turquoise Mirissa bay",
           "currency": "LKR",
           "priceLabel": "From LKR 245,000 / couple",
-          "terms": "Illustrative demo offer · Customisable hotel tiers",
+          "travelWindow": "Sample travel window: Year-round (coast matched by season)",
+          "terms": "Illustrative couple rate with private A/C sedan. Hotel tier, villa upgrades, and candlelight dining customisable on request.",
           "expiryDate": "2027-06-30T23:59:59+05:30",
+          "expiryMessage": "This honeymoon guide period has ended — request our latest bespoke couple quotation.",
+          "relatedPackageId": "romantic-island-escape",
           "ctaLabel": "Enquire Honeymoon",
-          "ctaUrl": "/#tailor-made"
+          "ctaUrl": "/plan-your-trip/"
         },
         {
-          "title": "East Coast Summer Preview",
-          "category": "Seasonal Escape",
-          "discountLabel": "Illustrative · May–Sep Season",
-          "description": "Calm turquoise waters in Trincomalee paired with ancient Cultural Triangle stops along the route.",
+          "id": "east-coast-summer-resort",
+          "title": "East Coast Calm-Season Resort Package",
+          "category": "Seasonal Resort",
+          "discountLabel": "Illustrative · May–Sep Coast",
+          "description": "Calm turquoise waters in Trincomalee and Nilaveli paired with Cultural Triangle heritage stops along the way for families and couples.",
           "imageUrl": "/images/dest-trincomalee.webp",
-          "imageAlt": "Sunlit turquoise bay along Trincomalee's east coast",
+          "imageAlt": "Sunlit turquoise bay along Trincomalee east coast",
           "currency": "LKR",
           "priceLabel": "From LKR 118,000 / person",
-          "terms": "Illustrative demo offer · Seasonal dry-coast routing",
+          "travelWindow": "Sample travel window: May – September 2027",
+          "terms": "Illustrative land-package guide. Snorkelling boat excursions and half-board resort upgrades quoted transparently on request.",
           "expiryDate": "2027-08-31T23:59:59+05:30",
+          "expiryMessage": "East Coast summer booking window has concluded — enquire for upcoming seasonal coastal options.",
+          "relatedPackageId": "ultimate-sri-lanka",
           "ctaLabel": "Request East Coast Plan",
-          "ctaUrl": "/#tailor-made"
+          "ctaUrl": "/plan-your-trip/"
+        },
+        {
+          "id": "group-corporate-hill-retreat",
+          "title": "Friends & Corporate Group Escape",
+          "category": "Group Travel",
+          "discountLabel": "Illustrative · 6+ Guests",
+          "description": "Dedicated A/C KDH van or luxury coach, curated group dining, team-friendly activities, and comfortable stays across Kandy, Ella, or Bentota.",
+          "imageUrl": "/images/stay-mountain-retreat.webp",
+          "imageAlt": "Highland lodge deck ideal for friends and corporate retreats in Sri Lanka",
+          "currency": "LKR",
+          "priceLabel": "From LKR 46,000 / guest",
+          "travelWindow": "Sample travel window: Flexible weekday & weekend departures",
+          "terms": "Illustrative per-person guide based on minimum 6 guests sharing. Conference rooms, BBQ dinners, and custom pickups available.",
+          "expiryDate": "2027-09-30T23:59:59+05:30",
+          "expiryMessage": "This group preview rate has concluded — share your headcount for an updated group quote.",
+          "relatedPackageId": "ella-nuwara-eliya-family-break",
+          "ctaLabel": "Request Group Quote",
+          "ctaUrl": "/plan-your-trip/"
+        },
+        {
+          "id": "outbound-maldives-seasonal",
+          "title": "Colombo to Maldives Island Getaway",
+          "category": "Outbound Offer",
+          "discountLabel": "Illustrative · Ex-CMB Land Guide",
+          "description": "Three idyllic nights on a turquoise Maldivian lagoon island with return Malé speedboat transfers — an effortless 90-minute hop from Colombo.",
+          "imageUrl": "/images/outbound-island-escape.webp",
+          "imageAlt": "Turquoise Maldives lagoon and wooden jetty for outbound holiday from Colombo",
+          "currency": "LKR",
+          "priceLabel": "From LKR 295,000 / person",
+          "travelWindow": "Sample travel window: Flexible 2027 departures",
+          "terms": "Illustrative land-package guide excluding fluctuating international airfares. Valid passport (6+ months) required; flights quoted live on inquiry.",
+          "expiryDate": "2027-05-31T23:59:59+05:30",
+          "expiryMessage": "This outbound preview window has closed — ask our outbound desk for current island resort rates.",
+          "relatedPackageId": "outbound-maldives-lagoon-escape",
+          "ctaLabel": "Enquire Outbound Offer",
+          "ctaUrl": "/plan-your-trip/"
         }
       ],
       "featuresEyebrow": "WHY TRAVEL WITH US",
@@ -1168,59 +1414,196 @@
       "journalSummary": "Practical Sri Lankan travel guides, weekend getaway inspiration, food notes, and family tips to help you plan with confidence.",
       "journalPosts": [
         {
-          "title": "Understanding Sri Lanka's Two Seasons: Where to Go Every Month",
-          "category": "Sri Lankan Travel Guides",
+          "id": "sri-lanka-two-monsoon-seasons",
+          "title": "Understanding Sri Lanka’s Two Seasons: Where to Go Every Month",
+          "category": "Seasonal Travel",
+          "readingTime": "5 min read",
           "excerpt": "How the southwest and northeast monsoons shape beach clarity, tea-country mist, and wildlife sightings so you pick the sunniest coast year-round.",
+          "intro": "One of Sri Lanka’s greatest travel advantages is that sunny coastline exists somewhere on the island during almost every month of the year. Understanding the gentle rhythm of the two monsoon systems makes route planning remarkably straightforward.",
           "imageUrl": "/images/hero-coast.webp",
           "imageAlt": "Golden Sri Lankan coastline under clear sunny tropical skies",
-          "date": "November 2026",
-          "author": "Ceylon Odyssey Editorial",
-          "ctaLabel": "Ask about seasonal routes",
-          "ctaUrl": "/#tailor-made"
+          "sections": [
+            {
+              "heading": "November to April: South Coast, West Coast & Central Highlands",
+              "body": "From late November through April, calm seas and bright skies favour Bentota, Galle, Mirissa, Tangalle, and the hill country around Kandy, Nuwara Eliya, and Ella. This is the classic window for southern whale watching, Galle Fort strolls, and crisp highland mornings.",
+              "imageUrl": "/images/dest-mirissa.webp",
+              "caption": "Calm golden bays along Sri Lanka’s southwest shoreline during the dry season"
+            },
+            {
+              "heading": "May to September: East Coast & Cultural Triangle Sunshine",
+              "body": "When southwest trade winds bring passing showers to the west coast, Sri Lanka’s east coast — Trincomalee, Nilaveli, Pasikudah, and Arugam Bay — opens into tranquil turquoise water and warm sunshine. Pair it with Sigiriya, Polonnaruwa, and Minneriya elephant gatherings for an effortless summer route.",
+              "imageUrl": "/images/dest-trincomalee.webp",
+              "caption": "Clear turquoise waters along Trincomalee during the May–September east-coast season"
+            },
+            {
+              "heading": "Inter-Monsoon Shoulder Months: Quiet Heritage & Lush Landscapes",
+              "body": "May, October, and early November often bring brief afternoon tropical showers balanced by vivid green tea hills, calmer heritage monuments, and favourable boutique hotel availability across the island.",
+              "imageUrl": "",
+              "caption": ""
+            }
+          ],
+          "practicalTips": "Match your beach nights to the sunnier coast rather than cancelling a trip due to monsoon labels | Pack a light breathable rain layer for misty highland afternoons year-round | Book scenic train legs and festive stays 4–6 weeks ahead during December, April Avurudu, and August",
+          "date": "Seasonal Guide",
+          "author": "Destination Desk",
+          "relatedDestinationId": "mirissa",
+          "relatedPackageId": "ultimate-sri-lanka",
+          "ctaLabel": "Read Article",
+          "ctaUrl": "/journal/detail/?id=sri-lanka-two-monsoon-seasons"
         },
         {
+          "id": "48-hours-ella-haputale-weekend",
           "title": "48 Hours in Ella & Haputale: A Calm Highland Weekend",
-          "category": "Weekend Getaway Ideas",
-          "excerpt": "From sunrise views at Lipton's Seat to crossing Nine Arch Bridge and lingering over hillside tea — a relaxed two-night blueprint from Colombo.",
+          "category": "Destination Guides",
+          "readingTime": "4 min read",
+          "excerpt": "From sunrise views at Lipton’s Seat to crossing Nine Arch Bridge and lingering over hillside tea — a relaxed two-night blueprint from Colombo.",
+          "intro": "For Sri Lankan families, couples, and international travellers short on time, Ella and nearby Haputale deliver the very best of the central highlands without frantic driving — provided you pace your stops around early morning light.",
           "imageUrl": "/images/hero-ella.webp",
           "imageAlt": "Highland train moving across misty viaduct surrounded by green hills",
-          "date": "November 2026",
+          "sections": [
+            {
+              "heading": "Day One: Tea Estates & Golden Hour at Little Adam’s Peak",
+              "body": "Leave Colombo early or connect from Kandy via Nanu Oya so you arrive in cool highland air by mid-afternoon. Check into a hillside bungalow, enjoy a pot of fresh Uva tea, and take the gentle 45-minute ridge walk up Little Adam’s Peak as late-afternoon mist drifts across Ella Gap.",
+              "imageUrl": "/images/hero-tea.webp",
+              "caption": "Rolling tea slopes surrounding Ella and Haputale"
+            },
+            {
+              "heading": "Day Two: Nine Arch Bridge Dawn & Haputale’s Quiet Ridges",
+              "body": "Walk down to Nine Arch Bridge shortly after sunrise before mid-morning crowds arrive, then venture 45 minutes west to Haputale for sweeping plantation trails around Lipton’s Seat and historic Dambatenne Tea Factory — an unhurried alternative to busier town cafes.",
+              "imageUrl": "/images/stay-mountain-retreat.webp",
+              "caption": "Peaceful timber terraces looking out over cloud-draped mountain ridges"
+            }
+          ],
+          "practicalTips": "Start outdoor walks before 09:00 while valley views are clearest before afternoon mist | Let your private driver carry luggage while you ride the Nanu Oya–Ella scenic rail segment | Carry a light sweater for crisp evenings around 16–18°C",
+          "date": "Highland Guide",
           "author": "Highlands Desk",
-          "ctaLabel": "Plan a highland break",
-          "ctaUrl": "/#tailor-made"
+          "relatedDestinationId": "ella",
+          "relatedPackageId": "ella-nuwara-eliya-family-break",
+          "ctaLabel": "Read Article",
+          "ctaUrl": "/journal/detail/?id=48-hours-ella-haputale-weekend"
         },
         {
+          "id": "culinary-route-clay-pots-ceylon-tea",
           "title": "Clay-Pot Curries, Cinnamon & Ceylon Tea: A Culinary Route South",
-          "category": "Food & Culture",
-          "excerpt": "Explore spice gardens, village cooking hearths, and coastal seafood kitchens connecting Kandy's central markets to historic Galle Fort.",
+          "category": "Food & Experiences",
+          "readingTime": "5 min read",
+          "excerpt": "Explore spice gardens, village cooking hearths, and coastal seafood kitchens connecting Kandy’s central markets to historic Galle Fort.",
+          "intro": "Sri Lankan cuisine shifts subtly with every elevation and coast: fragrant highland tea pairings, slow-simmered central rice-and-curry feasts in terracotta pots, and southern cinnamon-infused coastal seafood.",
           "imageUrl": "/images/exp-culinary.webp",
           "imageAlt": "Traditional Sri Lankan clay-pot dishes and fragrant whole spices",
-          "date": "October 2026",
+          "sections": [
+            {
+              "heading": "Morning Markets & Village Hearths in the Centre",
+              "body": "Begin at Kandy’s lively produce market to smell freshly cracked cardamom, curry leaves, and heirloom red rice before joining a rural kitchen session where coconut milk is pressed fresh and curries simmer gently over clay hearths.",
+              "imageUrl": "/images/exp-culinary.webp",
+              "caption": "Freshly ground spices and clay-pot curries prepared to your preferred spice level"
+            },
+            {
+              "heading": "True Ceylon Cinnamon & Southern Coastal Tables",
+              "body": "Heading down toward Galle and Bentota, visit small family-run cinnamon estates where delicate inner bark quills are hand-peeled, then spend an evening sampling crisp hoppers, pol sambol, and line-caught southern fish inside Galle Fort.",
+              "imageUrl": "/images/hero-galle.webp",
+              "caption": "Evening courtyard dining inside the coral-stone lanes of Galle Fort"
+            }
+          ],
+          "practicalTips": "Sri Lankan cuisine is naturally welcoming for vegetarian, vegan, and halal travellers — mention dietary notes early | Ask for mild or medium spice levels when introducing children to local curries | Enjoy fresh king coconut (thambili) roadside during warm afternoon drives",
+          "date": "Culinary Guide",
           "author": "Culture & Dining Desk",
-          "ctaLabel": "Explore culinary trips",
-          "ctaUrl": "/#experiences"
+          "relatedDestinationId": "galle",
+          "relatedPackageId": "down-south-coastal-weekend",
+          "ctaLabel": "Read Article",
+          "ctaUrl": "/journal/detail/?id=culinary-route-clay-pots-ceylon-tea"
         },
         {
-          "title": "Planning Ahead for Avurudu, Poya Long Weekends & Safari Peaks",
-          "category": "Seasonal Travel Advice",
-          "excerpt": "Simple timing tips for booking scenic rail seats, national park jeep entries, and popular hill-country stays during festive Sri Lankan holidays.",
+          "id": "wildlife-safari-etiquette-national-parks",
+          "title": "Choosing Between Yala, Wilpattu & Udawalawe for Your Safari",
+          "category": "Wildlife & Nature",
+          "readingTime": "5 min read",
+          "excerpt": "A practical comparison of Sri Lanka’s flagship national parks — helping families, photographers, and nature lovers pick the right wilderness setting.",
+          "intro": "Each Sri Lankan national park has a distinct landscape and rhythm. Choosing the right park for your route and season ensures a calmer, more rewarding encounter with elephants, leopards, and island birdlife.",
           "imageUrl": "/images/yala-wildlife.webp",
           "imageAlt": "Sri Lankan leopard basking at sunrise in Yala National Park",
-          "date": "October 2026",
-          "author": "Planning Desk",
-          "ctaLabel": "View seasonal offers",
-          "ctaUrl": "/#offers"
+          "sections": [
+            {
+              "heading": "Yala & Wilpattu: Coastal Scrubland vs Shaded Villu Lakes",
+              "body": "Yala is famous for dramatic granite outcrops, coastal lagoons, and high leopard density, making it easy to pair with Ella or the south coast. Wilpattu, the island’s largest park in the northwest, rewards patient travellers with quiet shaded forest tracks and shimmering natural lakes (villus).",
+              "imageUrl": "/images/yala-wildlife.webp",
+              "caption": "Early-morning light across Yala’s granite boulders and wilderness tracks"
+            },
+            {
+              "heading": "Udawalawe & Minneriya: Gentle Elephant Encounters for Families",
+              "body": "If travelling with younger children, Udawalawe’s open grassland makes spotting wild Asian elephants remarkably consistent year-round, while Minneriya and Kaudulla host memorable dry-season lakeside gatherings between July and October.",
+              "imageUrl": "",
+              "caption": ""
+            }
+          ],
+          "practicalTips": "Start dawn drives right at 06:00 gate opening when wildlife is most active and temperatures are cool | Wear muted earth tones, bring binoculars, and keep voices low near animals | Respect park speed limits and never ask drivers to crowd sightings",
+          "date": "Wildlife Guide",
+          "author": "Wildlife Desk",
+          "relatedDestinationId": "yala",
+          "relatedPackageId": "wildlife-wilderness-safari",
+          "ctaLabel": "Read Article",
+          "ctaUrl": "/journal/detail/?id=wildlife-safari-etiquette-national-parks"
         },
         {
+          "id": "travelling-sri-lanka-with-children-family-guide",
           "title": "Travelling Sri Lanka With Children: Gentle Routes & Calm Beaches",
-          "category": "Family Travel Tips",
+          "category": "Family Travel",
+          "readingTime": "4 min read",
           "excerpt": "How to balance short driving stretches, kid-friendly elephant safaris, calm swimming coves, and interconnecting resorts for stress-free family travel.",
+          "intro": "Sri Lanka is wonderfully welcoming to children and grandparents alike. The secret to a joyful multi-generational holiday is resisting the urge to see the entire island in a week — instead combining two or three distinct landscapes with relaxed pool time.",
           "imageUrl": "/images/family-beach-holiday.webp",
           "imageAlt": "Calm golden sandy crescent beach lined with coconut palms",
-          "date": "September 2026",
+          "sections": [
+            {
+              "heading": "Keep Daily Drives Under Three Hours Where Possible",
+              "body": "Using a spacious private A/C van with flexible snack and viewpoint stops keeps road transfers pleasant. Base yourselves for 2–3 nights per region so children aren’t unpacking every single evening.",
+              "imageUrl": "/images/family-beach-holiday.webp",
+              "caption": "Unhurried coastal afternoons give children space to play while parents unwind"
+            },
+            {
+              "heading": "Pair Gentle Nature With Hands-On Cultural Stops",
+              "body": "Madu River mangrove boat rides, short highland train segments, Udawalawe elephant sightings, and calm swimming bays in Bentota or Nilaveli keep every generation engaged without exhaustion.",
+              "imageUrl": "",
+              "caption": ""
+            }
+          ],
+          "practicalTips": "Request child booster seats and interconnecting rooms when sending your trip inquiry | Carry sunscreen, mosquito repellent, and hydration salts for warm coastal afternoons | Include at least one open resort day with zero scheduled sightseeing",
+          "date": "Family Guide",
           "author": "Family Travel Desk",
-          "ctaLabel": "See family packages",
-          "ctaUrl": "/#packages"
+          "relatedDestinationId": "galle",
+          "relatedPackageId": "ella-nuwara-eliya-family-break",
+          "ctaLabel": "Read Article",
+          "ctaUrl": "/journal/detail/?id=travelling-sri-lanka-with-children-family-guide"
+        },
+        {
+          "id": "cultural-triangle-temple-etiquette-planning",
+          "title": "First-Timer’s Guide to Sigiriya, Kandy & Cultural Triangle Etiquette",
+          "category": "Culture & Heritage",
+          "readingTime": "4 min read",
+          "excerpt": "Practical timing, footwear, dress codes, and photography guidance for exploring Sri Lanka’s sacred temples and ancient royal citadels respectfully.",
+          "intro": "Sri Lanka’s Cultural Triangle and Kandy preserve over two thousand years of living Buddhist heritage and architectural ingenuity. A few simple preparations make climbing Sigiriya and visiting sacred temples comfortable and deeply meaningful.",
+          "imageUrl": "/images/hero-sigiriya.webp",
+          "imageAlt": "Sigiriya Lion Rock towering over lush forest canopy at dawn",
+          "sections": [
+            {
+              "heading": "Climb Ancient Rocks Early & Pace the Midday Heat",
+              "body": "Arrive at Sigiriya Lion Rock or Polonnaruwa early in the morning when stone steps are cool and golden light illuminates the water gardens. Reserve warm midday hours for shaded museum visits, traditional lunch, or a restorative hotel swim.",
+              "imageUrl": "/images/dest-anuradhapura.webp",
+              "caption": "Tranquil white stupas and sacred grounds of ancient Sri Lanka"
+            },
+            {
+              "heading": "Respectful Temple Dress & Living Rituals",
+              "body": "When visiting sacred sites such as Kandy’s Temple of the Sacred Tooth Relic or Dambulla Cave Temple, cover shoulders and knees, remove hats and shoes before entering inner courtyards, and avoid posing with your back turned directly to Buddha statues.",
+              "imageUrl": "/images/dest-kandy.webp",
+              "caption": "Evening lamps glowing along the lakeside temple precinct in Kandy"
+            }
+          ],
+          "practicalTips": "Keep a lightweight scarf or sarong and thick socks in your daypack for warm temple stone walkways | Verify current official ticket rules and dress guidelines with your chauffeur-guide each morning | Confirm up-to-date Sri Lanka ETA visa requirements on official government portals before international flights",
+          "date": "Planning Guide",
+          "author": "Heritage Desk",
+          "relatedDestinationId": "sigiriya",
+          "relatedPackageId": "ultimate-sri-lanka",
+          "ctaLabel": "Read Article",
+          "ctaUrl": "/journal/detail/?id=cultural-triangle-temple-etiquette-planning"
         }
       ],
       "testimonialsEyebrow": "TRAVELLER STORIES · ILLUSTRATIVE SAMPLES",
@@ -2025,6 +2408,103 @@
       "ctaHeading": "Weave These Experiences Into Your Trip",
       "ctaBody": "Tell us which experiences inspire your group and we will arrange local transfers, guides, and timing around Sri Lanka’s seasonal weather.",
       "ctaLabel": "Plan Experiences on WhatsApp"
+    },
+    "staysPage": {
+      "eyebrow": "HOTELS & STAYS",
+      "heading": "Handpicked Places to Stay Across Sri Lanka",
+      "subtitle": "Beachfront resorts, heritage boutique hotels, misty tea bungalows, eco lodges, and family-friendly retreats.",
+      "description": "Explore curated accommodation styles matched to every region and budget tier — from smart value guesthouses for weekend road trips to secluded coastal villas.",
+      "breadcrumbLabel": "Hotels & Stays",
+      "bannerImageUrl": "/images/exp-villa.webp",
+      "bannerImageAlt": "Serene Sri Lankan tropical villa reflection pool surrounded by lush greenery",
+      "disclaimer": "Displayed accommodation styles and nightly rates in LKR are illustrative guides only. Availability, meal plans, and seasonal pricing are confirmed directly with each property upon inquiry.",
+      "ctaHeading": "Looking for a Specific Hotel Tier or Multi-Stop Stay Plan?",
+      "ctaBody": "Tell us your preferred destinations, room requirements, and nightly budget so we can match comfortable stays along your route.",
+      "ctaLabel": "Plan Your Stays"
+    },
+    "offersPage": {
+      "eyebrow": "SPECIAL OFFERS",
+      "heading": "Seasonal Escapes & Holiday Deals",
+      "subtitle": "Thoughtfully timed Sri Lankan long-weekend breaks, Avurudu family holidays, honeymoon retreats, and outbound getaways.",
+      "description": "Browse seasonal travel campaigns tailored for Sri Lankan households and international visitors, with transparent validity windows and direct WhatsApp or email inquiry.",
+      "breadcrumbLabel": "Special Offers",
+      "bannerImageUrl": "/images/hero-tea.webp",
+      "bannerImageAlt": "Sunlit green tea plantations across Sri Lanka central highlands",
+      "featuredLabel": "Featured Seasonal Offer",
+      "pricingDisclaimer": "All offer rates shown are illustrative sample guides subject to live room, transport, and seasonal date confirmation. No artificial urgency or fabricated availability is displayed.",
+      "expiredNotice": "This seasonal offer window has concluded — contact our team for current travel rates.",
+      "ctaHeading": "Want a Custom Quotation Around Your Dates?",
+      "ctaBody": "Every seasonal offer can be adjusted for your preferred pickup city, group size, room tier, and travel dates.",
+      "ctaLabel": "Build Your Custom Trip"
+    },
+    "journalPage": {
+      "eyebrow": "TRAVEL JOURNAL",
+      "heading": "Stories, Guides & Island Planning Notes",
+      "subtitle": "Practical Sri Lankan destination guides, twin-monsoon timing, wildlife insights, and family travel advice.",
+      "description": "Read calm, grounded guides written to help you pace driving routes, pick the sunniest coast, respect sacred heritage, and plan with confidence.",
+      "breadcrumbLabel": "Travel Journal",
+      "bannerImageUrl": "/images/hero-coast.webp",
+      "bannerImageAlt": "Golden Sri Lankan shoreline and coconut palms under clear coastal light",
+      "featuredLabel": "Featured Guide",
+      "ctaHeading": "Inspired to Turn These Ideas Into a Real Route?",
+      "ctaBody": "Use our interactive trip planner to select your favourite destinations, experiences, and travel style in a few simple steps.",
+      "ctaLabel": "Open Trip Planner"
+    },
+    "planTripPage": {
+      "eyebrow": "BESPOKE TRIP PLANNER",
+      "heading": "Plan Your Ideal Journey, Step by Step",
+      "subtitle": "Tell us where you would like to travel, your preferred pace, budget tier, and stays — we prepare a complete brief for WhatsApp or email.",
+      "description": "Designed for Sri Lankan domestic holidays, inbound island tours, and outbound escapes from Colombo. Every preference stays flexible until we tailor your quotation together.",
+      "breadcrumbLabel": "Plan Your Trip",
+      "bannerImageUrl": "/images/ayubowan-hospitality.webp",
+      "bannerImageAlt": "Warm Sri Lankan hospitality welcome with fragrant Ceylon tea and tropical scenery",
+      "step1Title": "What Kind of Journey Are You Planning?",
+      "step1Subtitle": "Choose the travel path that best matches your upcoming trip — you can keep it open if you are still deciding.",
+      "journeyOptions": [
+        {
+          "key": "Domestic",
+          "title": "Domestic Sri Lanka Holiday",
+          "description": "Weekend breaks, Poya long weekends, Avurudu family getaways, and local group trips with convenient city pickups.",
+          "badge": "For Sri Lankan Residents"
+        },
+        {
+          "key": "Inbound",
+          "title": "Inbound Sri Lanka Journey",
+          "description": "Private airport meet-and-greet at CMB, curated cultural, highland, wildlife, and coastal circuits across the island.",
+          "badge": "Visiting Sri Lanka"
+        },
+        {
+          "key": "Outbound",
+          "title": "Outbound International Holiday",
+          "description": "Curated regional and overseas holidays from Colombo to Maldives, Thailand, Singapore, Dubai, Malaysia, and beyond.",
+          "badge": "Travelling Overseas"
+        },
+        {
+          "key": "Custom",
+          "title": "Custom or Undecided Journey",
+          "description": "Still exploring ideas or mixing family, corporate, and special-occasion travel? Share a few hints and we will advise.",
+          "badge": "Flexible Guidance"
+        }
+      ],
+      "step2Title": "Choose Your Destinations & Travel Style",
+      "step2Subtitle": "Select one or more places that inspire you, or add a custom destination, then pick the styles that fit your group.",
+      "outboundDestinations": "Maldives | Thailand | Singapore | Dubai | Malaysia | Bali | Vietnam | India",
+      "travelStyleOptions": "Family Holiday | Romantic Escape | Honeymoon | Adventure | Wildlife & Nature | Culture & Heritage | Beach Holiday | Wellness | Group Travel | Corporate Travel | Undecided",
+      "step3Title": "Travel Dates, Travellers & Pickup Location",
+      "step3Subtitle": "Share rough or exact travel dates, your party mix, and where you would like to begin your journey.",
+      "pickupCities": "Bandaranaike International Airport (CMB) | Colombo | Negombo | Kandy | Galle | Matara | Kurunegala | Jaffna",
+      "step4Title": "Budget Guide, Accommodation & Transport",
+      "step4Subtitle": "Help us match the right comfort level and vehicle — LKR is our default guide, with other currencies supported.",
+      "supportedCurrencies": "LKR | USD | EUR | GBP",
+      "step5Title": "Experiences & Personal Preferences",
+      "step5Subtitle": "Tick any signature experiences or helpful notes such as dietary needs, relaxed pacing, or family celebrations.",
+      "step6Title": "Review Your Trip Summary & Send Inquiry",
+      "step6Subtitle": "Double-check your selections, add optional contact details, and send directly via WhatsApp, email, or copy to share.",
+      "summaryHeading": "Your Trip Summary",
+      "inquiryNotice": "Sending prepares a formatted travel inquiry directly for our agency via WhatsApp or your email app. No payment is taken and no reservation is confirmed until we reply with your tailored quotation.",
+      "whatsappCtaLabel": "Send via WhatsApp",
+      "emailCtaLabel": "Send via Email",
+      "copyCtaLabel": "Copy Trip Summary"
     }
   },
   "media": {},

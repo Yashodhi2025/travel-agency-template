@@ -13,8 +13,10 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
   const siteData = useSiteData();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const drawerCloseRef = useRef<HTMLButtonElement | null>(null);
+  const moreMenuRef = useRef<HTMLDivElement | null>(null);
 
   const content = contentObject(siteData?.content);
   const common = contentObject(content.common);
@@ -34,6 +36,10 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
         'destinations',
         'tours',
         'experiences',
+        'stays',
+        'offers',
+        'journal',
+        'plan_your_trip',
         'about_us',
         'services',
         'contact',
@@ -43,6 +49,10 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
   const hasDestinations = requiredPages.includes('destinations');
   const hasTours = requiredPages.includes('tours');
   const hasExperiences = requiredPages.includes('experiences');
+  const hasStays = requiredPages.includes('stays');
+  const hasOffers = requiredPages.includes('offers');
+  const hasJournal = requiredPages.includes('journal');
+  const hasPlanYourTrip = requiredPages.includes('plan_your_trip');
   const hasServices = requiredPages.includes('services');
   const hasAbout = requiredPages.includes('about_us');
   const hasContact = requiredPages.includes('contact');
@@ -74,8 +84,27 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!moreOpen) return;
+    const onPointerDown = (event: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMoreOpen(false);
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [moreOpen]);
+
   const navigateTo = (target: string) => {
     setMenuOpen(false);
+    setMoreOpen(false);
     if (typeof window === 'undefined') return;
     if (target.startsWith('/#') && isHome) {
       const id = target.slice(2);
@@ -88,6 +117,56 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
     }
     window.location.href = withBasePath(target);
   };
+
+  const secondaryNavItems: Array<{
+    key: string;
+    labelKey: string;
+    fallback: string;
+    href: string;
+    targetPage: string;
+    enabled: boolean;
+    active: boolean;
+  }> = [
+    {
+      key: 'stays',
+      labelKey: 'stays',
+      fallback: 'Hotels & Stays',
+      href: '/stays/',
+      targetPage: 'stays',
+      enabled: hasStays,
+      active: activeRoute.startsWith('/stays'),
+    },
+    {
+      key: 'offers',
+      labelKey: 'offers',
+      fallback: 'Special Offers',
+      href: '/offers/',
+      targetPage: 'offers',
+      enabled: hasOffers,
+      active: activeRoute.startsWith('/offers'),
+    },
+    {
+      key: 'journal',
+      labelKey: 'journal',
+      fallback: 'Travel Journal',
+      href: '/journal/',
+      targetPage: 'journal',
+      enabled: hasJournal,
+      active: activeRoute.startsWith('/journal'),
+    },
+    {
+      key: 'services',
+      labelKey: 'services',
+      fallback: 'Services',
+      href: '/services/',
+      targetPage: 'services',
+      enabled: hasServices,
+      active: activeRoute.startsWith('/services'),
+    },
+  ];
+
+  const enabledSecondaryItems = secondaryNavItems.filter((item) => item.enabled);
+  const isSecondaryActive = enabledSecondaryItems.some((item) => item.active);
 
   const navItems: Array<{
     key: string;
@@ -269,11 +348,57 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
               {contentText(navLabels.experiences) || 'Experiences'}
             </span>,
           )}
-          {renderNavButton(
-            navItems[4],
-            <span data-preview-field-path="common.navLabels.services">
-              {contentText(navLabels.services) || 'Services'}
-            </span>,
+          {enabledSecondaryItems.length > 0 && (
+            <div ref={moreMenuRef} className="relative shrink-0">
+              <button
+                type="button"
+                data-preview-static="header-explore-dropdown-trigger"
+                aria-expanded={moreOpen}
+                aria-haspopup="menu"
+                onClick={() => setMoreOpen((prev) => !prev)}
+                className={`group relative inline-flex items-center gap-1 whitespace-nowrap border-0 bg-transparent px-2.5 py-2 text-[13px] font-medium tracking-[0.015em] transition-colors xl:px-3 ${
+                  isSecondaryActive
+                    ? isOverlayHero
+                      ? 'font-semibold text-[#FAF8F3]'
+                      : 'font-semibold text-[#154C42] dark:text-[#FAF8F3]'
+                    : isOverlayHero
+                      ? 'text-[#FAF8F3]/82 hover:text-[#FAF8F3]'
+                      : 'text-[#4E5B66] hover:text-[#101820] dark:text-[#A3B0BA] dark:hover:text-[#FAF8F3]'
+                }`}
+              >
+                <span>Explore</span>
+                <span aria-hidden="true" className="text-[10px]">▾</span>
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-x-2.5 bottom-0.5 h-[1.5px] bg-[var(--brand-accent,#FF783D)] transition-transform duration-300 ${
+                    isSecondaryActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                />
+              </button>
+
+              {moreOpen && (
+                <div
+                  role="menu"
+                  className="absolute left-0 top-full z-50 mt-2 w-52 overflow-hidden rounded-[6px] border border-[var(--lux-border-strong)] bg-[var(--lux-surface)] py-1.5 text-[var(--lux-text)] shadow-xl"
+                >
+                  {enabledSecondaryItems.map((sec) => (
+                    <button
+                      key={sec.key}
+                      type="button"
+                      role="menuitem"
+                      data-preview-static={`header-more-${sec.key}`}
+                      onClick={() => navigateTo(sec.href)}
+                      className={`flex w-full items-center justify-between border-0 bg-transparent px-4 py-2.5 text-left text-xs font-semibold transition hover:bg-[var(--lux-surface-alt)] hover:text-[var(--brand-accent,#FF783D)] ${
+                        sec.active ? 'text-[var(--brand-accent,#FF783D)]' : 'text-[var(--lux-text)]'
+                      }`}
+                    >
+                      <span>{contentText(navLabels[sec.labelKey]) || sec.fallback}</span>
+                      <span aria-hidden="true" className="text-[10px] opacity-60">→</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           )}
           {renderNavButton(
             navItems[5],
@@ -299,11 +424,11 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
             }
           />
 
-          {hasContact ? (
-            <span data-target-page="contact" className="hidden sm:inline-flex">
+          {hasPlanYourTrip || hasContact ? (
+            <span data-target-page={hasPlanYourTrip ? 'plan_your_trip' : 'contact'} className="hidden sm:inline-flex">
               <button
                 type="button"
-                onClick={() => navigateTo('/#tailor-made')}
+                onClick={() => navigateTo(hasPlanYourTrip ? '/plan-your-trip/' : '/#tailor-made')}
                 className="font-display inline-flex min-h-[38px] items-center justify-center whitespace-nowrap rounded-md border border-[var(--brand-accent,#FF783D)] bg-[var(--brand-accent,#FF783D)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.11em] text-white transition-colors duration-200 hover:bg-[#EA662C]"
               >
                 <span data-preview-field-path="common.headerCtaLabel">{headerCtaLabel}</span>
@@ -311,7 +436,7 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
             </span>
           ) : (
             <span
-              data-target-page="contact"
+              data-target-page="plan_your_trip"
               data-preview-field-path="common.headerCtaLabel"
               className="unavailable hidden whitespace-nowrap text-xs sm:inline-flex"
             >
@@ -368,7 +493,15 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
           </div>
 
           <div className="flex flex-col">
-            {navItems.map((item) => {
+            {[
+              navItems[0],
+              navItems[1],
+              navItems[2],
+              navItems[3],
+              ...secondaryNavItems,
+              navItems[5],
+              navItems[6],
+            ].map((item) => {
               const label = contentText(navLabels[item.labelKey]) || item.fallback;
               if (!item.enabled) return null;
               return (
@@ -376,7 +509,7 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
                   key={`mobile-${item.key}`}
                   type="button"
                   onClick={() => navigateTo(item.href)}
-                  className={`flex min-h-[48px] w-full items-center justify-between border-0 border-b border-white/10 bg-transparent px-1 py-2.5 text-left text-sm font-semibold tracking-[0.04em] ${item.active ? 'text-[#FF783D]' : 'text-[#FAF8F3]/90 hover:text-[#FF783D]'
+                  className={`flex min-h-[46px] w-full items-center justify-between border-0 border-b border-white/10 bg-transparent px-1 py-2.5 text-left text-sm font-semibold tracking-[0.04em] ${item.active ? 'text-[#FF783D]' : 'text-[#FAF8F3]/90 hover:text-[#FF783D]'
                     }`}
                 >
                   <span>{label}</span>
@@ -386,11 +519,11 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
             })}
           </div>
 
-          {hasContact && (
+          {(hasPlanYourTrip || hasContact) && (
             <button
               type="button"
               data-preview-static="mobile-menu-plan-cta"
-              onClick={() => navigateTo('/#tailor-made')}
+              onClick={() => navigateTo(hasPlanYourTrip ? '/plan-your-trip/' : '/#tailor-made')}
               className="lux-btn-sunset mt-5 w-full"
             >
               {headerCtaLabel}

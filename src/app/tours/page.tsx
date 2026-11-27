@@ -32,6 +32,25 @@ export default function ToursPage() {
   const shopContact = contentObject(shop.contact);
   const products = useProducts();
 
+  const selectedPages =
+    siteData.requirements?.requiredPages ??
+    siteData.template?.structure?.pages ?? [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'stays',
+      'offers',
+      'journal',
+      'plan_your_trip',
+      'about_us',
+      'services',
+      'contact',
+    ];
+  const plannerTarget = selectedPages.includes('plan_your_trip')
+    ? '/plan-your-trip/'
+    : '/#tailor-made';
+
   const [marketFilter, setMarketFilter] = useState<string>('All');
   const [styleFilter, setStyleFilter] = useState<string>('All');
   const [durationFilter, setDurationFilter] = useState<string>('');
@@ -389,8 +408,9 @@ export default function ToursPage() {
                             ? marketFilter
                             : undefined,
                         destination: destinationQuery.trim() || undefined,
+                        sourceLabel: 'Custom Tour Request',
                       });
-                      window.location.href = withBasePath('/#tailor-made');
+                      window.location.href = withBasePath(plannerTarget);
                     }}
                     className="lux-btn-sunset !min-h-[40px]"
                   >
@@ -663,7 +683,7 @@ export default function ToursPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    window.location.href = withBasePath('/#tailor-made');
+                    window.location.href = withBasePath(plannerTarget);
                   }}
                   className="lux-btn-sunset"
                 >

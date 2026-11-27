@@ -37,9 +37,23 @@ export default function ExperiencesPage() {
 
   const selectedPages =
     siteData.requirements?.requiredPages ??
-    siteData.template?.structure?.pages ??
-    ['home', 'destinations', 'tours', 'experiences', 'about_us', 'services', 'contact'];
+    siteData.template?.structure?.pages ?? [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'stays',
+      'offers',
+      'journal',
+      'plan_your_trip',
+      'about_us',
+      'services',
+      'contact',
+    ];
   const hasExperiences = selectedPages.includes('experiences');
+  const plannerTarget = selectedPages.includes('plan_your_trip')
+    ? '/plan-your-trip/'
+    : '/#tailor-made';
 
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -328,9 +342,11 @@ export default function ExperiencesPage() {
                           onClick={() => {
                             saveTripEnquiryDraft({
                               experienceName: exp.title,
+                              experiences: [exp.title],
                               destination: exp.location || undefined,
+                              sourceLabel: `Experience: ${exp.title}`,
                             });
-                            window.location.href = withBasePath('/#tailor-made');
+                            window.location.href = withBasePath(plannerTarget);
                           }}
                           className="border-0 bg-transparent p-0 text-xs font-semibold text-[var(--lux-text-muted)] hover:text-[var(--brand-accent,#FF783D)]"
                         >
@@ -372,7 +388,7 @@ export default function ExperiencesPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    window.location.href = withBasePath('/#tailor-made');
+                    window.location.href = withBasePath(plannerTarget);
                   }}
                   className="lux-btn-sunset"
                 >

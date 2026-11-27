@@ -23,7 +23,14 @@
       "home.featuredDestinationsCount",
       "home.featuredPackagesCount",
       "home.featuredStaysCount",
-      "home.featuredOffersCount"
+      "home.featuredOffersCount",
+      "home.stays[*].id",
+      "home.seasonalOffers[*].id",
+      "home.seasonalOffers[*].relatedPackageId",
+      "home.journalPosts[*].id",
+      "home.journalPosts[*].relatedDestinationId",
+      "home.journalPosts[*].relatedPackageId",
+      "planTripPage.journeyOptions[*].key"
     ]
   },
   "siteDataFile": "src/data/site-data.json",
@@ -52,6 +59,26 @@
       "id": "experiences",
       "label": "Experiences",
       "route": "/experiences"
+    },
+    {
+      "id": "stays",
+      "label": "Hotels & Stays",
+      "route": "/stays"
+    },
+    {
+      "id": "offers",
+      "label": "Special Offers",
+      "route": "/offers"
+    },
+    {
+      "id": "journal",
+      "label": "Travel Journal",
+      "route": "/journal"
+    },
+    {
+      "id": "plan_your_trip",
+      "label": "Plan Your Trip",
+      "route": "/plan-your-trip"
     },
     {
       "id": "about_us",
@@ -196,6 +223,26 @@
                 "key": "contact",
                 "type": "text",
                 "label": "Contact label"
+              },
+              {
+                "key": "stays",
+                "type": "text",
+                "label": "Hotels & Stays label"
+              },
+              {
+                "key": "offers",
+                "type": "text",
+                "label": "Special Offers label"
+              },
+              {
+                "key": "journal",
+                "type": "text",
+                "label": "Travel Journal label"
+              },
+              {
+                "key": "plan_your_trip",
+                "type": "text",
+                "label": "Plan Your Trip label"
               }
             ]
           },
@@ -1001,9 +1048,14 @@
             "maxItems": 12,
             "fields": [
               {
+                "key": "id",
+                "type": "text",
+                "label": "Stay ID"
+              },
+              {
                 "key": "title",
                 "type": "text",
-                "label": "Property or Stay Style Name",
+                "label": "Property or Stay Name",
                 "required": true
               },
               {
@@ -1014,12 +1066,42 @@
               {
                 "key": "category",
                 "type": "text",
-                "label": "Stay Category"
+                "label": "Accommodation Category"
               },
               {
                 "key": "description",
                 "type": "textarea",
-                "label": "Description"
+                "label": "Short Description"
+              },
+              {
+                "key": "overview",
+                "type": "textarea",
+                "label": "Detailed Property Overview"
+              },
+              {
+                "key": "roomTypes",
+                "type": "textarea",
+                "label": "Accommodation Types (separated by |)"
+              },
+              {
+                "key": "amenities",
+                "type": "textarea",
+                "label": "Amenities & Facilities (separated by |)"
+              },
+              {
+                "key": "suitableFor",
+                "type": "text",
+                "label": "Suitable Traveller Types"
+              },
+              {
+                "key": "nearbyAttractions",
+                "type": "textarea",
+                "label": "Nearby Attractions (separated by |)"
+              },
+              {
+                "key": "importantInfo",
+                "type": "textarea",
+                "label": "Important Accommodation Information"
               },
               {
                 "key": "imageUrl",
@@ -1034,9 +1116,39 @@
                 "label": "Image Alt Text"
               },
               {
+                "key": "photoGallery",
+                "type": "list",
+                "label": "Property Photo Gallery",
+                "itemLabel": "Gallery Photo",
+                "minItems": 0,
+                "maxItems": 6,
+                "fields": [
+                  {
+                    "key": "imageUrl",
+                    "type": "image",
+                    "label": "Photo"
+                  },
+                  {
+                    "key": "caption",
+                    "type": "text",
+                    "label": "Caption"
+                  }
+                ]
+              },
+              {
+                "key": "showPrice",
+                "type": "boolean",
+                "label": "Show Indicative Nightly Rate"
+              },
+              {
+                "key": "indicativePrice",
+                "type": "number",
+                "label": "Indicative Starting Nightly Price (LKR)"
+              },
+              {
                 "key": "priceLabel",
                 "type": "text",
-                "label": "Optional Illustrative Rate"
+                "label": "Indicative Rate Display Label"
               },
               {
                 "key": "ctaLabel",
@@ -1046,7 +1158,7 @@
               {
                 "key": "ctaUrl",
                 "type": "url",
-                "label": "Inquiry CTA Link"
+                "label": "Detail or Inquiry Link"
               }
             ]
           },
@@ -1079,6 +1191,11 @@
             "maxItems": 8,
             "fields": [
               {
+                "key": "id",
+                "type": "text",
+                "label": "Offer ID"
+              },
+              {
                 "key": "title",
                 "type": "text",
                 "label": "Offer Title",
@@ -1087,12 +1204,12 @@
               {
                 "key": "category",
                 "type": "text",
-                "label": "Offer Type (e.g. Avurudu / Weekend / Honeymoon)"
+                "label": "Offer Category (e.g. Avurudu / Weekend / Honeymoon)"
               },
               {
                 "key": "discountLabel",
                 "type": "text",
-                "label": "Discount / Highlight Label"
+                "label": "Offer Highlight Badge"
               },
               {
                 "key": "description",
@@ -1122,14 +1239,29 @@
                 "label": "Illustrative Offer Price"
               },
               {
-                "key": "terms",
+                "key": "travelWindow",
                 "type": "text",
-                "label": "Offer Terms / Illustrative Note"
+                "label": "Travel Dates / Validity Period"
+              },
+              {
+                "key": "terms",
+                "type": "textarea",
+                "label": "Offer Terms & Conditions"
               },
               {
                 "key": "expiryDate",
                 "type": "text",
-                "label": "Offer Expiry Date (ISO YYYY-MM-DD or full ISO)"
+                "label": "Offer Expiry Date (ISO YYYY-MM-DDTHH:MM:SS+05:30)"
+              },
+              {
+                "key": "expiryMessage",
+                "type": "text",
+                "label": "Message Shown After Offer Expiry"
+              },
+              {
+                "key": "relatedPackageId",
+                "type": "text",
+                "label": "Related Package ID (optional)"
               },
               {
                 "key": "ctaLabel",
@@ -1232,8 +1364,13 @@
             "label": "Travel Journal Articles",
             "itemLabel": "Journal Article",
             "minItems": 0,
-            "maxItems": 8,
+            "maxItems": 12,
             "fields": [
+              {
+                "key": "id",
+                "type": "text",
+                "label": "Article ID"
+              },
               {
                 "key": "title",
                 "type": "text",
@@ -1246,31 +1383,86 @@
                 "label": "Category"
               },
               {
+                "key": "readingTime",
+                "type": "text",
+                "label": "Reading Time"
+              },
+              {
                 "key": "excerpt",
                 "type": "textarea",
-                "label": "Excerpt"
+                "label": "Short Excerpt"
+              },
+              {
+                "key": "intro",
+                "type": "textarea",
+                "label": "Article Introduction"
               },
               {
                 "key": "imageUrl",
                 "type": "image",
-                "label": "Article Photograph",
+                "label": "Article Cover Photograph",
                 "recommendedWidth": 1200,
                 "recommendedHeight": 800
               },
               {
                 "key": "imageAlt",
                 "type": "text",
-                "label": "Image Alt Text"
+                "label": "Cover Image Alt Text"
+              },
+              {
+                "key": "sections",
+                "type": "list",
+                "label": "Article Body Sections",
+                "itemLabel": "Section",
+                "minItems": 0,
+                "maxItems": 6,
+                "fields": [
+                  {
+                    "key": "heading",
+                    "type": "text",
+                    "label": "Section Heading"
+                  },
+                  {
+                    "key": "body",
+                    "type": "textarea",
+                    "label": "Section Body"
+                  },
+                  {
+                    "key": "imageUrl",
+                    "type": "image",
+                    "label": "Optional Supporting Photo"
+                  },
+                  {
+                    "key": "caption",
+                    "type": "text",
+                    "label": "Photo Caption"
+                  }
+                ]
+              },
+              {
+                "key": "practicalTips",
+                "type": "textarea",
+                "label": "Practical Travel Tips (separated by |)"
               },
               {
                 "key": "date",
                 "type": "text",
-                "label": "Publish Date"
+                "label": "Editorial Season / Label"
               },
               {
                 "key": "author",
                 "type": "text",
-                "label": "Author"
+                "label": "Editorial Desk / Contributor"
+              },
+              {
+                "key": "relatedDestinationId",
+                "type": "text",
+                "label": "Related Destination ID (optional)"
+              },
+              {
+                "key": "relatedPackageId",
+                "type": "text",
+                "label": "Related Tour Package ID (optional)"
               },
               {
                 "key": "ctaLabel",
@@ -1610,6 +1802,400 @@
             "key": "ctaLabel",
             "type": "text",
             "label": "Bottom Inquiry CTA Label"
+          }
+        ]
+      },
+      {
+        "id": "staysPage",
+        "path": "staysPage",
+        "pageKey": "stays",
+        "type": "object",
+        "label": "Hotels & Stays Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "disclaimer",
+            "type": "textarea",
+            "label": "Accommodation Illustrative Notice"
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Custom Accommodation CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Custom Accommodation CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Custom Accommodation CTA Label"
+          }
+        ]
+      },
+      {
+        "id": "offersPage",
+        "path": "offersPage",
+        "pageKey": "offers",
+        "type": "object",
+        "label": "Special Offers Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "featuredLabel",
+            "type": "text",
+            "label": "Featured Offer Badge Label"
+          },
+          {
+            "key": "pricingDisclaimer",
+            "type": "textarea",
+            "label": "Sample Pricing & Availability Disclaimer"
+          },
+          {
+            "key": "expiredNotice",
+            "type": "text",
+            "label": "Default Expired Offer Notice"
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom Inquiry CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Label"
+          }
+        ]
+      },
+      {
+        "id": "journalPage",
+        "path": "journalPage",
+        "pageKey": "journal",
+        "type": "object",
+        "label": "Travel Journal Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "featuredLabel",
+            "type": "text",
+            "label": "Featured Story Label"
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom Planning CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom Planning CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom Planning CTA Label"
+          }
+        ]
+      },
+      {
+        "id": "planTripPage",
+        "path": "planTripPage",
+        "pageKey": "plan_your_trip",
+        "type": "object",
+        "label": "Plan Your Trip Planner Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "step1Title",
+            "type": "text",
+            "label": "Step 1 Heading (Journey Type)"
+          },
+          {
+            "key": "step1Subtitle",
+            "type": "text",
+            "label": "Step 1 Instruction"
+          },
+          {
+            "key": "journeyOptions",
+            "type": "list",
+            "label": "Step 1 Journey Type Options",
+            "itemLabel": "Journey Option",
+            "minItems": 0,
+            "maxItems": 6,
+            "fields": [
+              {
+                "key": "key",
+                "type": "text",
+                "label": "Option Key (Domestic / Inbound / Outbound / Custom)"
+              },
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Option Title",
+                "required": true
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Option Description"
+              },
+              {
+                "key": "badge",
+                "type": "text",
+                "label": "Short Label / Audience"
+              }
+            ]
+          },
+          {
+            "key": "step2Title",
+            "type": "text",
+            "label": "Step 2 Heading (Destinations & Style)"
+          },
+          {
+            "key": "step2Subtitle",
+            "type": "text",
+            "label": "Step 2 Instruction"
+          },
+          {
+            "key": "outboundDestinations",
+            "type": "text",
+            "label": "Outbound Destinations List (separated by |)"
+          },
+          {
+            "key": "travelStyleOptions",
+            "type": "textarea",
+            "label": "Travel Style Options (separated by |)"
+          },
+          {
+            "key": "step3Title",
+            "type": "text",
+            "label": "Step 3 Heading (Dates & Travellers)"
+          },
+          {
+            "key": "step3Subtitle",
+            "type": "text",
+            "label": "Step 3 Instruction"
+          },
+          {
+            "key": "pickupCities",
+            "type": "text",
+            "label": "Suggested Pickup Locations (separated by |)"
+          },
+          {
+            "key": "step4Title",
+            "type": "text",
+            "label": "Step 4 Heading (Budget & Stay)"
+          },
+          {
+            "key": "step4Subtitle",
+            "type": "text",
+            "label": "Step 4 Instruction"
+          },
+          {
+            "key": "supportedCurrencies",
+            "type": "text",
+            "label": "Supported Currencies (separated by |)"
+          },
+          {
+            "key": "step5Title",
+            "type": "text",
+            "label": "Step 5 Heading (Experiences & Notes)"
+          },
+          {
+            "key": "step5Subtitle",
+            "type": "text",
+            "label": "Step 5 Instruction"
+          },
+          {
+            "key": "step6Title",
+            "type": "text",
+            "label": "Step 6 Heading (Review & Send)"
+          },
+          {
+            "key": "step6Subtitle",
+            "type": "text",
+            "label": "Step 6 Instruction"
+          },
+          {
+            "key": "summaryHeading",
+            "type": "text",
+            "label": "Live Trip Summary Heading"
+          },
+          {
+            "key": "inquiryNotice",
+            "type": "textarea",
+            "label": "Honest Inquiry Preparation Notice"
+          },
+          {
+            "key": "whatsappCtaLabel",
+            "type": "text",
+            "label": "WhatsApp Send Button Label"
+          },
+          {
+            "key": "emailCtaLabel",
+            "type": "text",
+            "label": "Email Send Button Label"
+          },
+          {
+            "key": "copyCtaLabel",
+            "type": "text",
+            "label": "Copy Trip Summary Button Label"
           }
         ]
       },

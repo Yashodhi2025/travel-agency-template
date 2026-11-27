@@ -46,17 +46,38 @@ export function TestimonialsAndTrustSection() {
     };
   });
 
+  const selectedPages = Array.isArray(siteData?.requirements?.requiredPages)
+    ? siteData.requirements.requiredPages
+    : siteData?.template?.structure?.pages || [
+        'home',
+        'destinations',
+        'tours',
+        'experiences',
+        'stays',
+        'offers',
+        'journal',
+        'plan_your_trip',
+        'about_us',
+        'services',
+        'contact',
+      ];
+  const hasJournal = selectedPages.includes('journal');
+
   const journalPosts = contentList(home.journalPosts).map((raw) => {
     const item = contentObject(raw);
     return {
       title: contentText(item.title),
       category: contentText(item.category),
+      readingTime: contentText(item.readingTime),
       excerpt: contentText(item.excerpt),
+      intro: contentText(item.intro),
+      sections: contentList(item.sections),
+      practicalTips: contentText(item.practicalTips),
       imageUrl: contentText(item.imageUrl) || '/images/hero-coast.webp',
       imageAlt: contentText(item.imageAlt),
       date: contentText(item.date),
       author: contentText(item.author),
-      ctaLabel: contentText(item.ctaLabel) || 'Read guide',
+      ctaLabel: contentText(item.ctaLabel) || 'Read Article',
       ctaUrl: contentText(item.ctaUrl) || '/#tailor-made',
     };
   });
@@ -486,7 +507,8 @@ export function TestimonialsAndTrustSection() {
                   </p>
                 )}
                 {journalPosts.map((post, idx) => {
-                  const href = sanitizeHref(post.ctaUrl) || '/#tailor-made';
+                  const rawHref = sanitizeHref(post.ctaUrl) || '/#tailor-made';
+                  const href = !hasJournal && rawHref.includes('/journal') ? '/#tailor-made' : rawHref;
                   return (
                     <article
                       key={idx}
@@ -500,13 +522,65 @@ export function TestimonialsAndTrustSection() {
                         fit="cover"
                         className="aspect-[16/10] w-full rounded object-cover"
                       />
-                      <span data-preview-field-path={`home.journalPosts[${idx}].category`} className="text-[10px] font-bold uppercase text-[#FF783D]">
-                        {post.category}
-                      </span>
+                      <div className="flex flex-wrap items-center justify-between gap-1 text-[10px] font-bold uppercase">
+                        <span data-preview-field-path={`home.journalPosts[${idx}].category`} className="text-[#FF783D]">
+                          {post.category}
+                        </span>
+                        <span data-preview-field-path={`home.journalPosts[${idx}].readingTime`} className="text-[#C5A46D]">
+                          {post.readingTime}
+                        </span>
+                      </div>
                       <strong data-preview-field-path={`home.journalPosts[${idx}].title`}>{post.title}</strong>
                       <p data-preview-field-path={`home.journalPosts[${idx}].excerpt`} className="m-0 text-[var(--lux-text-muted)]">
                         {post.excerpt}
                       </p>
+                      <p data-preview-field-path={`home.journalPosts[${idx}].intro`} className="m-0 text-[11px] text-[var(--lux-text-muted)]">
+                        {post.intro}
+                      </p>
+                      <p data-preview-field-path={`home.journalPosts[${idx}].practicalTips`} className="m-0 text-[11px] text-[var(--lux-text-muted)]">
+                        {post.practicalTips}
+                      </p>
+                      <div
+                        data-preview-list-path={`home.journalPosts[${idx}].sections`}
+                        className="space-y-1 border-t border-[var(--lux-border)] pt-1.5"
+                      >
+                        <strong data-preview-static="journal-sections-heading" className="text-[10.5px]">
+                          Article sections
+                        </strong>
+                        {post.sections.length === 0 && (
+                          <p data-preview-static="journal-sections-empty" className="m-0 text-[10.5px] opacity-75">
+                            No body sections added yet.
+                          </p>
+                        )}
+                        {post.sections.map((rawSec, secIdx) => {
+                          const sec = contentObject(rawSec);
+                          const secImg = contentText(sec.imageUrl);
+                          return (
+                            <div
+                              key={secIdx}
+                              data-preview-item-path={`home.journalPosts[${idx}].sections[${secIdx}]`}
+                              className="space-y-1 rounded border border-[var(--lux-border)] bg-[var(--lux-surface-alt)] p-1.5 text-[10.5px]"
+                            >
+                              <strong data-preview-field-path={`home.journalPosts[${idx}].sections[${secIdx}].heading`} className="block">
+                                {contentText(sec.heading)}
+                              </strong>
+                              <p data-preview-field-path={`home.journalPosts[${idx}].sections[${secIdx}].body`} className="m-0 text-[var(--lux-text-muted)]">
+                                {contentText(sec.body)}
+                              </p>
+                              <EditableImage
+                                src={secImg || post.imageUrl}
+                                alt={contentText(sec.caption) || contentText(sec.heading) || post.title}
+                                data-preview-field-path={`home.journalPosts[${idx}].sections[${secIdx}].imageUrl`}
+                                fit="cover"
+                                className="h-8 w-12 rounded object-cover"
+                              />
+                              <span data-preview-field-path={`home.journalPosts[${idx}].sections[${secIdx}].caption`} className="block text-[10px] text-[var(--lux-text-muted)]">
+                                {contentText(sec.caption)}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
                       <div className="flex flex-wrap gap-2 text-[11px] text-[var(--lux-text-muted)]">
                         <span data-preview-field-path={`home.journalPosts[${idx}].date`}>{post.date}</span>
                         <span data-preview-field-path={`home.journalPosts[${idx}].author`}>{post.author}</span>

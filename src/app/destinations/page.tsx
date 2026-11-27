@@ -35,9 +35,23 @@ export default function DestinationsPage() {
 
   const selectedPages =
     siteData.requirements?.requiredPages ??
-    siteData.template?.structure?.pages ??
-    ['home', 'destinations', 'tours', 'experiences', 'about_us', 'services', 'contact'];
+    siteData.template?.structure?.pages ?? [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'stays',
+      'offers',
+      'journal',
+      'plan_your_trip',
+      'about_us',
+      'services',
+      'contact',
+    ];
   const hasDestinations = selectedPages.includes('destinations');
+  const plannerTarget = selectedPages.includes('plan_your_trip')
+    ? '/plan-your-trip/'
+    : '/#tailor-made';
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -281,8 +295,13 @@ export default function DestinationsPage() {
                     type="button"
                     data-preview-static="destinations-no-results-plan"
                     onClick={() => {
-                      saveTripEnquiryDraft({ destination: searchQuery.trim() || undefined });
-                      window.location.href = withBasePath('/#tailor-made');
+                      saveTripEnquiryDraft({
+                        destination: searchQuery.trim() || undefined,
+                        sourceLabel: searchQuery.trim()
+                          ? `Custom Destination: ${searchQuery.trim()}`
+                          : 'Destinations Directory',
+                      });
+                      window.location.href = withBasePath(plannerTarget);
                     }}
                     className="lux-btn-sunset !min-h-[40px]"
                   >
@@ -430,7 +449,7 @@ export default function DestinationsPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    window.location.href = withBasePath('/#tailor-made');
+                    window.location.href = withBasePath(plannerTarget);
                   }}
                   className="lux-btn-sunset"
                 >

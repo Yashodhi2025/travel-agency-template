@@ -4,19 +4,28 @@ import { formatLocalizedNumber } from './i18n';
 import { withBasePath } from './utils';
 
 export interface TripEnquiryDraft {
-  travelType?: 'Domestic' | 'Inbound' | 'Outbound';
+  travelType?: 'Domestic' | 'Inbound' | 'Outbound' | 'Custom';
   destination?: string;
+  destinations?: string[];
   travelStyle?: string;
   duration?: string;
   travellers?: string;
   travelDate?: string;
+  returnDate?: string;
+  flexibleDates?: boolean;
   budget?: string;
+  budgetTier?: string;
+  currency?: string;
   pickupLocation?: string;
   accommodation?: string;
+  stayName?: string;
+  stayCategory?: string;
   packageName?: string;
   serviceName?: string;
   offerName?: string;
   experienceName?: string;
+  experiences?: string[];
+  sourceLabel?: string;
 }
 
 const DRAFT_STORAGE_KEY = 'ceylon_odyssey_trip_draft_v2';
@@ -25,6 +34,15 @@ export function saveTripEnquiryDraft(draft: TripEnquiryDraft): void {
   if (typeof window === 'undefined') return;
   try {
     window.sessionStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+  } catch {
+    // Ignore restricted storage contexts.
+  }
+}
+
+export function clearTripEnquiryDraft(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.sessionStorage.removeItem(DRAFT_STORAGE_KEY);
   } catch {
     // Ignore restricted storage contexts.
   }
@@ -84,6 +102,24 @@ export function experienceDetailHref(
 ): string {
   const key = resolveItemIdentifier(id, title, index);
   return withBasePath(`/experiences/detail/?id=${encodeURIComponent(key)}`);
+}
+
+export function stayDetailHref(
+  id: string | undefined | null,
+  title: string | undefined | null,
+  index: number,
+): string {
+  const key = resolveItemIdentifier(id, title, index);
+  return withBasePath(`/stays/detail/?id=${encodeURIComponent(key)}`);
+}
+
+export function journalDetailHref(
+  id: string | undefined | null,
+  title: string | undefined | null,
+  index: number,
+): string {
+  const key = resolveItemIdentifier(id, title, index);
+  return withBasePath(`/journal/detail/?id=${encodeURIComponent(key)}`);
 }
 
 export function sanitizeHref(value: string | undefined | null): string | undefined {

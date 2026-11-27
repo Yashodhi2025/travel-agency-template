@@ -28,10 +28,24 @@ function ExperienceDetailContent() {
 
   const selectedPages =
     siteData.requirements?.requiredPages ??
-    siteData.template?.structure?.pages ??
-    ['home', 'destinations', 'tours', 'experiences', 'about_us', 'services', 'contact'];
+    siteData.template?.structure?.pages ?? [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'stays',
+      'offers',
+      'journal',
+      'plan_your_trip',
+      'about_us',
+      'services',
+      'contact',
+    ];
   const hasExperiences = selectedPages.includes('experiences');
   const expBackHref = hasExperiences ? '/experiences/' : '/#experiences';
+  const plannerTarget = selectedPages.includes('plan_your_trip')
+    ? '/plan-your-trip/'
+    : '/#tailor-made';
 
   const experiences = useMemo(
     () =>
@@ -133,10 +147,12 @@ function ExperienceDetailContent() {
   const handlePlanExperience = () => {
     saveTripEnquiryDraft({
       experienceName: experience.title,
+      experiences: [experience.title],
       destination: experience.location,
       travelStyle: experience.category,
+      sourceLabel: `Experience: ${experience.title}`,
     });
-    window.location.href = withBasePath('/#tailor-made');
+    window.location.href = withBasePath(plannerTarget);
   };
 
   return (

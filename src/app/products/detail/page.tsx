@@ -30,10 +30,24 @@ function TourItineraryDetailView({ product }: { product: Record<string, unknown>
 
   const selectedPages =
     siteData.requirements?.requiredPages ??
-    siteData.template?.structure?.pages ??
-    ['home', 'destinations', 'tours', 'experiences', 'about_us', 'services', 'contact'];
+    siteData.template?.structure?.pages ?? [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'stays',
+      'offers',
+      'journal',
+      'plan_your_trip',
+      'about_us',
+      'services',
+      'contact',
+    ];
   const hasTours = selectedPages.includes('tours');
   const toursBackHref = hasTours ? '/tours/' : '/#packages';
+  const plannerTarget = selectedPages.includes('plan_your_trip')
+    ? '/plan-your-trip/'
+    : '/#tailor-made';
 
   const [openDay, setOpenDay] = useState<number | null>(0);
   const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
@@ -125,8 +139,10 @@ function TourItineraryDetailView({ product }: { product: Record<string, unknown>
       destination: destinations || undefined,
       duration: duration || undefined,
       travelStyle: category || undefined,
+      currency: currency || 'LKR',
+      sourceLabel: `Tour Package: ${name}`,
     });
-    window.location.href = withBasePath('/#tailor-made');
+    window.location.href = withBasePath(plannerTarget);
   };
 
   return (

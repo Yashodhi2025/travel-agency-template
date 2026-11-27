@@ -8,6 +8,7 @@ import {
   formatCountdownParts,
   parseOfferDeadline,
   sanitizeHref,
+  saveTripEnquiryDraft,
   type TripEnquiryDraft,
 } from '@/lib/travelHelpers';
 import { withBasePath } from '@/lib/utils';
@@ -31,9 +32,28 @@ export function SeasonalOffersSection({ onEnquireOffer }: SeasonalOffersSectionP
     return () => window.clearInterval(id);
   }, [isEditorPreview]);
 
-  const offers = contentList(home.seasonalOffers).map((raw) => {
+  const selectedPages = Array.isArray(siteData?.requirements?.requiredPages)
+    ? siteData.requirements.requiredPages
+    : siteData?.template?.structure?.pages || [
+        'home',
+        'destinations',
+        'tours',
+        'experiences',
+        'stays',
+        'offers',
+        'journal',
+        'plan_your_trip',
+        'about_us',
+        'services',
+        'contact',
+      ];
+  const hasOffers = selectedPages.includes('offers');
+  const hasPlanner = selectedPages.includes('plan_your_trip');
+
+  const offers = contentList(home.seasonalOffers).map((raw, idx) => {
     const item = contentObject(raw);
     return {
+      id: contentText(item.id) || `offer-${idx}`,
       title: contentText(item.title),
       category: contentText(item.category),
       discountLabel: contentText(item.discountLabel),
@@ -42,12 +62,21 @@ export function SeasonalOffersSection({ onEnquireOffer }: SeasonalOffersSectionP
       imageAlt: contentText(item.imageAlt),
       currency: contentText(item.currency) || 'LKR',
       priceLabel: contentText(item.priceLabel),
+      travelWindow: contentText(item.travelWindow),
       terms: contentText(item.terms),
       expiryDate: contentText(item.expiryDate),
+      expiryMessage: contentText(item.expiryMessage),
       ctaLabel: contentText(item.ctaLabel) || 'Enquire Offer',
       ctaUrl: contentText(item.ctaUrl) || '/#tailor-made',
     };
   });
+
+  const resolveOfferHref = (rawUrl: string) => {
+    const clean = sanitizeHref(rawUrl) || '/#tailor-made';
+    if (!hasPlanner && clean.includes('/plan-your-trip')) return '/#tailor-made';
+    if (!hasOffers && clean.includes('/offers')) return '/#offers';
+    return clean;
+  };
 
   // Maximum 2 featured offers on live homepage by default (full offer list editable in Fivora preview)
   const rawLimit = Number(home.featuredOffersCount);
@@ -83,13 +112,24 @@ export function SeasonalOffersSection({ onEnquireOffer }: SeasonalOffersSectionP
               />
             </div>
 
-            <EditableText
-              as="p"
-              color="rgba(250, 248, 243, 0.78)"
-              className="m-0 max-w-md text-xs leading-relaxed text-[#FAF8F3]/78 sm:text-sm"
-              data-preview-field-path="home.offersSummary"
-              defaultValue={contentText(home.offersSummary)}
-            />
+            <div className="flex flex-col items-start gap-3 lg:items-end">
+              <EditableText
+                as="p"
+                color="rgba(250, 248, 243, 0.78)"
+                className="m-0 max-w-md text-xs leading-relaxed text-[#FAF8F3]/78 sm:text-sm lg:text-right"
+                data-preview-field-path="home.offersSummary"
+                defaultValue={contentText(home.offersSummary)}
+              />
+              {!isEditorPreview && hasOffers && (
+                <a
+                  href={withBasePath('/offers/')}
+                  data-preview-static="offers-view-all-link"
+                  className="lux-btn-outline-light !min-h-[38px] !px-4 !text-[11px]"
+                >
+                  View All Special Offers →
+                </a>
+              )}
+            </div>
           </div>
         </Reveal>
 
@@ -108,7 +148,7 @@ export function SeasonalOffersSection({ onEnquireOffer }: SeasonalOffersSectionP
           )}
 
           {visibleOffers.map((offer, index) => {
-            const href = sanitizeHref(offer.ctaUrl) || '/#tailor-made';
+            const href = resolveOfferHref(offer.ctaUrl);
             const targetTs = parseOfferDeadline(offer.expiryDate);
             const remainingSec =
               targetTs !== null && nowMs !== null ? Math.floor((targetTs - nowMs) / 1000) : null;
@@ -167,11 +207,25 @@ export function SeasonalOffersSection({ onEnquireOffer }: SeasonalOffersSectionP
                   />
 
                   {isEditorPreview && (
-                    <div className="rounded border border-dashed border-white/20 p-2 text-[11px] text-[#FAF8F3]/80">
-                      <span data-preview-static="offer-alt-label">Alt: </span>
-                      <span data-preview-field-path={`home.seasonalOffers[${index}].imageAlt`}>
-                        {offer.imageAlt || offer.title}
-                      </span>
+                    <div className="space-y-1 rounded border border-dashed border-white/20 p-2 text-[11px] text-[#FAF8F3]/80">
+                      <div>
+                        <span data-preview-static="offer-window-label">Travel window: </span>
+                        <span data-preview-field-path={`home.seasonalOffers[${index}].travelWindow`}>
+                          {offer.travelWindow}
+                        </span>
+                      </div>
+                      <div>
+                        <span data-preview-static="offer-expiry-msg-label">Expiry message: </span>
+                        <span data-preview-field-path={`home.seasonalOffers[${index}].expiryMessage`}>
+                          {offer.expiryMessage}
+                        </span>
+                      </div>
+                      <div>
+                        <span data-preview-static="offer-alt-label">Alt: </span>
+                        <span data-preview-field-path={`home.seasonalOffers[${index}].imageAlt`}>
+                          {offer.imageAlt || offer.title}
+                        </span>
+                      </div>
                     </div>
                   )}
 
@@ -243,7 +297,15 @@ export function SeasonalOffersSection({ onEnquireOffer }: SeasonalOffersSectionP
                       href={withBasePath(href)}
                       data-preview-field-path={`home.seasonalOffers[${index}].ctaUrl`}
                       onClick={(e) => {
-                        if (!isEditorPreview && href === '/#tailor-made') {
+                        if (isEditorPreview) return;
+                        if (href.includes('/plan-your-trip')) {
+                          saveTripEnquiryDraft({
+                            offerName: offer.title,
+                            travelStyle: offer.category || undefined,
+                            currency: offer.currency || 'LKR',
+                            sourceLabel: `Special Offer: ${offer.title}`,
+                          });
+                        } else if (href === '/#tailor-made') {
                           e.preventDefault();
                           onEnquireOffer({
                             offerName: offer.title,
