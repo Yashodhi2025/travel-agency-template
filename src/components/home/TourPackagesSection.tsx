@@ -12,6 +12,7 @@ import {
 } from '@/lib/siteDataContext';
 import { useIsEditorPreview } from '@/lib/useIsEditorPreview';
 import { formatMoney, type TripEnquiryDraft } from '@/lib/travelHelpers';
+import { withBasePath } from '@/lib/utils';
 import { Reveal } from '../Reveal';
 
 const TOUR_MARKET_TABS = ['All', 'Domestic', 'Inbound', 'Outbound'] as const;
@@ -33,6 +34,19 @@ export function TourPackagesSection({
   const isEditorPreview = useIsEditorPreview();
   const home = contentObject(contentObject(siteData?.content).home);
   const products = useProducts();
+
+  const selectedPages = Array.isArray(siteData?.requirements?.requiredPages)
+    ? siteData.requirements.requiredPages
+    : siteData?.template?.structure?.pages || [
+        'home',
+        'destinations',
+        'tours',
+        'experiences',
+        'about_us',
+        'services',
+        'contact',
+      ];
+  const hasTours = selectedPages.includes('tours');
 
   const [marketFilter, setMarketFilter] = useState<string>('All');
   const [showAll, setShowAll] = useState(false);
@@ -244,6 +258,7 @@ export function TourPackagesSection({
             const transport = contentText(product.transport);
             const inclusions = contentText(product.inclusions);
             const exclusions = contentText(product.exclusions);
+            const importantInfo = contentText(product.importantInfo);
             const imageAlt = contentText(product.imageAlt) || contentText(product.name);
             const itinerary = contentList(product.itinerary);
             const photoGallery = contentList(product.photoGallery);
@@ -492,6 +507,10 @@ export function TourPackagesSection({
                           <span data-preview-static="product-exclusions-label">Exclusions: </span>
                           <span data-preview-field-path={`products[${index}].exclusions`}>{exclusions}</span>
                         </div>
+                        <div>
+                          <span data-preview-static="product-important-info-label">Important info: </span>
+                          <span data-preview-field-path={`products[${index}].importantInfo`}>{importantInfo}</span>
+                        </div>
                       </div>
 
                       <div
@@ -628,7 +647,19 @@ export function TourPackagesSection({
             }
           />
 
-          {hasMoreToShow && (
+          {!isEditorPreview && hasTours && (
+            <a
+              href={withBasePath('/tours/')}
+              className="lux-btn-tropical shrink-0"
+            >
+              <span data-preview-field-path="home.productsViewAllLabel">
+                {contentText(home.productsViewAllLabel) || 'View All Tours'}
+              </span>
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
+
+          {!isEditorPreview && !hasTours && hasMoreToShow && (
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}

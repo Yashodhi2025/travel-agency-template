@@ -31,6 +31,9 @@
     "structure": {
       "pages": [
         "home",
+        "destinations",
+        "tours",
+        "experiences",
         "about_us",
         "services",
         "contact"
@@ -60,6 +63,9 @@
   "requirements": {
     "requiredPages": [
       "home",
+      "destinations",
+      "tours",
+      "experiences",
       "about_us",
       "services",
       "contact"
@@ -322,7 +328,7 @@
           "imageUrl": "/images/hero-sigiriya.webp",
           "imageAlt": "Sigiriya Lion Rock rising above emerald forest at dawn",
           "ctaLabel": "Explore Sigiriya",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=sigiriya",
           "mapX": 48.8,
           "mapY": 48.3
         },
@@ -336,7 +342,7 @@
           "imageUrl": "/images/yala-wildlife.webp",
           "imageAlt": "Wild Sri Lankan leopard in dry-zone national park forest",
           "ctaLabel": "Explore Wilpattu",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/",
           "mapX": 26.9,
           "mapY": 37.7
         },
@@ -350,9 +356,9 @@
           "imageUrl": "/images/dest-trincomalee.webp",
           "imageAlt": "Turquoise calm waters and white sands of Trincomalee bay",
           "ctaLabel": "Explore Trincomalee",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=trincomalee",
           "mapX": 62.5,
-          "mapY": 35.0
+          "mapY": 35
         },
         {
           "id": "map-kandy",
@@ -364,8 +370,8 @@
           "imageUrl": "/images/dest-kandy.webp",
           "imageAlt": "Scenic view of Kandy Lake and traditional Kandyan temple architecture",
           "ctaLabel": "Explore Kandy",
-          "ctaUrl": "/#packages",
-          "mapX": 45.0,
+          "ctaUrl": "/destinations/detail/?id=kandy",
+          "mapX": 45,
           "mapY": 62.3
         },
         {
@@ -378,7 +384,7 @@
           "imageUrl": "/images/hero-tea.webp",
           "imageAlt": "Rolling misty emerald tea plantations in Nuwara Eliya highlands",
           "ctaLabel": "Explore Nuwara Eliya",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=nuwara-eliya",
           "mapX": 49.5,
           "mapY": 69.1
         },
@@ -392,7 +398,7 @@
           "imageUrl": "/images/hero-ella.webp",
           "imageAlt": "Blue highland train crossing the Nine Arch Bridge in Ella",
           "ctaLabel": "Explore Ella",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=ella",
           "mapX": 57.4,
           "mapY": 71.3
         },
@@ -406,7 +412,7 @@
           "imageUrl": "/images/dest-arugam-bay.webp",
           "imageAlt": "Golden morning surf point and palm bay at Arugam Bay",
           "ctaLabel": "Explore Arugam Bay",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/",
           "mapX": 81.1,
           "mapY": 71.8
         },
@@ -420,7 +426,7 @@
           "imageUrl": "/images/yala-wildlife.webp",
           "imageAlt": "Sri Lankan leopard perched on warm granite boulder in Yala National Park",
           "ctaLabel": "Explore Yala",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=yala",
           "mapX": 71.5,
           "mapY": 81.7
         },
@@ -434,7 +440,7 @@
           "imageUrl": "/images/hero-galle.webp",
           "imageAlt": "Galle Fort lighthouse and coral-stone ocean ramparts at sunset",
           "ctaLabel": "Explore Galle",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=galle",
           "mapX": 32.5,
           "mapY": 88.8
         },
@@ -448,7 +454,7 @@
           "imageUrl": "/images/dest-mirissa.webp",
           "imageAlt": "Palm headland curving over turquoise waves in Mirissa",
           "ctaLabel": "Explore Mirissa",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=mirissa",
           "mapX": 40.1,
           "mapY": 90.6
         }
@@ -471,9 +477,27 @@
           "imageUrl": "/images/hero-sigiriya.webp",
           "imageAlt": "Sigiriya Lion Rock towering over misty green jungle at dawn",
           "ctaLabel": "Explore Sigiriya",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=sigiriya",
           "mapX": 51,
-          "mapY": 44
+          "mapY": 44,
+          "topAttractions": "Sigiriya Lion Rock Fortress | Pidurangala Sunrise Rock | Royal Water & Boulder Gardens | Dambulla Cave Temple",
+          "thingsToDo": "Climb Lion Rock at 7:00 AM before midday heat | Cycle shaded village tracks past lotus tanks | Join an afternoon elephant safari at Minneriya or Kaudulla | Enjoy a traditional clay-pot village lunch",
+          "suggestedDuration": "2 – 3 Days",
+          "travelInfo": "Approx. 3.5 – 4 hours by private A/C vehicle from Colombo or Bandaranaike International Airport (CMB) via Kurunegala. Easily combined with Anuradhapura, Polonnaruwa, and Kandy.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-sigiriya.webp",
+              "caption": "Sigiriya Lion Rock rising through morning mist"
+            },
+            {
+              "imageUrl": "/images/dest-anuradhapura.webp",
+              "caption": "Nearby Cultural Triangle sacred heritage landscapes"
+            },
+            {
+              "imageUrl": "/images/exp-villa.webp",
+              "caption": "Forest sanctuary stays surrounding the Cultural Triangle"
+            }
+          ]
         },
         {
           "id": "ella",
@@ -487,9 +511,27 @@
           "imageUrl": "/images/hero-ella.webp",
           "imageAlt": "Iconic mountain train crossing Ella's Nine Arch Bridge",
           "ctaLabel": "Explore Ella",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=ella",
           "mapX": 60,
-          "mapY": 68
+          "mapY": 68,
+          "topAttractions": "Nine Arch Bridge (Demodara) | Little Adam’s Peak | Ella Rock Viewpoint | Ravana Waterfall & Diyaluma Falls",
+          "thingsToDo": "Ride the scenic hill-country train from Nanu Oya or Kandy | Walk the gentle Little Adam’s Peak trail at sunrise | Visit a working highland tea factory | Relax at hillside cafes overlooking Ella Gap",
+          "suggestedDuration": "2 – 3 Days",
+          "travelInfo": "Approx. 5 – 5.5 hours from Colombo via Southern Expressway & Wellawaya, or pair a private chauffeur drop-off in Nanu Oya with the scenic 3-hour mountain train directly into Ella.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-ella.webp",
+              "caption": "Classic highland train crossing the Nine Arch Bridge"
+            },
+            {
+              "imageUrl": "/images/stay-mountain-retreat.webp",
+              "caption": "Misty emerald valley views from highland retreats"
+            },
+            {
+              "imageUrl": "/images/style-adventure-trek.webp",
+              "caption": "Sunrise ridgeline walks across the Uva highlands"
+            }
+          ]
         },
         {
           "id": "nuwara-eliya",
@@ -503,9 +545,27 @@
           "imageUrl": "/images/hero-tea.webp",
           "imageAlt": "Misty green terraced tea slopes in Nuwara Eliya",
           "ctaLabel": "Explore Nuwara Eliya",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=nuwara-eliya",
           "mapX": 52,
-          "mapY": 65
+          "mapY": 65,
+          "topAttractions": "Single-Origin Ceylon Tea Estates | Horton Plains & World’s End | Gregory Lake Promenade | Hakgala Botanical Garden",
+          "thingsToDo": "Sample silver tips and high-grown teas with estate hosts | Take an early-morning trek to Baker’s Falls | Boat across cool Gregory Lake with family | Unwind by a hearth in a heritage planter bungalow",
+          "suggestedDuration": "2 Days",
+          "travelInfo": "Approx. 4.5 hours from Colombo via Ginigathena or 2.5 hours uphill from Kandy along winding tea-draped roads. Bring a light jacket for cool 14–20°C evenings.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-tea.webp",
+              "caption": "Rolling emerald Ceylon tea slopes in Nuwara Eliya"
+            },
+            {
+              "imageUrl": "/images/style-romantic-escape.webp",
+              "caption": "Quiet highland verandas overlooking misty hills at dusk"
+            },
+            {
+              "imageUrl": "/images/stay-mountain-retreat.webp",
+              "caption": "Morning tea surrounded by highland cloud forest"
+            }
+          ]
         },
         {
           "id": "kandy",
@@ -519,9 +579,27 @@
           "imageUrl": "/images/dest-kandy.webp",
           "imageAlt": "Kandy Lake and sacred heritage skyline framed by misty hills",
           "ctaLabel": "Explore Kandy",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=kandy",
           "mapX": 48,
-          "mapY": 57
+          "mapY": 57,
+          "topAttractions": "Temple of the Sacred Tooth Relic (Sri Dalada Maligawa) | Peradeniya Royal Botanical Gardens | Kandy Lake Walk | Bahirawakanda Viewpoint",
+          "thingsToDo": "Attend evening Thevava drumming offerings at the sacred temple | Stroll century-old palm avenues at Peradeniya | Explore local spice and handicraft markets | Watch traditional Kandyan cultural dance at twilight",
+          "suggestedDuration": "1 – 2 Days",
+          "travelInfo": "Approx. 3 – 3.5 hours from Colombo or CMB Airport via the Central Expressway & Kadugannawa Pass, or via intercity train from Colombo Fort. Natural gateway between Cultural Triangle and Tea Country.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/dest-kandy.webp",
+              "caption": "Kandy Lake and sacred hill-capital heritage"
+            },
+            {
+              "imageUrl": "/images/exp-cultural-dance.webp",
+              "caption": "Traditional Kandyan cultural drumming and Ves dance"
+            },
+            {
+              "imageUrl": "/images/exp-culinary.webp",
+              "caption": "Fragrant central-highland spices and Sri Lankan cuisine"
+            }
+          ]
         },
         {
           "id": "galle",
@@ -535,9 +613,27 @@
           "imageUrl": "/images/hero-galle.webp",
           "imageAlt": "Historic Galle Fort ramparts and white lighthouse along the coast",
           "ctaLabel": "Explore Galle",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=galle",
           "mapX": 39,
-          "mapY": 86
+          "mapY": 86,
+          "topAttractions": "UNESCO Galle Dutch Fort Ramparts | Galle Lighthouse & Flag Rock | Pedlar Street Heritage Lanes | Handunugoda Tea & Southern Cinnamon Estates",
+          "thingsToDo": "Walk the coral-stone fort bastions at sunset | Browse local artisan boutiques and spice courtyards | Cycle quiet southern paddy lanes | Pair a fort stay with nearby Unawatuna or Habaraduwa beaches",
+          "suggestedDuration": "2 Days",
+          "travelInfo": "Just 2 hours from Colombo or 2.5 hours from CMB Airport via the Southern Expressway — making Galle one of Sri Lanka’s easiest luxury or family weekend escapes.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-galle.webp",
+              "caption": "Galle Fort lighthouse and coral-stone ocean bastions"
+            },
+            {
+              "imageUrl": "/images/family-beach-holiday.webp",
+              "caption": "Golden family-friendly southern beaches minutes away"
+            },
+            {
+              "imageUrl": "/images/ayubowan-hospitality.webp",
+              "caption": "Warm coastal hospitality and sunlit verandas"
+            }
+          ]
         },
         {
           "id": "mirissa",
@@ -551,9 +647,27 @@
           "imageUrl": "/images/dest-mirissa.webp",
           "imageAlt": "Mirissa palm hill overlooking turquoise Indian Ocean bays",
           "ctaLabel": "Explore Mirissa",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=mirissa",
           "mapX": 47,
-          "mapY": 89
+          "mapY": 89,
+          "topAttractions": "Coconut Tree Hill | Mirissa Crescent Bay | Secret Beach Cove | Weligama Beginner Surf Bay (15 mins away)",
+          "thingsToDo": "Watch sunrise from Coconut Tree Hill | Swim calm seasonal waters from November to April | Take beginner surf lessons in nearby Weligama | Enjoy freshly grilled coastal seafood at dusk",
+          "suggestedDuration": "2 – 3 Days",
+          "travelInfo": "Approx. 2.5 hours from Colombo via the Southern Expressway (Imaduwa or Kokmaduwa exit). Ideal pairing with Galle Fort and Yala National Park.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/dest-mirissa.webp",
+              "caption": "Palm-crowned Coconut Tree Hill overlooking turquoise surf"
+            },
+            {
+              "imageUrl": "/images/hero-coast.webp",
+              "caption": "Wide golden southern shorelines and calm sunset seas"
+            },
+            {
+              "imageUrl": "/images/style-family-holiday.webp",
+              "caption": "Relaxed palm-shaded family walks beside the bay"
+            }
+          ]
         },
         {
           "id": "yala",
@@ -567,9 +681,27 @@
           "imageUrl": "/images/yala-wildlife.webp",
           "imageAlt": "Sri Lankan leopard on a granite boulder at golden hour in Yala",
           "ctaLabel": "Explore Yala",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=yala",
           "mapX": 68,
-          "mapY": 79
+          "mapY": 79,
+          "topAttractions": "Yala National Park Block 1 & Block 5 | Sithulpawwa Rock Monastery | Coastal Sand Dunes & Lagoons | Bundala Bird Sanctuary nearby",
+          "thingsToDo": "Join a 5:30 AM dawn 4x4 safari drive for cooler wildlife activity | Spot Sri Lankan leopards, elephants, peacocks, and sloth bears | Unwind at an eco-lodge or tented camp | Combine with Ella or Mirissa in 2–3 hours",
+          "suggestedDuration": "2 Days",
+          "travelInfo": "Approx. 4.5 hours from Colombo via the Southern Expressway extension to Mattala/Tissamaharama, or 2.5 hours descending from Ella. Park Block 1 typically observes a seasonal maintenance closure in September.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/yala-wildlife.webp",
+              "caption": "Sri Lankan leopard basking on warm granite rock at sunrise"
+            },
+            {
+              "imageUrl": "/images/exp-villa.webp",
+              "caption": "Secluded wilderness lodges bordering dry-zone forest"
+            },
+            {
+              "imageUrl": "/images/dest-arugam-bay.webp",
+              "caption": "Untamed southeast coastal lagoons and dunes"
+            }
+          ]
         },
         {
           "id": "trincomalee",
@@ -583,9 +715,27 @@
           "imageUrl": "/images/dest-trincomalee.webp",
           "imageAlt": "Calm turquoise bay and sunlit shoreline in Trincomalee",
           "ctaLabel": "Explore Trincomalee",
-          "ctaUrl": "/#packages",
+          "ctaUrl": "/destinations/detail/?id=trincomalee",
           "mapX": 63,
-          "mapY": 33
+          "mapY": 33,
+          "topAttractions": "Nilaveli & Uppuveli Beaches | Pigeon Island Marine Sanctuary | Koneswaram Cliff Temple | Fort Frederick & Natural Harbour",
+          "thingsToDo": "Swim glassy turquoise east-coast bays from May to September | Snorkel clear reef waters near Pigeon Island | Visit Koneswaram headland for Bay of Bengal vistas | Combine with Sigiriya or Anuradhapura on the drive inland",
+          "suggestedDuration": "2 – 3 Days",
+          "travelInfo": "Approx. 5.5 hours from Colombo via Habarana, or just 2 hours from Sigiriya — making Trincomalee the ideal dry-season beach finale during southwest monsoon months (May – Sep).",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/dest-trincomalee.webp",
+              "caption": "Calm crystalline turquoise waters along Trincomalee bay"
+            },
+            {
+              "imageUrl": "/images/family-beach-holiday.webp",
+              "caption": "Sun-drenched sandy east-coast family shoreline"
+            },
+            {
+              "imageUrl": "/images/hero-sigiriya.webp",
+              "caption": "Easy two-hour connection to Sigiriya and the Cultural Triangle"
+            }
+          ]
         }
       ],
       "productsEyebrow": "FEATURED TOUR PACKAGES",
@@ -604,8 +754,30 @@
           "description": "Drift through emerald tea slopes, misty tunnels, and the Nine Arch Bridge on Sri Lanka's celebrated Kandy-to-Ella mountain railway.",
           "imageUrl": "/images/hero-ella.webp",
           "imageAlt": "Scenic highland train traversing stone viaduct surrounded by lush greenery",
-          "ctaLabel": "Include in trip",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=scenic-train-journeys",
+          "id": "scenic-train-journeys",
+          "location": "Kandy · Nanu Oya · Ella",
+          "overview": "Winding past emerald tea slopes, misty viaducts, cloud-forest tunnels, and hillside villages, Sri Lanka’s main highland rail line is one of the world’s most scenic journeys — equally cherished by Sri Lankan families and international visitors.",
+          "highlights": "Iconic Kandy to Ella or Nanu Oya to Ella rail segments | Dramatic views across Nine Arch Bridge & tea valleys | Luggage transferred seamlessly by your private driver | Choice of reserved 1st, 2nd, or panoramic carriages (subject to rail release)",
+          "duration": "Half Day (3 – 6 Hours by segment)",
+          "bestSeason": "Year-round (Clearer mountain views Jan – May & Aug – Sep)",
+          "suitableFor": "Families, Couples, Solo Travellers, Photography Enthusiasts, Groups",
+          "practicalInfo": "Sri Lanka Railways opens reserved tickets approximately 30 days ahead. For comfort without long delays, we often recommend boarding the shorter, most scenic Nanu Oya to Ella stretch (approx. 3 hours) while your private vehicle carries your bags to meet you at Ella Station.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-ella.webp",
+              "caption": "Mountain train gliding over Ella’s Nine Arch Bridge"
+            },
+            {
+              "imageUrl": "/images/hero-tea.webp",
+              "caption": "Terraced tea slopes visible along the hill-country rail"
+            },
+            {
+              "imageUrl": "/images/stay-mountain-retreat.webp",
+              "caption": "Misty highland valleys welcoming arrivals in Ella"
+            }
+          ]
         },
         {
           "title": "Tea Estate Experiences",
@@ -613,8 +785,30 @@
           "description": "Walk hand-plucked highland trails with estate hosts and taste single-origin silver tips inside heritage Ceylon tea factories.",
           "imageUrl": "/images/hero-tea.webp",
           "imageAlt": "Misty terraced Ceylon tea plantation in Sri Lanka's central highlands",
-          "ctaLabel": "Include in trip",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=tea-estate-experiences",
+          "id": "tea-estate-experiences",
+          "location": "Nuwara Eliya · Hatton · Haputale",
+          "overview": "Step inside Sri Lanka’s living Ceylon tea heritage with guided walks along misty terraced estates, heritage factory tours showing withering and rolling craft, and unhurried single-origin tastings.",
+          "highlights": "Guided walk through emerald high-grown tea fields | Historic working tea factory tour | Single-estate tasting of Silver Tips, Pekoe & BOPF | Optional colonial tea bungalow high tea",
+          "duration": "2 – 4 Hours (or Full Overnight Bungalow Stay)",
+          "bestSeason": "Year-round (Crisp sunlit mornings Jan – Apr & Aug – Sep)",
+          "suitableFor": "Families, Couples, Cultural Travellers, Culinary Enthusiasts",
+          "practicalInfo": "Morning visits offer the freshest estate activity and clearest mountain light. Comfortable walking shoes and a light sweater are recommended in Nuwara Eliya and Hatton.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/hero-tea.webp",
+              "caption": "Sun-dappled terraced Ceylon tea hills at dawn"
+            },
+            {
+              "imageUrl": "/images/ayubowan-hospitality.webp",
+              "caption": "Freshly brewed golden Ceylon tea service"
+            },
+            {
+              "imageUrl": "/images/style-romantic-escape.webp",
+              "caption": "Highland tea-country veranda overlooking misty ridges"
+            }
+          ]
         },
         {
           "title": "Traditional Cooking",
@@ -622,8 +816,26 @@
           "description": "Visit morning village markets and prepare fragrant clay-pot curries, pol sambol, and hoppers over woodfire hearths.",
           "imageUrl": "/images/exp-culinary.webp",
           "imageAlt": "Authentic Sri Lankan clay-pot curries, tropical spices, and woven serving platters",
-          "ctaLabel": "Include in trip",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=traditional-cooking",
+          "id": "traditional-cooking",
+          "location": "Kandy · Sigiriya · Galle · Colombo",
+          "overview": "Discover Sri Lanka’s vibrant culinary heritage from morning produce markets to fragrant clay-pot hearths. Learn to balance roasted curry spices, fresh coconut milk, garden herbs, and regional coastal or village recipes.",
+          "highlights": "Guided local market & spice selection | Hands-on preparation of clay-pot curries & pol sambol | Crispy hoppers or string hoppers demonstration | Relaxed shared family-style meal",
+          "duration": "3 – 4 Hours",
+          "bestSeason": "Year-round across all regions",
+          "suitableFor": "Families, Couples, Food Lovers, Small Groups",
+          "practicalInfo": "Vegetarian, vegan, halal, and mild kid-friendly spice levels are happily accommodated with advance notice. Ideal as a relaxed afternoon activity in Sigiriya, Kandy, or Galle.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/exp-culinary.webp",
+              "caption": "Traditional clay-pot curries, whole spices, and woven platters"
+            },
+            {
+              "imageUrl": "/images/ayubowan-hospitality.webp",
+              "caption": "Warm Sri Lankan table hospitality and Ceylon tea"
+            }
+          ]
         },
         {
           "title": "Wildlife Safaris",
@@ -631,8 +843,26 @@
           "description": "Track leopards, wild elephant herds, and migratory birdlife across Yala, Wilpattu, and Minneriya in private 4x4 safari jeeps.",
           "imageUrl": "/images/yala-wildlife.webp",
           "imageAlt": "Sri Lankan leopard resting on sun-warmed rock in Yala National Park",
-          "ctaLabel": "Explore safaris",
-          "ctaUrl": "/#packages"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=wildlife-safaris",
+          "id": "wildlife-safaris",
+          "location": "Yala · Wilpattu · Minneriya · Udawalawe",
+          "overview": "Sri Lanka packs remarkable biodiversity into accessible dry-zone national parks. Travel in private open-air 4x4 safari jeeps with experienced local trackers to observe leopards, wild Asian elephants, sloth bears, and vibrant birdlife.",
+          "highlights": "Private 4x4 safari jeep with dedicated local tracker | Dawn (5:30 AM) or afternoon game drives | Leopard sanctuaries in Yala & Wilpattu | Wild elephant herds in Udawalawe & Minneriya",
+          "duration": "Half Day (4 Hours) or Full Day Safari",
+          "bestSeason": "Feb – Jul & Nov – Jan (Yala/Wilpattu); Jun – Sep (Minneriya Gathering)",
+          "suitableFor": "Families, Wildlife Photographers, Nature Lovers, Adventure Seekers",
+          "practicalInfo": "Wear neutral earthy colours, bring binoculars and sun protection, and keep respectful quiet distances around animals. Park entry permits and jeep pickups from nearby hotels are coordinated in advance.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/yala-wildlife.webp",
+              "caption": "Sri Lankan leopard perched on warm granite rock at sunrise"
+            },
+            {
+              "imageUrl": "/images/dest-arugam-bay.webp",
+              "caption": "Southeast wilderness lagoons and coastal bird habitats"
+            }
+          ]
         },
         {
           "title": "Surfing & Ocean Swells",
@@ -640,8 +870,26 @@
           "description": "Catch warm beginner-friendly southern waves in Weligama and Mirissa or iconic right-hand point breaks in Arugam Bay.",
           "imageUrl": "/images/dest-arugam-bay.webp",
           "imageAlt": "Clean golden morning surf swells curving into Arugam Bay",
-          "ctaLabel": "Explore surf coast",
-          "ctaUrl": "/#packages"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=surfing-ocean-swells",
+          "id": "surfing-ocean-swells",
+          "location": "Arugam Bay · Weligama · Mirissa · Hikkaduwa",
+          "overview": "Thanks to Sri Lanka’s twin monsoon seasons, warm tropical waves roll somewhere along the island’s coastline almost every month of the year — from gentle sandy beginner breaks in Weligama to classic right-hand point breaks in Arugam Bay.",
+          "highlights": "Year-round warm-water surf seasons (South Nov–Apr, East May–Sep) | Certified beginner surf coaching & board rentals | Sunrise sessions in Weligama, Hiriketiya & Arugam Bay | Coastal beach cafes and lagoon kayaking nearby",
+          "duration": "2 Hours (Lesson) to Multi-Day Surf Escape",
+          "bestSeason": "Nov – Apr (South & West Coast) | May – Sep (Arugam Bay East Coast)",
+          "suitableFor": "Beginners, Active Couples, Friends, Youth & Adventure Travellers",
+          "practicalInfo": "Early morning sessions between 6:30 AM and 9:30 AM offer the cleanest glassy waves and gentler sun. Reef-safe sunscreen and rash guards are recommended.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/dest-arugam-bay.webp",
+              "caption": "Golden sunrise swells rolling into Arugam Bay"
+            },
+            {
+              "imageUrl": "/images/dest-mirissa.webp",
+              "caption": "Turquoise southern bays around Mirissa and Weligama"
+            }
+          ]
         },
         {
           "title": "Cultural Performances",
@@ -649,8 +897,26 @@
           "description": "Witness rhythmic Kandyan drums, ceremonial Ves dance traditions, and twilight temple offerings rooted in centuries of island artistry.",
           "imageUrl": "/images/exp-cultural-dance.webp",
           "imageAlt": "Traditional Kandyan cultural dancer beside a ceremonial brass oil lamp at twilight",
-          "ctaLabel": "Explore culture",
-          "ctaUrl": "/#packages"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=cultural-performances",
+          "id": "cultural-performances",
+          "location": "Kandy · Cultural Triangle · Galle",
+          "overview": "Experience centuries of Sri Lankan performing heritage — from resonant Geta Bera drums and ceremonial Kandyan Ves dance to living temple rituals and coastal artisan workshops.",
+          "highlights": "Traditional Kandyan drumming & Ves dance ensembles | Evening Thevava offerings at the Temple of the Sacred Tooth | Low-country mask & folk heritage along the south coast | Respectful cultural context from local guides",
+          "duration": "1.5 – 3 Hours (Evening Experience)",
+          "bestSeason": "Year-round (Esala Perahera festival typically July/August in Kandy)",
+          "suitableFor": "Families, Culture Seekers, Multi-Generational Groups, International Visitors",
+          "practicalInfo": "Dress modestly with shoulders and knees covered when combining performances with visits to sacred temples. Front-row seating and private transfers can be arranged ahead of busy holiday evenings.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/exp-cultural-dance.webp",
+              "caption": "Traditional Kandyan Ves dancer beside ceremonial brass oil lamp"
+            },
+            {
+              "imageUrl": "/images/dest-kandy.webp",
+              "caption": "Kandy’s historic lakeside temple precinct at twilight"
+            }
+          ]
         },
         {
           "title": "Highland & Forest Hiking",
@@ -658,8 +924,26 @@
           "description": "Trek misty ridgelines across Ella Rock, Little Adam's Peak, Horton Plains, and the biodiverse Knuckles Conservation Forest.",
           "imageUrl": "/images/stay-mountain-retreat.webp",
           "imageAlt": "Misty highland mountain ridges overlooking Sri Lankan cloud forests",
-          "ctaLabel": "Plan hiking route",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=highland-forest-hiking",
+          "id": "highland-forest-hiking",
+          "location": "Ella · Knuckles Range · Horton Plains · Pekoe Trail",
+          "overview": "Lace up for misty cloud-forest ridgelines, waterfall trails, and scenic segments of Sri Lanka’s Pekoe Trail — with route options ranging from gentle 90-minute family walks to full-day guided mountain treks.",
+          "highlights": "Gentle sunrise hike to Little Adam’s Peak | Panoramic Ella Rock & Horton Plains World’s End trails | Guided biodiverse Knuckles Conservation Forest walks | Curated Pekoe Trail tea-country day stages",
+          "duration": "2 Hours to Full Day Guided Trek",
+          "bestSeason": "Jan – May & Aug – Sep for clearest ridge panoramas",
+          "suitableFor": "Active Travellers, Adventure Groups, Families (on gentle routes), Nature Photographers",
+          "practicalInfo": "Start hikes early before highland clouds roll in around late morning. Good grip walking shoes, drinking water, and light rain layers are advised; experienced local trekking guides handle trail pacing and safety.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/style-adventure-trek.webp",
+              "caption": "Hikers crossing sunlit highland ridges above misty waterfalls"
+            },
+            {
+              "imageUrl": "/images/stay-mountain-retreat.webp",
+              "caption": "Cloud-draped emerald hills surrounding mountain lodges"
+            }
+          ]
         },
         {
           "title": "Ayurveda & Wellness",
@@ -667,8 +951,26 @@
           "description": "Restore balance with botanical oil therapies, herbal steam rituals, and tranquil yoga pavilions set amidst tropical gardens.",
           "imageUrl": "/images/exp-wellness.webp",
           "imageAlt": "Serene Sri Lankan Ayurveda wellness pavilion surrounded by tropical gardens",
-          "ctaLabel": "Enquire wellness",
-          "ctaUrl": "/#tailor-made"
+          "ctaLabel": "Explore Experience",
+          "ctaUrl": "/experiences/detail/?id=ayurveda-wellness",
+          "id": "ayurveda-wellness",
+          "location": "Bentota · Beruwala · Kandy · South Coast",
+          "overview": "Rooted in over two millennia of Sri Lankan botanical wisdom, authentic Ayurveda sanctuaries pair doctor consultations, warm herbal oil therapies, wholesome cuisine, and quiet tropical gardens for deep restoration.",
+          "highlights": "Restorative herbal oil massages & steam rituals | Tranquil garden yoga & guided breathwork | Option for single spa afternoons or multi-day residential retreats | Calm coastal or jungle sanctuary environments",
+          "duration": "2 Hours (Spa Ritual) to 5–14 Day Retreats",
+          "bestSeason": "Year-round (Monsoon months offer especially peaceful retreat rates)",
+          "suitableFor": "Couples, Solo Travellers, Seniors, Wellness & Slow-Travel Guests",
+          "practicalInfo": "Choose between a relaxing half-day Ayurveda spa session during a normal holiday or a dedicated doctor-guided residential programme. Tell us your wellness goals so we match the right environment.",
+          "photoGallery": [
+            {
+              "imageUrl": "/images/exp-wellness.webp",
+              "caption": "Peaceful botanical Ayurveda pavilion amidst lush greenery"
+            },
+            {
+              "imageUrl": "/images/exp-villa.webp",
+              "caption": "Serene open-air garden architecture for restorative stays"
+            }
+          ]
         }
       ],
       "staysEyebrow": "HOTELS & STAYS",
@@ -1261,7 +1563,8 @@
         "minPrice": 78000,
         "maxPrice": 125000,
         "priceRange": "LKR 78,000 – 125,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Flexible pickup from Colombo, suburbs, or regional towns. Rates are illustrative demo guides in LKR and vary by Poya/Avurudu peak dates, room category, and group size. Child-friendly seating and halal/vegetarian meal preferences can be requested in advance."
       },
       {
         "id": "down-south-coastal-weekend",
@@ -1320,7 +1623,8 @@
         "minPrice": 54000,
         "maxPrice": 85000,
         "priceRange": "LKR 54,000 – 85,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Flexible pickup from Colombo, suburbs, or regional towns. Rates are illustrative demo guides in LKR and vary by Poya/Avurudu peak dates, room category, and group size. Child-friendly seating and halal/vegetarian meal preferences can be requested in advance."
       },
       {
         "id": "ultimate-sri-lanka",
@@ -1395,7 +1699,8 @@
         "minPrice": 485000,
         "maxPrice": 790000,
         "priceRange": "LKR 485,000 – 790,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Private airport meet-and-greet at Bandaranaike International Airport (CMB). Confirm current Sri Lanka ETA/visa guidelines via official immigration portals before travel. Dress modestly (shoulders and knees covered) at sacred temples. Displayed LKR rates are illustrative demo guides; USD/EUR/GBP quotations available."
       },
       {
         "id": "romantic-island-escape",
@@ -1454,7 +1759,8 @@
         "minPrice": 620000,
         "maxPrice": 940000,
         "priceRange": "LKR 620,000 – 940,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Private airport meet-and-greet at Bandaranaike International Airport (CMB). Confirm current Sri Lanka ETA/visa guidelines via official immigration portals before travel. Dress modestly (shoulders and knees covered) at sacred temples. Displayed LKR rates are illustrative demo guides; USD/EUR/GBP quotations available."
       },
       {
         "id": "wildlife-wilderness-safari",
@@ -1513,7 +1819,8 @@
         "minPrice": 395000,
         "maxPrice": 560000,
         "priceRange": "LKR 395,000 – 560,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Private airport meet-and-greet at Bandaranaike International Airport (CMB). Confirm current Sri Lanka ETA/visa guidelines via official immigration portals before travel. Dress modestly (shoulders and knees covered) at sacred temples. Displayed LKR rates are illustrative demo guides; USD/EUR/GBP quotations available."
       },
       {
         "id": "luxury-sri-lanka-collection",
@@ -1572,7 +1879,8 @@
         "minPrice": 0,
         "maxPrice": 0,
         "priceRange": "",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Private airport meet-and-greet at Bandaranaike International Airport (CMB). Confirm current Sri Lanka ETA/visa guidelines via official immigration portals before travel. Dress modestly (shoulders and knees covered) at sacred temples. Displayed LKR rates are illustrative demo guides; USD/EUR/GBP quotations available."
       },
       {
         "id": "outbound-maldives-lagoon-escape",
@@ -1627,7 +1935,8 @@
         "minPrice": 295000,
         "maxPrice": 580000,
         "priceRange": "LKR 295,000 – 580,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Displayed LKR rates are illustrative land-package guides excluding fluctuating international airfares. Valid passport (minimum 6 months validity) and destination visa requirements apply. Final quotations confirm exact flight schedules, baggage allowances, and hotel availability."
       },
       {
         "id": "outbound-southeast-asia-explorer",
@@ -1676,9 +1985,47 @@
         "minPrice": 245000,
         "maxPrice": 395000,
         "priceRange": "LKR 245,000 – 395,000",
-        "isAvailable": true
+        "isAvailable": true,
+        "importantInfo": "Displayed LKR rates are illustrative land-package guides excluding fluctuating international airfares. Valid passport (minimum 6 months validity) and destination visa requirements apply. Final quotations confirm exact flight schedules, baggage allowances, and hotel availability."
       }
-    ]
+    ],
+    "destinationsPage": {
+      "eyebrow": "EXPLORE SRI LANKA",
+      "heading": "Destinations Across the Island",
+      "subtitle": "Ancient heritage cities, misty tea highlands, wildlife sanctuaries, and sunlit coastlines.",
+      "description": "Browse Sri Lanka by region, season, or travel style. Every destination shown is illustrative demonstration content that agencies can tailor or expand freely in Fivora.",
+      "breadcrumbLabel": "Destinations",
+      "bannerImageUrl": "/images/hero-sigiriya.webp",
+      "bannerImageAlt": "Sigiriya Lion Rock rising over emerald Sri Lankan jungle canopy at sunrise",
+      "ctaHeading": "Planning a Multi-Destination Route?",
+      "ctaBody": "Combine highlands, heritage, wildlife, and coast into one comfortable itinerary with private transport from Colombo, CMB Airport, or Kandy.",
+      "ctaLabel": "Plan Your Custom Route"
+    },
+    "toursPage": {
+      "eyebrow": "TOUR PACKAGES",
+      "heading": "Domestic, Inbound & Outbound Holidays",
+      "subtitle": "Practical, customizable itineraries for Sri Lankan families, weekend travellers, couples, groups, and global guests.",
+      "description": "Filter by market, travel style, duration, budget range, or destination. Default prices are shown in Sri Lankan Rupees (LKR) as illustrative demonstration guides.",
+      "breadcrumbLabel": "Tour Packages",
+      "bannerImageUrl": "/images/hero-ella.webp",
+      "bannerImageAlt": "Highland train crossing the Nine Arch Bridge in Ella surrounded by lush greenery",
+      "pricingDisclaimer": "All package prices and ranges shown are illustrative demonstration guides in LKR (configurable per package in Fivora). Confirm live seasonal availability and exact quotations directly with the agency.",
+      "ctaHeading": "Need a Custom Family, Group, or Corporate Package?",
+      "ctaBody": "Share your dates, passenger count, preferred pickup city, and budget tier to receive a tailored WhatsApp or email quotation.",
+      "ctaLabel": "Request Custom Quotation"
+    },
+    "experiencesPage": {
+      "eyebrow": "SIGNATURE EXPERIENCES",
+      "heading": "Authentic Sri Lankan Moments",
+      "subtitle": "Curated island experiences from dawn leopard safaris and scenic mountain trains to spice kitchens and Ayurveda retreats.",
+      "description": "Discover practical details, ideal seasons, and traveller suitability for Sri Lanka’s most memorable experiences — ready to weave into any domestic or inbound holiday.",
+      "breadcrumbLabel": "Experiences",
+      "bannerImageUrl": "/images/hero-tea.webp",
+      "bannerImageAlt": "Misty terraced Ceylon tea plantations across Sri Lanka central highlands",
+      "ctaHeading": "Weave These Experiences Into Your Trip",
+      "ctaBody": "Tell us which experiences inspire your group and we will arrange local transfers, guides, and timing around Sri Lanka’s seasonal weather.",
+      "ctaLabel": "Plan Experiences on WhatsApp"
+    }
   },
   "media": {},
   "seo": null,

@@ -29,9 +29,20 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
 
   const requiredPages = Array.isArray(siteData?.requirements?.requiredPages)
     ? siteData.requirements.requiredPages
-    : siteData?.template?.structure?.pages || ['home', 'about_us', 'services', 'contact'];
+    : siteData?.template?.structure?.pages || [
+        'home',
+        'destinations',
+        'tours',
+        'experiences',
+        'about_us',
+        'services',
+        'contact',
+      ];
 
   const isHome = activeRoute === '/' || activeRoute === '';
+  const hasDestinations = requiredPages.includes('destinations');
+  const hasTours = requiredPages.includes('tours');
+  const hasExperiences = requiredPages.includes('experiences');
   const hasServices = requiredPages.includes('services');
   const hasAbout = requiredPages.includes('about_us');
   const hasContact = requiredPages.includes('contact');
@@ -100,25 +111,28 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
         key: 'destinations',
         labelKey: 'destinations',
         fallback: 'Destinations',
-        href: '/#destinations',
-        enabled: true,
-        active: false,
+        href: '/destinations/',
+        targetPage: 'destinations',
+        enabled: hasDestinations,
+        active: activeRoute.startsWith('/destinations'),
       },
       {
         key: 'packages',
         labelKey: 'packages',
         fallback: 'Tour Packages',
-        href: '/#packages',
-        enabled: true,
-        active: false,
+        href: '/tours/',
+        targetPage: 'tours',
+        enabled: hasTours,
+        active: activeRoute.startsWith('/tours') || activeRoute.startsWith('/products'),
       },
       {
         key: 'experiences',
         labelKey: 'experiences',
         fallback: 'Experiences',
-        href: '/#experiences',
-        enabled: true,
-        active: false,
+        href: '/experiences/',
+        targetPage: 'experiences',
+        enabled: hasExperiences,
+        active: activeRoute.startsWith('/experiences'),
       },
       {
         key: 'services',

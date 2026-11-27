@@ -15,6 +15,7 @@
       "home.destinations[*].id",
       "home.destinations[*].mapX",
       "home.destinations[*].mapY",
+      "home.experiences[*].id",
       "home.travelStyles[*].id",
       "home.mapMarkers[*].id",
       "home.mapMarkers[*].mapX",
@@ -36,6 +37,21 @@
       "label": "Home",
       "route": "/",
       "required": true
+    },
+    {
+      "id": "destinations",
+      "label": "Destinations",
+      "route": "/destinations"
+    },
+    {
+      "id": "tours",
+      "label": "Tour Packages",
+      "route": "/tours"
+    },
+    {
+      "id": "experiences",
+      "label": "Experiences",
+      "route": "/experiences"
     },
     {
       "id": "about_us",
@@ -720,6 +736,46 @@
                 "label": "Key Highlights (separated by |)"
               },
               {
+                "key": "topAttractions",
+                "type": "textarea",
+                "label": "Top Attractions (separated by |)"
+              },
+              {
+                "key": "thingsToDo",
+                "type": "textarea",
+                "label": "Things To Do (separated by |)"
+              },
+              {
+                "key": "suggestedDuration",
+                "type": "text",
+                "label": "Suggested Trip Duration"
+              },
+              {
+                "key": "travelInfo",
+                "type": "textarea",
+                "label": "Travel & Transport Guidance"
+              },
+              {
+                "key": "photoGallery",
+                "type": "list",
+                "label": "Destination Photo Gallery",
+                "itemLabel": "Gallery Photo",
+                "minItems": 0,
+                "maxItems": 6,
+                "fields": [
+                  {
+                    "key": "imageUrl",
+                    "type": "image",
+                    "label": "Photo"
+                  },
+                  {
+                    "key": "caption",
+                    "type": "text",
+                    "label": "Caption"
+                  }
+                ]
+              },
+              {
                 "key": "imageUrl",
                 "type": "image",
                 "label": "Destination Image",
@@ -807,6 +863,11 @@
             "maxItems": 12,
             "fields": [
               {
+                "key": "id",
+                "type": "text",
+                "label": "Experience ID"
+              },
+              {
                 "key": "title",
                 "type": "text",
                 "label": "Experience Title",
@@ -818,9 +879,44 @@
                 "label": "Category"
               },
               {
+                "key": "location",
+                "type": "text",
+                "label": "Primary Location(s)"
+              },
+              {
                 "key": "description",
                 "type": "textarea",
-                "label": "Description"
+                "label": "Short Summary"
+              },
+              {
+                "key": "overview",
+                "type": "textarea",
+                "label": "Detailed Overview"
+              },
+              {
+                "key": "highlights",
+                "type": "textarea",
+                "label": "Experience Highlights (separated by |)"
+              },
+              {
+                "key": "duration",
+                "type": "text",
+                "label": "Typical Duration"
+              },
+              {
+                "key": "bestSeason",
+                "type": "text",
+                "label": "Best Season"
+              },
+              {
+                "key": "suitableFor",
+                "type": "text",
+                "label": "Suitable Traveller Types"
+              },
+              {
+                "key": "practicalInfo",
+                "type": "textarea",
+                "label": "Practical Travel Information"
               },
               {
                 "key": "imageUrl",
@@ -833,6 +929,26 @@
                 "key": "imageAlt",
                 "type": "text",
                 "label": "Image Alt Text"
+              },
+              {
+                "key": "photoGallery",
+                "type": "list",
+                "label": "Experience Photo Gallery",
+                "itemLabel": "Gallery Photo",
+                "minItems": 0,
+                "maxItems": 6,
+                "fields": [
+                  {
+                    "key": "imageUrl",
+                    "type": "image",
+                    "label": "Photo"
+                  },
+                  {
+                    "key": "caption",
+                    "type": "text",
+                    "label": "Caption"
+                  }
+                ]
               },
               {
                 "key": "ctaLabel",
@@ -1307,6 +1423,197 @@
         ]
       },
       {
+        "id": "destinationsPage",
+        "path": "destinationsPage",
+        "pageKey": "destinations",
+        "type": "object",
+        "label": "Destinations Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom Inquiry CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Label"
+          }
+        ]
+      },
+      {
+        "id": "toursPage",
+        "path": "toursPage",
+        "pageKey": "tours",
+        "type": "object",
+        "label": "Tour Packages Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "pricingDisclaimer",
+            "type": "textarea",
+            "label": "Sample Pricing & Currency Note"
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom Inquiry CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Label"
+          }
+        ]
+      },
+      {
+        "id": "experiencesPage",
+        "path": "experiencesPage",
+        "pageKey": "experiences",
+        "type": "object",
+        "label": "Experiences Page",
+        "fields": [
+          {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
+            "key": "heading",
+            "type": "text",
+            "label": "Page Heading",
+            "required": true
+          },
+          {
+            "key": "subtitle",
+            "type": "text",
+            "label": "Page Subtitle"
+          },
+          {
+            "key": "description",
+            "type": "textarea",
+            "label": "Introduction Description"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Hero Photograph",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom Inquiry CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom Inquiry CTA Label"
+          }
+        ]
+      },
+      {
         "id": "about",
         "path": "about",
         "pageKey": "about_us",
@@ -1767,6 +2074,11 @@
             "key": "transport",
             "type": "textarea",
             "label": "Transport Overview"
+          },
+          {
+            "key": "importantInfo",
+            "type": "textarea",
+            "label": "Important Travel Information"
           },
           {
             "key": "inclusions",

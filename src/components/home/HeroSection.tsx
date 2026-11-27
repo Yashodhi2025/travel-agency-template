@@ -67,8 +67,24 @@ export function HeroSection() {
 
   const selectedPages =
     siteData.requirements?.requiredPages ??
-    siteData.template?.structure?.pages ??
-    ['home', 'about_us', 'services', 'contact'];
+    siteData.template?.structure?.pages ?? [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'about_us',
+      'services',
+      'contact',
+    ];
+
+  const guardSlideHref = (rawUrl?: string) => {
+    const clean = sanitizeHref(rawUrl) || '/#destinations';
+    if (!selectedPages.includes('destinations') && clean.includes('/destinations')) return '/#destinations';
+    if (!selectedPages.includes('tours') && clean.includes('/tours')) return '/#packages';
+    if (!selectedPages.includes('experiences') && clean.includes('/experiences')) return '/#experiences';
+    if (!selectedPages.includes('contact') && clean.includes('/contact')) return '/#tailor-made';
+    return clean;
+  };
 
   const count = slides.length;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -160,7 +176,7 @@ export function HeroSection() {
     window.location.href = withBasePath(target);
   };
 
-  const activeCtaHref = sanitizeHref(currentSlide?.ctaUrl) || '/#destinations';
+  const activeCtaHref = guardSlideHref(currentSlide?.ctaUrl);
 
   return (
     <section
@@ -585,7 +601,7 @@ export function HeroSection() {
               )}
 
               {slides.map((slide, index) => {
-                const safeUrl = sanitizeHref(slide.ctaUrl) || '/#destinations';
+                const safeUrl = guardSlideHref(slide.ctaUrl);
                 return (
                   <article
                     key={index}

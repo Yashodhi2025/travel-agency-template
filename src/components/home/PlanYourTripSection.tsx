@@ -62,8 +62,9 @@ export function PlanYourTripSection({ activeDraft }: PlanYourTripSectionProps) {
     if (draft.travelType) setTripPath(draft.travelType);
     if (draft.destination) setDestination(draft.destination);
     if (draft.travelDate) setTravelDate(draft.travelDate);
-    if (draft.packageName || draft.offerName || draft.accommodation) {
-      const refText = draft.packageName || draft.offerName || draft.accommodation || '';
+    if (draft.packageName || draft.offerName || draft.accommodation || draft.experienceName) {
+      const refText =
+        draft.packageName || draft.offerName || draft.accommodation || draft.experienceName || '';
       setNotes((prev) => (prev.includes(refText) ? prev : `Interested in: ${refText}`));
     }
   }, [activeDraft]);

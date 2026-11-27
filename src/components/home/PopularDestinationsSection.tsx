@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { EditableImage, EditableText } from '@deneb-ui/ui';
 import { contentList, contentObject, contentText, useSiteData } from '@/lib/siteDataContext';
 import { useIsEditorPreview } from '@/lib/useIsEditorPreview';
-import { sanitizeHref, type TripEnquiryDraft } from '@/lib/travelHelpers';
+import { resolveItemIdentifier, sanitizeHref, type TripEnquiryDraft } from '@/lib/travelHelpers';
 import { withBasePath } from '@/lib/utils';
 import { Reveal } from '../Reveal';
 
@@ -40,9 +40,23 @@ export function PopularDestinationsSection({
   const home = contentObject(contentObject(siteData?.content).home);
   const [showAll, setShowAll] = useState(false);
 
+  const selectedPages = Array.isArray(siteData?.requirements?.requiredPages)
+    ? siteData.requirements.requiredPages
+    : siteData?.template?.structure?.pages || [
+      'home',
+      'destinations',
+      'tours',
+      'experiences',
+      'about_us',
+      'services',
+      'contact',
+    ];
+  const hasDestinations = selectedPages.includes('destinations');
+
   const destinations = contentList(home.destinations).map((raw, idx) => {
     const item = contentObject(raw);
     return {
+      rawId: contentText(item.id),
       id: contentText(item.id) || `dest-${idx}`,
       name: contentText(item.name),
       region: contentText(item.region),
@@ -51,12 +65,29 @@ export function PopularDestinationsSection({
       shortDescription: contentText(item.shortDescription),
       detailedDescription: contentText(item.detailedDescription),
       highlights: contentText(item.highlights),
+      topAttractions: contentText(item.topAttractions),
+      thingsToDo: contentText(item.thingsToDo),
+      suggestedDuration: contentText(item.suggestedDuration),
+      travelInfo: contentText(item.travelInfo),
+      photoGallery: contentList(item.photoGallery),
       imageUrl: contentText(item.imageUrl) || '/images/hero-sigiriya.webp',
       imageAlt: contentText(item.imageAlt),
       ctaLabel: contentText(item.ctaLabel) || 'Explore',
       ctaUrl: contentText(item.ctaUrl) || '/#packages',
     };
   });
+
+  const resolveDestinationHref = (dest: (typeof destinations)[number], index: number) => {
+    const sanitized = sanitizeHref(dest.ctaUrl) || '/#packages';
+    if (!hasDestinations) {
+      return sanitized.includes('/destinations') ? '/#packages' : sanitized;
+    }
+    if (sanitized === '/#packages') {
+      const key = resolveItemIdentifier(dest.rawId, dest.name, index);
+      return `/destinations/detail/?id=${encodeURIComponent(key)}`;
+    }
+    return sanitized;
+  };
 
   const rawLimit = Number(home.featuredDestinationsCount);
   const featuredLimit = Number.isFinite(rawLimit) && rawLimit > 0 ? Math.round(rawLimit) : 5;
@@ -97,7 +128,19 @@ export function PopularDestinationsSection({
               />
             </div>
 
-            {hasMore && (
+            {!isEditorPreview && hasDestinations && (
+              <a
+                href={withBasePath('/destinations/')}
+                className="lux-btn-outline self-start lg:self-end"
+              >
+                <span data-preview-field-path="home.destinationsViewAllLabel">
+                  {contentText(home.destinationsViewAllLabel) || 'View All Destinations'}
+                </span>
+                <span aria-hidden="true">→</span>
+              </a>
+            )}
+
+            {!isEditorPreview && !hasDestinations && hasMore && (
               <button
                 type="button"
                 onClick={() => setShowAll((prev) => !prev)}
@@ -138,7 +181,7 @@ export function PopularDestinationsSection({
           )}
 
           {visibleDestinations.map((dest, index) => {
-            const href = sanitizeHref(dest.ctaUrl) || '/#packages';
+            const href = resolveDestinationHref(dest, index);
             const { colSpan, aspect } = getMosaicLayout(index, isEditorPreview);
             const isFeatureTile = !isEditorPreview && index % 5 < 2;
 
@@ -146,9 +189,8 @@ export function PopularDestinationsSection({
               <article
                 key={dest.id}
                 data-preview-item-path={`home.destinations[${index}]`}
-                className={`group relative flex flex-col overflow-hidden rounded-[6px] bg-[#101820] ${colSpan} ${
-                  isEditorPreview ? 'border border-[var(--lux-border)] bg-[var(--lux-surface)]' : ''
-                }`}
+                className={`group relative flex flex-col overflow-hidden rounded-[6px] bg-[#101820] ${colSpan} ${isEditorPreview ? 'border border-[var(--lux-border)] bg-[var(--lux-surface)]' : ''
+                  }`}
               >
                 <div className={`lux-image-zoom relative w-full overflow-hidden ${aspect}`}>
                   <EditableImage
@@ -179,9 +221,8 @@ export function PopularDestinationsSection({
                             <EditableText
                               as="h3"
                               color="#FAF8F3"
-                              className={`font-display m-0 font-bold text-[#FAF8F3] ${
-                                isFeatureTile ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
-                              }`}
+                              className={`font-display m-0 font-bold text-[#FAF8F3] ${isFeatureTile ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
+                                }`}
                               data-preview-field-path={`home.destinations[${index}].name`}
                               defaultValue={dest.name}
                             />
@@ -295,6 +336,67 @@ export function PopularDestinationsSection({
                     >
                       {dest.highlights}
                     </p>
+                    <div className="text-[11px] text-[var(--lux-text-muted)]">
+                      <span data-preview-static="dest-duration-label">Suggested stay: </span>
+                      <span data-preview-field-path={`home.destinations[${index}].suggestedDuration`}>
+                        {dest.suggestedDuration}
+                      </span>
+                    </div>
+                    <p
+                      data-preview-field-path={`home.destinations[${index}].topAttractions`}
+                      className="m-0 text-[11px] text-[var(--lux-text-muted)]"
+                    >
+                      {dest.topAttractions}
+                    </p>
+                    <p
+                      data-preview-field-path={`home.destinations[${index}].thingsToDo`}
+                      className="m-0 text-[11px] text-[var(--lux-text-muted)]"
+                    >
+                      {dest.thingsToDo}
+                    </p>
+                    <p
+                      data-preview-field-path={`home.destinations[${index}].travelInfo`}
+                      className="m-0 text-[11px] text-[var(--lux-text-muted)]"
+                    >
+                      {dest.travelInfo}
+                    </p>
+                    <div
+                      data-preview-list-path={`home.destinations[${index}].photoGallery`}
+                      className="space-y-1 border-t border-[var(--lux-border)] pt-1.5"
+                    >
+                      <strong data-preview-static="dest-gallery-heading" className="text-[11px]">
+                        Destination gallery
+                      </strong>
+                      {dest.photoGallery.length === 0 && (
+                        <p data-preview-static="dest-gallery-empty" className="m-0 text-[11px] opacity-75">
+                          No gallery photos added yet.
+                        </p>
+                      )}
+                      {dest.photoGallery.map((rawPhoto, photoIdx) => {
+                        const photoObj = contentObject(rawPhoto);
+                        return (
+                          <div
+                            key={photoIdx}
+                            data-preview-item-path={`home.destinations[${index}].photoGallery[${photoIdx}]`}
+                            className="flex items-center gap-2 rounded border border-[var(--lux-border)] bg-[var(--lux-surface-alt)] p-1"
+                          >
+                            <EditableImage
+                              src={contentText(photoObj.imageUrl) || dest.imageUrl}
+                              alt={contentText(photoObj.caption) || `${dest.name} ${photoIdx + 1}`}
+                              data-preview-field-path={`home.destinations[${index}].photoGallery[${photoIdx}].imageUrl`}
+                              fit="cover"
+                              className="h-6 w-9 shrink-0 rounded object-cover"
+                            />
+                            <span
+                              data-preview-field-path={`home.destinations[${index}].photoGallery[${photoIdx}].caption`}
+                              className="text-[10.5px]"
+                            >
+                              {contentText(photoObj.caption)}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                     <div className="text-[11px] text-[var(--lux-text-muted)]">
                       <span data-preview-static="dest-alt-label">Alt: </span>
                       <span data-preview-field-path={`home.destinations[${index}].imageAlt`}>

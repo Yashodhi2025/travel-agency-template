@@ -10,13 +10,13 @@ const EditableText_1 = require("@deneb-ui/ui");
 const EditableIcon_1 = require("@deneb-ui/ui");
 
 const DEFAULT_FOOTER_PAGES = [
-    { id: 'home', label: 'Home', route: '/' },
-    { id: 'destinations', label: 'Destinations', route: '/#destinations', anchor: true },
-    { id: 'packages', label: 'Tour Packages', route: '/#packages', anchor: true },
-    { id: 'experiences', label: 'Experiences', route: '/#experiences', anchor: true },
-    { id: 'services', label: 'Services', route: '/services/' },
-    { id: 'about_us', label: 'About Us', route: '/about_us/' },
-    { id: 'contact', label: 'Contact', route: '/contact/' },
+    { id: 'home', navLabelKey: 'home', label: 'Home', route: '/' },
+    { id: 'destinations', navLabelKey: 'destinations', label: 'Destinations', route: '/destinations/' },
+    { id: 'tours', navLabelKey: 'packages', label: 'Tour Packages', route: '/tours/' },
+    { id: 'experiences', navLabelKey: 'experiences', label: 'Experiences', route: '/experiences/' },
+    { id: 'services', navLabelKey: 'services', label: 'Services', route: '/services/' },
+    { id: 'about_us', navLabelKey: 'about_us', label: 'About Us', route: '/about_us/' },
+    { id: 'contact', navLabelKey: 'contact', label: 'Contact', route: '/contact/' },
 ];
 
 const SOCIAL_ICONS = {
@@ -101,7 +101,17 @@ function EditableFooter({
     const navigationItems = links || defaultLinks;
     const requiredPages = Array.isArray(siteData?.requirements?.requiredPages)
         ? siteData.requirements.requiredPages
-        : siteData?.template?.structure?.pages || ['home', 'about_us', 'services', 'contact'];
+        : siteData?.template?.structure?.pages || [
+            'home',
+            'destinations',
+            'tours',
+            'experiences',
+            'about_us',
+            'services',
+            'contact',
+        ];
+    const hasDestinations = requiredPages.includes('destinations');
+    const hasTours = requiredPages.includes('tours');
     const hasContact = requiredPages.includes('contact');
     const policyUrl = rawPolicyUrl && (hasContact || !rawPolicyUrl.includes('/contact'))
         ? rawPolicyUrl
@@ -251,8 +261,9 @@ function EditableFooter({
                                                 (0, jsx_runtime_1.jsx)("ul", {
                                                     className: "m-0 flex list-none flex-col gap-2 p-0",
                                                     children: navigationItems.map((link) => {
+                                                        const labelKey = link.navLabelKey || link.id;
                                                         const isSelected = link.anchor || link.id === 'home' || requiredPages.includes(link.id);
-                                                        const label = navLabels[link.id] || link.label;
+                                                        const label = navLabels[labelKey] || link.label;
                                                         if (isSelected) {
                                                             return (0, jsx_runtime_1.jsx)("li", {
                                                                 children: (0, jsx_runtime_1.jsx)("span", {
@@ -262,7 +273,7 @@ function EditableFooter({
                                                                         onClick: () => navigate(link.route),
                                                                         className: "border-0 bg-transparent p-0 text-left text-xs text-[#9AA7B2] transition hover:text-[#FAF8F3]",
                                                                         children: (0, jsx_runtime_1.jsx)("span", {
-                                                                            "data-preview-field-path": `common.navLabels.${link.id}`,
+                                                                            "data-preview-field-path": `common.navLabels.${labelKey}`,
                                                                             children: label,
                                                                         }),
                                                                     }),
@@ -274,7 +285,7 @@ function EditableFooter({
                                                             children: (0, jsx_runtime_1.jsx)("span", {
                                                                 "data-target-page": link.id,
                                                                 children: (0, jsx_runtime_1.jsx)("span", {
-                                                                    "data-preview-field-path": `common.navLabels.${link.id}`,
+                                                                    "data-preview-field-path": `common.navLabels.${labelKey}`,
                                                                     children: label,
                                                                 }),
                                                             }),
@@ -300,18 +311,26 @@ function EditableFooter({
                                                 (0, jsx_runtime_1.jsx)("ul", {
                                                     className: "m-0 flex list-none flex-col gap-2 p-0",
                                                     children: (destinations.length > 0
-                                                        ? destinations.map((d, idx) => ({ key: d?.id || idx, label: d?.name || '' })).filter((d) => d.label)
+                                                        ? destinations.map((d, idx) => ({
+                                                            key: d?.id || idx,
+                                                            id: d?.id || String(idx),
+                                                            label: d?.name || '',
+                                                        })).filter((d) => d.label)
                                                         : [
-                                                            { key: 'sigiriya', label: 'Sigiriya' },
-                                                            { key: 'ella', label: 'Ella' },
-                                                            { key: 'kandy', label: 'Kandy' },
-                                                            { key: 'galle', label: 'Galle' },
+                                                            { key: 'sigiriya', id: 'sigiriya', label: 'Sigiriya' },
+                                                            { key: 'ella', id: 'ella', label: 'Ella' },
+                                                            { key: 'kandy', id: 'kandy', label: 'Kandy' },
+                                                            { key: 'galle', id: 'galle', label: 'Galle' },
                                                         ]).map((item) => (
                                                             (0, jsx_runtime_1.jsx)("li", {
                                                                 children: (0, jsx_runtime_1.jsx)("button", {
                                                                     type: "button",
                                                                     "data-preview-static": "footer-region-shortcut",
-                                                                    onClick: () => navigate('/#destinations'),
+                                                                    onClick: () => navigate(
+                                                                        hasDestinations
+                                                                            ? `/destinations/detail/?id=${encodeURIComponent(String(item.id))}`
+                                                                            : '/#destinations'
+                                                                    ),
                                                                     className: "border-0 bg-transparent p-0 text-left text-xs text-[#9AA7B2] transition hover:text-[#FAF8F3]",
                                                                     children: item.label,
                                                                 }),
@@ -348,7 +367,7 @@ function EditableFooter({
                                                                 children: (0, jsx_runtime_1.jsx)("button", {
                                                                     type: "button",
                                                                     "data-preview-static": "footer-category-shortcut",
-                                                                    onClick: () => navigate('/#travel-styles'),
+                                                                    onClick: () => navigate(hasTours ? '/tours/' : '/#travel-styles'),
                                                                     className: "border-0 bg-transparent p-0 text-left text-xs text-[#9AA7B2] transition hover:text-[#FAF8F3]",
                                                                     children: item.label,
                                                                 }),

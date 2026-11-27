@@ -70,6 +70,27 @@ export function SriLankaMapSection({
   const isEditorPreview = useIsEditorPreview();
   const home = contentObject(contentObject(siteData?.content).home);
 
+  const selectedPages = Array.isArray(siteData?.requirements?.requiredPages)
+    ? siteData.requirements.requiredPages
+    : siteData?.template?.structure?.pages || [
+        'home',
+        'destinations',
+        'tours',
+        'experiences',
+        'about_us',
+        'services',
+        'contact',
+      ];
+  const hasDestinations = selectedPages.includes('destinations');
+
+  const resolveMapHref = (rawUrl: string) => {
+    const clean = sanitizeHref(rawUrl) || '/#packages';
+    if (!hasDestinations && clean.includes('/destinations')) {
+      return '/#packages';
+    }
+    return clean;
+  };
+
   const markers: MapMarkerItem[] = contentList(home.mapMarkers).map((raw, idx) => {
     const item = contentObject(raw);
     return {
@@ -453,10 +474,10 @@ export function SriLankaMapSection({
 
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href={withBasePath(sanitizeHref(activeMarker.ctaUrl) || '/#packages')}
+                      href={withBasePath(resolveMapHref(activeMarker.ctaUrl))}
                       data-preview-static="map-spotlight-explore-cta"
                       onClick={(e) => {
-                        const target = sanitizeHref(activeMarker.ctaUrl) || '/#packages';
+                        const target = resolveMapHref(activeMarker.ctaUrl);
                         if (target === '/#packages') {
                           e.preventDefault();
                           onSelectDestinationForFilter(activeMarker.name);
@@ -519,7 +540,7 @@ export function SriLankaMapSection({
               )}
 
               {markers.map((marker, index) => {
-                const safeHref = sanitizeHref(marker.ctaUrl) || '/#packages';
+                const safeHref = resolveMapHref(marker.ctaUrl);
                 return (
                   <article
                     key={marker.id}

@@ -1,6 +1,7 @@
 'use client';
 
 import { formatLocalizedNumber } from './i18n';
+import { withBasePath } from './utils';
 
 export interface TripEnquiryDraft {
   travelType?: 'Domestic' | 'Inbound' | 'Outbound';
@@ -15,6 +16,7 @@ export interface TripEnquiryDraft {
   packageName?: string;
   serviceName?: string;
   offerName?: string;
+  experienceName?: string;
 }
 
 const DRAFT_STORAGE_KEY = 'ceylon_odyssey_trip_draft_v2';
@@ -38,6 +40,50 @@ export function readTripEnquiryDraft(): TripEnquiryDraft | null {
   } catch {
     return null;
   }
+}
+
+export function slugifyKey(value: string | undefined | null): string {
+  if (!value || typeof value !== 'string') return '';
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/**
+ * Resolves a stable identifier for merchant-added destinations or experiences,
+ * falling back to a URL-safe slug of the title or numeric index so items added
+ * in Fivora without an explicit `id` field can still open on detail pages.
+ */
+export function resolveItemIdentifier(
+  id: string | undefined | null,
+  fallbackTitle: string | undefined | null,
+  index: number,
+): string {
+  const cleanId = slugifyKey(id);
+  if (cleanId) return cleanId;
+  const slugTitle = slugifyKey(fallbackTitle);
+  if (slugTitle) return slugTitle;
+  return String(index);
+}
+
+export function destinationDetailHref(
+  id: string | undefined | null,
+  name: string | undefined | null,
+  index: number,
+): string {
+  const key = resolveItemIdentifier(id, name, index);
+  return withBasePath(`/destinations/detail/?id=${encodeURIComponent(key)}`);
+}
+
+export function experienceDetailHref(
+  id: string | undefined | null,
+  title: string | undefined | null,
+  index: number,
+): string {
+  const key = resolveItemIdentifier(id, title, index);
+  return withBasePath(`/experiences/detail/?id=${encodeURIComponent(key)}`);
 }
 
 export function sanitizeHref(value: string | undefined | null): string | undefined {
@@ -94,10 +140,6 @@ export function extractDaysCount(duration: string | undefined | null): number | 
   return Number.isFinite(value) ? value : null;
 }
 
-/**
- * Parses an ISO date or date-time string safely into a UTC epoch timestamp.
- * Accepts YYYY-MM-DD (treated as end-of-day Sri Lanka time +05:30) or full ISO strings.
- */
 export function parseOfferDeadline(raw: string | undefined | null): number | null {
   if (!raw || typeof raw !== 'string') return null;
   const trimmed = raw.trim();
