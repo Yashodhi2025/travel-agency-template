@@ -62,9 +62,15 @@ export function PlanYourTripSection({ activeDraft }: PlanYourTripSectionProps) {
     if (draft.travelType) setTripPath(draft.travelType);
     if (draft.destination) setDestination(draft.destination);
     if (draft.travelDate) setTravelDate(draft.travelDate);
-    if (draft.packageName || draft.offerName || draft.accommodation || draft.experienceName) {
+    if (draft.packageName || draft.offerName || draft.accommodation || draft.experienceName || draft.serviceName || draft.stayName) {
       const refText =
-        draft.packageName || draft.offerName || draft.accommodation || draft.experienceName || '';
+        draft.packageName ||
+        draft.offerName ||
+        draft.stayName ||
+        draft.serviceName ||
+        draft.accommodation ||
+        draft.experienceName ||
+        '';
       setNotes((prev) => (prev.includes(refText) ? prev : `Interested in: ${refText}`));
     }
   }, [activeDraft]);

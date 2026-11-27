@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import { contentObject, contentText, useSiteData } from '@/lib/siteDataContext';
 import { withBasePath } from '@/lib/utils';
 import { ThemeToggle } from './ThemeToggle';
@@ -10,6 +11,7 @@ interface LuxuryHeaderProps {
 }
 
 export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
+  const router = useRouter();
   const siteData = useSiteData();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -115,7 +117,11 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
         return;
       }
     }
-    window.location.href = withBasePath(target);
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(target)) {
+      window.location.href = target;
+      return;
+    }
+    router.push(target);
   };
 
   const secondaryNavItems: Array<{

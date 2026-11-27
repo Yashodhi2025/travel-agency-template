@@ -76,7 +76,7 @@ export function MobileConciergeBar() {
           target="_blank"
           rel="noopener noreferrer"
           data-preview-static="mobile-bar-whatsapp"
-          className="flex min-h-[40px] flex-1 items-center justify-center gap-1.5 rounded border border-[#102D25]/30 bg-[#102D25] px-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#F7F3EA] no-underline"
+          className="flex min-h-[40px] flex-1 items-center justify-center gap-1.5 rounded border border-[#154C42] bg-[#154C42] px-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#FAF8F3] no-underline"
         >
           WhatsApp
         </a>
@@ -84,7 +84,7 @@ export function MobileConciergeBar() {
       <a
         href={withBasePath(planHref)}
         data-preview-static="mobile-bar-plan"
-        className="flex min-h-[40px] flex-1 items-center justify-center rounded bg-[#C6A46A] px-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#101917] no-underline"
+        className="flex min-h-[40px] flex-1 items-center justify-center rounded bg-[#FF783D] px-2 text-xs font-semibold uppercase tracking-[0.08em] text-white no-underline"
       >
         Plan Trip
       </a>

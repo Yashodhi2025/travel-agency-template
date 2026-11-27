@@ -5,6 +5,7 @@ exports.Footer = void 0;
 exports.EditableFooter = EditableFooter;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
+const navigation_1 = require("next/navigation");
 const SiteDataProvider_1 = require("@deneb-ui/ui");
 const EditableText_1 = require("@deneb-ui/ui");
 const EditableIcon_1 = require("@deneb-ui/ui");
@@ -63,6 +64,7 @@ function EditableFooter({
     style = {},
     ...props
 }) {
+    const router = (0, navigation_1.useRouter)();
     const siteData = (0, SiteDataProvider_1.useSiteData)();
     const [subscriberEmail, setSubscriberEmail] = (0, react_1.useState)('');
     const [newsletterNotice, setNewsletterNotice] = (0, react_1.useState)('');
@@ -121,12 +123,16 @@ function EditableFooter({
     const hasDestinations = requiredPages.includes('destinations');
     const hasTours = requiredPages.includes('tours');
     const hasContact = requiredPages.includes('contact');
-    const policyUrl = rawPolicyUrl && (hasContact || !rawPolicyUrl.includes('/contact'))
-        ? rawPolicyUrl
-        : '/#tailor-made';
-    const termsUrl = rawTermsUrl && (hasContact || !rawTermsUrl.includes('/contact'))
-        ? rawTermsUrl
-        : '/#tailor-made';
+    const hasPlanner = requiredPages.includes('plan_your_trip');
+
+    const guardLegalUrl = (raw) => {
+        if (!raw) return hasContact ? '/contact/#enquiry-info' : '/#tailor-made';
+        if (!hasContact && raw.includes('/contact')) return '/#tailor-made';
+        if (!hasPlanner && raw.includes('/plan-your-trip')) return '/#tailor-made';
+        return raw;
+    };
+    const policyUrl = guardLegalUrl(rawPolicyUrl);
+    const termsUrl = guardLegalUrl(rawTermsUrl);
 
     const basePathEnv = typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_SITE_BASE_PATH
         ? process.env.NEXT_PUBLIC_SITE_BASE_PATH
@@ -141,9 +147,12 @@ function EditableFooter({
     };
 
     const navigate = (path) => {
-        if (typeof window !== 'undefined') {
-            window.location.href = withBase(path);
+        if (!path) return;
+        if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(path)) {
+            if (typeof window !== 'undefined') window.location.href = path;
+            return;
         }
+        router.push(path);
     };
 
     const handleNewsletterRequest = (e) => {
@@ -172,7 +181,7 @@ function EditableFooter({
 
     return (
         (0, jsx_runtime_1.jsxs)("footer", {
-            className: `deneb-footer relative w-full border-t border-white/10 bg-[#0B1117] pb-20 pt-12 text-[#FAF8F3] lg:pb-8 ${className}`.trim(),
+            className: `deneb-footer relative w-full border-t border-white/10 bg-[#0B1117] pb-20 pt-10 text-[#FAF8F3] lg:pb-7 ${className}`.trim(),
             style: { ...style },
             ...props,
             children: [
@@ -182,10 +191,11 @@ function EditableFooter({
                 (0, jsx_runtime_1.jsxs)("div", {
                     className: "lux-container",
                     children: [
+                        // Balanced 4-Column Desktop Row (zero empty vertical voids)
                         (0, jsx_runtime_1.jsxs)("div", {
-                            className: "deneb-footer-grid mb-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-6",
+                            className: "deneb-footer-grid mb-7 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-12 lg:gap-6",
                             children: [
-                                // Column 1: Brand & Social
+                                // Column 1: Agency Identity & Social
                                 (0, jsx_runtime_1.jsxs)("div", {
                                     className: "flex flex-col gap-3 lg:col-span-3",
                                     children: [
@@ -225,7 +235,7 @@ function EditableFooter({
                                             children: shortDescription,
                                         }),
                                         (0, jsx_runtime_1.jsx)("div", {
-                                            className: "mt-1 flex flex-wrap items-center gap-2",
+                                            className: "mt-0.5 flex flex-wrap items-center gap-2",
                                             children: socialPlatforms.map((platformKey) => {
                                                 const key = platformKey.toLowerCase();
                                                 const iconConfig = SOCIAL_ICONS[key] || {
@@ -248,60 +258,63 @@ function EditableFooter({
                                     ],
                                 }),
 
-                                // Column 2: Navigation, Destinations & Categories
+                                // Column 2: Compact Two-Subcolumn Navigation (keeps height aligned to 5–6 rows)
                                 (0, jsx_runtime_1.jsxs)("div", {
-                                    className: "grid grid-cols-3 gap-4 lg:col-span-5",
+                                    className: "lg:col-span-3",
                                     children: [
-                                        (0, jsx_runtime_1.jsxs)("div", {
-                                            children: [
-                                                (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
-                                                    as: "h4",
-                                                    fieldPath: "common.footerExploreHeading",
-                                                    defaultValue: common.footerExploreHeading ?? 'Navigation',
-                                                    placeholder: "Navigation",
-                                                    size: "0.68rem",
-                                                    weight: 700,
-                                                    transform: "uppercase",
-                                                    letterSpacing: "0.16em",
-                                                    color: "#C5A46D",
-                                                    style: { marginBottom: '0.75rem' },
-                                                }),
-                                                (0, jsx_runtime_1.jsx)("ul", {
-                                                    className: "m-0 flex list-none flex-col gap-2 p-0",
-                                                    children: navigationItems.map((link) => {
-                                                        const labelKey = link.navLabelKey || link.id;
-                                                        const isSelected = link.anchor || link.id === 'home' || requiredPages.includes(link.id);
-                                                        const label = navLabels[labelKey] || link.label;
-                                                        if (isSelected) {
-                                                            return (0, jsx_runtime_1.jsx)("li", {
-                                                                children: (0, jsx_runtime_1.jsx)("span", {
-                                                                    "data-target-page": link.anchor ? undefined : link.id,
-                                                                    children: (0, jsx_runtime_1.jsx)("button", {
-                                                                        type: "button",
-                                                                        onClick: () => navigate(link.route),
-                                                                        className: "border-0 bg-transparent p-0 text-left text-xs text-[#9AA7B2] transition hover:text-[#FAF8F3]",
-                                                                        children: (0, jsx_runtime_1.jsx)("span", {
-                                                                            "data-preview-field-path": `common.navLabels.${labelKey}`,
-                                                                            children: label,
-                                                                        }),
-                                                                    }),
-                                                                }),
-                                                            }, link.id);
-                                                        }
-                                                        return (0, jsx_runtime_1.jsx)("li", {
-                                                            className: "unavailable text-xs text-[#9AA7B2]/50",
-                                                            children: (0, jsx_runtime_1.jsx)("span", {
-                                                                "data-target-page": link.id,
+                                        (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
+                                            as: "h4",
+                                            fieldPath: "common.footerExploreHeading",
+                                            defaultValue: common.footerExploreHeading ?? 'Navigation',
+                                            placeholder: "Navigation",
+                                            size: "0.68rem",
+                                            weight: 700,
+                                            transform: "uppercase",
+                                            letterSpacing: "0.16em",
+                                            color: "#C5A46D",
+                                            style: { marginBottom: '0.7rem' },
+                                        }),
+                                        (0, jsx_runtime_1.jsx)("ul", {
+                                            className: "m-0 grid list-none grid-cols-2 gap-x-3 gap-y-1.5 p-0",
+                                            children: navigationItems.map((link) => {
+                                                const labelKey = link.navLabelKey || link.id;
+                                                const isSelected = link.anchor || link.id === 'home' || requiredPages.includes(link.id);
+                                                const label = navLabels[labelKey] || link.label;
+                                                if (isSelected) {
+                                                    return (0, jsx_runtime_1.jsx)("li", {
+                                                        children: (0, jsx_runtime_1.jsx)("span", {
+                                                            "data-target-page": link.anchor ? undefined : link.id,
+                                                            children: (0, jsx_runtime_1.jsx)("button", {
+                                                                type: "button",
+                                                                onClick: () => navigate(link.route),
+                                                                className: "border-0 bg-transparent p-0 text-left text-xs text-[#9AA7B2] transition hover:text-[#FAF8F3]",
                                                                 children: (0, jsx_runtime_1.jsx)("span", {
                                                                     "data-preview-field-path": `common.navLabels.${labelKey}`,
                                                                     children: label,
                                                                 }),
                                                             }),
-                                                        }, link.id);
+                                                        }),
+                                                    }, link.id);
+                                                }
+                                                return (0, jsx_runtime_1.jsx)("li", {
+                                                    className: "unavailable text-xs text-[#9AA7B2]/50",
+                                                    children: (0, jsx_runtime_1.jsx)("span", {
+                                                        "data-target-page": link.id,
+                                                        children: (0, jsx_runtime_1.jsx)("span", {
+                                                            "data-preview-field-path": `common.navLabels.${labelKey}`,
+                                                            children: label,
+                                                        }),
                                                     }),
-                                                }),
-                                            ],
+                                                }, link.id);
+                                            }),
                                         }),
+                                    ],
+                                }),
+
+                                // Column 3: Destinations & Travel Styles Side-by-Side
+                                (0, jsx_runtime_1.jsxs)("div", {
+                                    className: "grid grid-cols-2 gap-4 lg:col-span-3",
+                                    children: [
                                         (0, jsx_runtime_1.jsxs)("div", {
                                             children: [
                                                 (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
@@ -314,10 +327,10 @@ function EditableFooter({
                                                     transform: "uppercase",
                                                     letterSpacing: "0.16em",
                                                     color: "#C5A46D",
-                                                    style: { marginBottom: '0.75rem' },
+                                                    style: { marginBottom: '0.7rem' },
                                                 }),
                                                 (0, jsx_runtime_1.jsx)("ul", {
-                                                    className: "m-0 flex list-none flex-col gap-2 p-0",
+                                                    className: "m-0 flex list-none flex-col gap-1.5 p-0",
                                                     children: (destinations.length > 0
                                                         ? destinations.map((d, idx) => ({
                                                             key: d?.id || idx,
@@ -359,10 +372,10 @@ function EditableFooter({
                                                     transform: "uppercase",
                                                     letterSpacing: "0.16em",
                                                     color: "#C5A46D",
-                                                    style: { marginBottom: '0.75rem' },
+                                                    style: { marginBottom: '0.7rem' },
                                                 }),
                                                 (0, jsx_runtime_1.jsx)("ul", {
-                                                    className: "m-0 flex list-none flex-col gap-2 p-0",
+                                                    className: "m-0 flex list-none flex-col gap-1.5 p-0",
                                                     children: (travelStyles.length > 0
                                                         ? travelStyles.map((s, idx) => ({ key: s?.id || idx, label: s?.title || '' })).filter((s) => s.label)
                                                         : [
@@ -387,9 +400,9 @@ function EditableFooter({
                                     ],
                                 }),
 
-                                // Column 3: Contact & Business Hours
+                                // Column 4: Direct Contact & Concierge Actions
                                 (0, jsx_runtime_1.jsxs)("div", {
-                                    className: "flex flex-col gap-2.5 lg:col-span-2",
+                                    className: "flex flex-col gap-2 lg:col-span-3",
                                     children: [
                                         (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
                                             as: "h4",
@@ -404,12 +417,12 @@ function EditableFooter({
                                             style: { marginBottom: '0.25rem' },
                                         }),
                                         (0, jsx_runtime_1.jsxs)("div", {
-                                            className: "flex flex-col gap-2 text-xs text-[#9AA7B2]",
+                                            className: "flex flex-col gap-1.5 text-xs text-[#9AA7B2]",
                                             children: [
                                                 (0, jsx_runtime_1.jsxs)("div", {
                                                     className: "flex items-center gap-2",
                                                     children: [
-                                                        (0, jsx_runtime_1.jsx)(EditableIcon_1.EditableIcon, { name: "mail", fieldPath: "common.footerEmailIcon", size: 13, className: "text-[#C5A46D]" }),
+                                                        (0, jsx_runtime_1.jsx)(EditableIcon_1.EditableIcon, { name: "mail", fieldPath: "common.footerEmailIcon", size: 13, className: "shrink-0 text-[#C5A46D]" }),
                                                         (0, jsx_runtime_1.jsx)("a", {
                                                             href: emailContact ? `mailto:${emailContact}` : '#',
                                                             "data-preview-field-path": "contact.email",
@@ -422,7 +435,7 @@ function EditableFooter({
                                                 (0, jsx_runtime_1.jsxs)("div", {
                                                     className: "flex items-center gap-2",
                                                     children: [
-                                                        (0, jsx_runtime_1.jsx)(EditableIcon_1.EditableIcon, { name: "phone", fieldPath: "common.footerPhoneIcon", size: 13, className: "text-[#C5A46D]" }),
+                                                        (0, jsx_runtime_1.jsx)(EditableIcon_1.EditableIcon, { name: "phone", fieldPath: "common.footerPhoneIcon", size: 13, className: "shrink-0 text-[#C5A46D]" }),
                                                         (0, jsx_runtime_1.jsx)("a", {
                                                             href: phone ? `tel:${phone}` : '#',
                                                             "data-preview-field-path": "contact.phone",
@@ -435,7 +448,7 @@ function EditableFooter({
                                                 (0, jsx_runtime_1.jsxs)("div", {
                                                     className: "flex items-start gap-2",
                                                     children: [
-                                                        (0, jsx_runtime_1.jsx)(EditableIcon_1.EditableIcon, { name: "map-pin", fieldPath: "common.footerLocationIcon", size: 13, className: "mt-0.5 text-[#C5A46D]" }),
+                                                        (0, jsx_runtime_1.jsx)(EditableIcon_1.EditableIcon, { name: "map-pin", fieldPath: "common.footerLocationIcon", size: 13, className: "mt-0.5 shrink-0 text-[#C5A46D]" }),
                                                         (0, jsx_runtime_1.jsx)("span", {
                                                             "data-preview-field-path": "contact.address",
                                                             className: "leading-relaxed text-[#9AA7B2]",
@@ -472,62 +485,67 @@ function EditableFooter({
                                         }),
                                     ],
                                 }),
+                            ],
+                        }),
 
-                                // Column 4: Optional Compact Email Notes Request
+                        // Compact Horizontal Seasonal Travel Notes Strip (replaces tall sparse 5th column)
+                        showNewsletter && (0, jsx_runtime_1.jsxs)("div", {
+                            className: "mb-5 flex flex-col gap-3 border-t border-white/10 pt-5 lg:flex-row lg:items-center lg:justify-between",
+                            children: [
                                 (0, jsx_runtime_1.jsxs)("div", {
-                                    className: "flex flex-col gap-2.5 lg:col-span-2",
+                                    className: "max-w-lg",
                                     children: [
                                         (0, jsx_runtime_1.jsx)("h4", {
                                             "data-preview-field-path": "common.footerHeading",
                                             className: "font-display m-0 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#C5A46D]",
                                             children: footerHeading,
                                         }),
-                                        showNewsletter && (0, jsx_runtime_1.jsxs)("div", {
-                                            className: "flex flex-col gap-2",
+                                        (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
+                                            as: "p",
+                                            fieldPath: "common.newsletterDescription",
+                                            defaultValue: common.newsletterDescription ?? 'Seasonal travel notes by email.',
+                                            placeholder: "Add newsletter description",
+                                            size: "0.75rem",
+                                            color: "#9AA7B2",
+                                            lineHeight: 1.45,
+                                            style: { margin: '0.25rem 0 0' },
+                                        }),
+                                    ],
+                                }),
+                                (0, jsx_runtime_1.jsxs)("div", {
+                                    className: "flex flex-col gap-1.5 sm:items-end",
+                                    children: [
+                                        (0, jsx_runtime_1.jsxs)("form", {
+                                            onSubmit: handleNewsletterRequest,
+                                            className: "flex flex-col gap-2 sm:flex-row sm:items-center",
                                             children: [
-                                                (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
-                                                    as: "p",
-                                                    fieldPath: "common.newsletterDescription",
-                                                    defaultValue: common.newsletterDescription ?? 'Seasonal travel notes by email.',
-                                                    placeholder: "Add newsletter description",
-                                                    size: "0.75rem",
-                                                    color: "#9AA7B2",
-                                                    lineHeight: 1.5,
-                                                    style: { margin: 0 },
+                                                (0, jsx_runtime_1.jsx)("input", {
+                                                    type: "email",
+                                                    required: true,
+                                                    "data-preview-field-path": "common.newsletterEmailPlaceholder",
+                                                    placeholder: common.newsletterEmailPlaceholder ?? 'Enter your email address',
+                                                    value: subscriberEmail,
+                                                    onChange: (e) => setSubscriberEmail(e.target.value),
+                                                    className: "min-h-[38px] w-full rounded border border-white/15 bg-white/5 px-3 py-1.5 text-xs text-[#FAF8F3] placeholder:text-[#9AA7B2]/70 focus:border-[#C5A46D] focus:outline-none sm:w-64",
                                                 }),
-                                                (0, jsx_runtime_1.jsxs)("form", {
-                                                    onSubmit: handleNewsletterRequest,
-                                                    className: "flex flex-col gap-2",
-                                                    children: [
-                                                        (0, jsx_runtime_1.jsx)("input", {
-                                                            type: "email",
-                                                            required: true,
-                                                            "data-preview-field-path": "common.newsletterEmailPlaceholder",
-                                                            placeholder: common.newsletterEmailPlaceholder ?? 'Enter your email address',
-                                                            value: subscriberEmail,
-                                                            onChange: (e) => setSubscriberEmail(e.target.value),
-                                                            className: "w-full rounded border border-white/15 bg-white/5 px-2.5 py-2 text-xs text-[#FAF8F3] placeholder:text-[#9AA7B2]/70 focus:border-[#C5A46D] focus:outline-none",
-                                                        }),
-                                                        (0, jsx_runtime_1.jsx)("button", {
-                                                            type: "submit",
-                                                            className: "font-display min-h-[36px] rounded border border-[#FF783D] bg-[#FF783D] px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[#EA662C]",
-                                                            children: (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
-                                                                as: "span",
-                                                                fieldPath: "common.newsletterSubscribeLabel",
-                                                                defaultValue: common.newsletterSubscribeLabel ?? 'Request by Email',
-                                                                placeholder: "Request by Email",
-                                                                style: { color: 'inherit' },
-                                                            }),
-                                                        }),
-                                                    ],
-                                                }),
-                                                newsletterNotice && (0, jsx_runtime_1.jsx)("p", {
-                                                    role: "status",
-                                                    "data-preview-static": "newsletter-notice",
-                                                    className: "m-0 text-[11px] leading-relaxed text-[#C5A46D]",
-                                                    children: newsletterNotice,
+                                                (0, jsx_runtime_1.jsx)("button", {
+                                                    type: "submit",
+                                                    className: "font-display min-h-[38px] shrink-0 rounded border border-[#FF783D] bg-[#FF783D] px-4 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[#EA662C]",
+                                                    children: (0, jsx_runtime_1.jsx)(EditableText_1.EditableText, {
+                                                        as: "span",
+                                                        fieldPath: "common.newsletterSubscribeLabel",
+                                                        defaultValue: common.newsletterSubscribeLabel ?? 'Request by Email',
+                                                        placeholder: "Request by Email",
+                                                        style: { color: 'inherit' },
+                                                    }),
                                                 }),
                                             ],
+                                        }),
+                                        newsletterNotice && (0, jsx_runtime_1.jsx)("p", {
+                                            role: "status",
+                                            "data-preview-static": "newsletter-notice",
+                                            className: "m-0 text-[11px] text-[#C5A46D]",
+                                            children: newsletterNotice,
                                         }),
                                     ],
                                 }),
@@ -536,7 +554,7 @@ function EditableFooter({
 
                         // Compact Bottom Legal Bar
                         (0, jsx_runtime_1.jsxs)("div", {
-                            className: "flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-5 text-[11.5px] text-[#9AA7B2] sm:flex-row",
+                            className: "flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-4 text-[11.5px] text-[#9AA7B2] sm:flex-row",
                             children: [
                                 (0, jsx_runtime_1.jsx)("p", {
                                     "data-preview-field-path": "common.copyright",

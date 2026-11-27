@@ -2370,6 +2370,57 @@
             "key": "ctaLabel",
             "type": "text",
             "label": "Bottom CTA Button Label"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "imageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "ayubowanHeading",
+            "type": "text",
+            "label": "Ayubowan Welcome Heading"
+          },
+          {
+            "key": "ayubowanBody",
+            "type": "textarea",
+            "label": "Ayubowan Welcome Message"
+          },
+          {
+            "key": "expertiseHeading",
+            "type": "text",
+            "label": "Travel Expertise Heading"
+          },
+          {
+            "key": "expertiseItems",
+            "type": "list",
+            "label": "Domestic, Inbound & Outbound Expertise",
+            "itemLabel": "Expertise Pillar",
+            "minItems": 0,
+            "maxItems": 6,
+            "fields": [
+              {
+                "key": "audience",
+                "type": "text",
+                "label": "Audience / Market Label"
+              },
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Title",
+                "required": true
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Description"
+              }
+            ]
           }
         ]
       },
@@ -2417,6 +2468,21 @@
             "key": "ctaLabel",
             "type": "text",
             "label": "Bottom CTA Label"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "serviceNotice",
+            "type": "textarea",
+            "label": "Service Coordination Notice"
           }
         ]
       },
@@ -2593,6 +2659,46 @@
             "key": "whatsapp",
             "type": "tel",
             "label": "WhatsApp Number"
+          },
+          {
+            "key": "breadcrumbLabel",
+            "type": "text",
+            "label": "Breadcrumb Label"
+          },
+          {
+            "key": "bannerImageAlt",
+            "type": "text",
+            "label": "Hero Image Alt Text"
+          },
+          {
+            "key": "phoneLabel",
+            "type": "text",
+            "label": "Phone / WhatsApp Field Label"
+          },
+          {
+            "key": "plannerCtaHeading",
+            "type": "text",
+            "label": "Interactive Planner Card Heading"
+          },
+          {
+            "key": "plannerCtaBody",
+            "type": "textarea",
+            "label": "Interactive Planner Card Description"
+          },
+          {
+            "key": "plannerCtaLabel",
+            "type": "text",
+            "label": "Interactive Planner Button Label"
+          },
+          {
+            "key": "privacyTermsHeading",
+            "type": "text",
+            "label": "Enquiry Privacy & Terms Heading"
+          },
+          {
+            "key": "privacyTermsBody",
+            "type": "textarea",
+            "label": "Enquiry Privacy & Terms Note"
           }
         ]
       },

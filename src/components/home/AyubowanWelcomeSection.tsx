@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { EditableIcon, EditableImage, EditableText } from '@deneb-ui/ui';
 import { contentList, contentObject, contentText, useSiteData } from '@/lib/siteDataContext';
 import { useIsEditorPreview } from '@/lib/useIsEditorPreview';
@@ -8,6 +9,7 @@ import { pageRoute, withBasePath } from '@/lib/utils';
 import { Reveal } from '../Reveal';
 
 export function AyubowanWelcomeSection() {
+  const router = useRouter();
   const siteData = useSiteData();
   const isEditorPreview = useIsEditorPreview();
   const home = contentObject(contentObject(siteData?.content).home);
@@ -128,7 +130,7 @@ export function AyubowanWelcomeSection() {
                     type="button"
                     data-target-page="about_us"
                     onClick={() => {
-                      window.location.href = withBasePath(pageRoute('about_us'));
+                      router.push(pageRoute('about_us'));
                     }}
                     className="lux-btn-tropical"
                   >

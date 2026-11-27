@@ -137,9 +137,9 @@
       "footerPhoneIcon": "phone",
       "footerLocationIcon": "map-pin",
       "footerPolicyLabel": "Privacy Policy",
-      "footerPolicyUrl": "/#tailor-made",
+      "footerPolicyUrl": "/contact/#enquiry-info",
       "footerTermsLabel": "Enquiry Terms",
-      "footerTermsUrl": "/#faqs",
+      "footerTermsUrl": "/contact/#enquiry-info",
       "copyright": "Ceylon Odyssey — Illustrative Demonstration Travel Template. Personalise all agency details in Fivora.",
       "socialMedia": {
         "instagram": "https://instagram.com",
@@ -1683,14 +1683,14 @@
     "about": {
       "eyebrow": "OUR STORY & APPROACH",
       "heading": "Crafting Unhurried Journeys Rooted in Sri Lankan Warmth",
-      "body": "Ceylon Odyssey is an illustrative travel agency template showcasing how Sri Lankan inbound specialists, domestic holiday planners, and outbound tour operators can present their craft with editorial clarity and genuine hospitality.",
+      "body": "Dedicated to thoughtful domestic holidays, private inbound island circuits, and curated outbound escapes — designed with genuine local insight and personal care.",
       "imageUrl": "/images/hero-tea.webp",
       "missionHeading": "Personalised Hospitality, Thoughtfully Paced",
-      "missionBody": "Great travel rarely rushes. Our demonstration philosophy pairs genuine Sri Lankan warmth with realistic drive times, curated stays across every budget tier, and attentive WhatsApp coordination — fully editable in Fivora.",
+      "missionBody": "Memorable holidays rarely rush from checklist to checklist. We pair local knowledge of Sri Lanka’s twin monsoon seasons and realistic road times with comfortable stays across every budget tier and responsive WhatsApp coordination.",
       "collageHeading": "A Visual Portrait of Sri Lanka",
-      "collageDescription": "Every photograph and caption in this gallery can be customised directly in Fivora to showcase your agency's destinations.",
-      "historyHeading": "The Craft of Bespoke Planning",
-      "history": "Rather than fixed departure checklists, tailor-made travel listens first: your dates, group mix, culinary curiosity, and comfort level. Replace this sample story with your agency's authentic heritage.",
+      "collageDescription": "Sunlit coastlines, misty mountain rails, fragrant spice kitchens, and historic ramparts that inspire every itinerary we arrange.",
+      "historyHeading": "The Craft of Tailor-Made Planning",
+      "history": "Every traveller arrives with a different rhythm — grandparents and young children travelling together, honeymooners seeking quiet coastal villas, friends chasing sunrise trails, or Sri Lankan households planning an overseas break. We listen first, then shape routes around your dates, pickup point, and comfort preferences.",
       "collageImages": [
         {
           "id": "sigiriya-dawn",
@@ -1732,151 +1732,240 @@
         }
       ],
       "responsibleTravelHeading": "Responsible Island Travel",
-      "responsibleTravelBody": "We encourage low-impact wildlife viewing in national parks, support for local guides and family-run estates, reduced single-use plastic during road transfers, and respectful engagement with living heritage sites.",
+      "responsibleTravelBody": "We champion respectful wildlife viewing distances inside national parks, support family-run estates, independent boutiques, and local guides, encourage reduced single-use plastic on road journeys, and promote mindful dress and conduct at living sacred sites.",
       "credentialsHeading": "Agency Registration & Accreditations",
-      "credentialsNote": "Configurable credentials area: enter your official tourism board licence number, company registration, and partner memberships here in Fivora. (No fictional registrations are displayed in this template.)",
-      "teamHeading": "Illustrative Travel Specialists",
+      "credentialsNote": "",
+      "teamHeading": "Dedicated Travel Planning Desks",
       "team": [
         {
-          "name": "Kavinda S. (Sample Profile)",
-          "role": "Cultural & Highland Route Planner",
-          "bio": "Replace with your senior itinerary specialist's biography, regional expertise, and languages spoken.",
+          "name": "Highlands & Heritage Desk",
+          "role": "Cultural Triangle, Kandy & Tea Country Routes",
+          "bio": "Focuses on realistic drive times, early-morning heritage visits, scenic rail coordination, and boutique highland bungalows.",
           "imageUrl": "/images/dest-kandy.webp"
         },
         {
-          "name": "Nadeesha P. (Sample Profile)",
-          "role": "Stays, Family & Honeymoon Curator",
-          "bio": "Replace with your hospitality specialist's background in boutique hotels, tea bungalows, and family resorts.",
+          "name": "Stays, Family & Honeymoon Desk",
+          "role": "Resorts, Villas & Multi-Generational Pacing",
+          "bio": "Matches calm coastal resorts, interconnecting family suites, and secluded private villas across budget, comfort, and luxury tiers.",
           "imageUrl": "/images/exp-villa.webp"
         },
         {
-          "name": "Rohan M. (Sample Profile)",
-          "role": "Wildlife, Transport & Outbound Desk",
-          "bio": "Replace with your safari, chauffeur fleet, and outbound travel coordinator's experience.",
+          "name": "Safari, Transport & Outbound Desk",
+          "role": "Chauffeur Fleet, Wildlife Parks & Overseas Holidays",
+          "bio": "Coordinates well-maintained A/C vehicles, private 4x4 national park jeeps, and outbound resort itineraries departing from Colombo.",
           "imageUrl": "/images/yala-wildlife.webp"
         }
       ],
       "ctaHeading": "Ready to Design Your Own Journey?",
-      "ctaBody": "Share your preferred dates, pickup point, and travel style to start planning with our team.",
-      "ctaLabel": "Start Planning Your Trip"
+      "ctaBody": "Use our interactive 6-step trip planner or message our travel desk directly to receive a personalised quotation.",
+      "ctaLabel": "Start Planning Your Trip",
+      "breadcrumbLabel": "About Us",
+      "imageAlt": "Misty terraced Ceylon tea hills across central Sri Lanka at sunrise",
+      "ayubowanHeading": "Ayubowan — Welcome to Our Island",
+      "ayubowanBody": "In Sri Lanka, Ayubowan is more than a greeting; it is a heartfelt wish for a long, joyful life. That same unhurried warmth guides every trip we plan — from a family long-weekend escape to the central highlands to a multi-week discovery across ancient heritage cities, wildlife reserves, and sunlit bays.",
+      "expertiseHeading": "Domestic, Inbound & Outbound Expertise",
+      "expertiseItems": [
+        {
+          "audience": "For Sri Lankan Households",
+          "title": "Domestic Holidays & Weekend Breaks",
+          "description": "Poya long weekends, Avurudu family getaways, school-holiday escapes, and group retreats with flexible pickups across Colombo, Kandy, Galle, and regional hubs."
+        },
+        {
+          "audience": "For International Guests",
+          "title": "Inbound Sri Lanka Round-Tours",
+          "description": "Private CMB airport welcomes, chauffeur-guided cultural and highland circuits, national park safaris, and season-matched beaches from first light to departure."
+        },
+        {
+          "audience": "Travelling From Colombo",
+          "title": "Curated Outbound Escapes",
+          "description": "Stress-free overseas holidays to Maldives, Thailand, Singapore, Dubai, Malaysia, and beyond — pairing vetted hotels, airport transfers, and tailored excursions."
+        }
+      ]
     },
     "servicesPage": {
-      "eyebrow": "BESPOKE TRAVEL SERVICES",
+      "eyebrow": "TRAVEL SERVICES",
       "heading": "Seamless Care From Arrival to Departure",
-      "intro": "Whether you require a complete Sri Lankan round-tour, a private chauffeur-guide, airport transfers, safari arrangements, or outbound holiday planning, every service is editable and transparently structured.",
+      "intro": "From domestic family getaways and private chauffeur-guided island tours to airport transfers, accommodation curation, and outbound holiday planning — every arrangement is tailored to your schedule and budget.",
       "bannerImageUrl": "/images/exp-villa.webp",
-      "ctaHeading": "Need a Combined Itinerary & Transport Quotation?",
-      "ctaBody": "Tell us which services you need and we will prepare a cohesive travel plan suited to your schedule and budget.",
-      "ctaLabel": "Request a Service Quotation"
+      "ctaHeading": "Need a Combined Itinerary, Stay & Transport Quotation?",
+      "ctaBody": "Tell us which services you need in our interactive trip planner and we will prepare a cohesive proposal for your party.",
+      "ctaLabel": "Plan Your Services",
+      "breadcrumbLabel": "Services",
+      "bannerImageAlt": "Tranquil Sri Lankan courtyard villa representing personalised travel services",
+      "serviceNotice": "All services are arranged personally upon quotation. Displayed LKR figures are illustrative starting guides; no automated flight ticketing, visa approval, or instant online booking is processed on this site."
     },
     "services": [
       {
-        "id": "tailor-made-tours",
-        "name": "Tailor-Made Domestic & Inbound Tours",
-        "description": "End-to-end custom itineraries crafted around your travel dates, preferred regions, hotel tier, and private transport.",
-        "imageUrl": "/images/hero-sigiriya.webp",
-        "features": [
-          "Dedicated trip design consultation",
-          "Flexible route & accommodation tiers",
-          "WhatsApp coordination throughout travel"
-        ],
-        "price": 185000,
-        "priceLabel": "Illustrative guide (LKR) / multi-day route",
-        "showPrice": true
-      },
-      {
-        "id": "airport-transfers",
-        "name": "Airport & Island-Wide Transfers",
-        "description": "Punctual private air-conditioned transfers connecting Bandaranaike International Airport, Colombo, Kandy, Ella, and coastal resorts.",
-        "imageUrl": "/images/hero-coast.webp",
-        "features": [
-          "Flight-tracked arrivals greeting",
-          "Comfortable A/C sedan, KDH van, or coach",
-          "Luggage assistance & flexible pickup points"
-        ],
-        "price": 18500,
-        "priceLabel": "Illustrative from (LKR) / Colombo transfer",
-        "showPrice": true
-      },
-      {
-        "id": "private-chauffeur",
-        "name": "Private Chauffeur-Guide Services",
-        "description": "Explore Sri Lanka at your own rhythm with an experienced chauffeur-guide and well-maintained private vehicle.",
+        "id": "domestic-holiday-planning",
+        "name": "Domestic Sri Lanka Holiday Planning",
+        "description": "Relaxed Poya long-weekend breaks, Avurudu family escapes, and school-holiday trips designed around Sri Lankan households and local pickup points.",
         "imageUrl": "/images/hero-ella.webp",
         "features": [
-          "Flexible daily touring schedule",
-          "Local cultural & dining insights",
-          "Highway tolls & driver logistics arranged"
+          "Colombo, Kandy, Galle & regional doorstep pickups",
+          "Value, comfort & boutique hotel options in LKR",
+          "Balanced driving times suited for kids & elders"
         ],
-        "price": 28000,
-        "priceLabel": "Illustrative from (LKR) / day",
+        "price": 54000,
+        "priceLabel": "Illustrative from / weekend escape",
         "showPrice": true
       },
       {
-        "id": "hotel-reservations",
-        "name": "Hotel, Villa & Bungalow Curation",
-        "description": "Handpicked stays across coastal resorts, heritage boutiques, mountain retreats, eco-lodges, and family-friendly properties.",
-        "imageUrl": "/images/stay-mountain-retreat.webp",
+        "id": "inbound-sri-lanka-tours",
+        "name": "Inbound Sri Lanka Round-Tours",
+        "description": "Complete multi-day island circuits uniting the Cultural Triangle, hill country, national parks, and sunny coastlines matched to seasonal weather.",
+        "imageUrl": "/images/hero-sigiriya.webp",
         "features": [
-          "Matched to season & budget tier",
-          "Family & honeymoon room requests",
-          "Coordinated check-in & transfers"
+          "Private CMB airport meet-and-greet & farewell",
+          "Dedicated route pacing across 5 to 14+ nights",
+          "Responsive WhatsApp support throughout your stay"
+        ],
+        "price": 185000,
+        "priceLabel": "Illustrative from / multi-day circuit",
+        "showPrice": true
+      },
+      {
+        "id": "outbound-holidays",
+        "name": "Outbound Holiday Planning (Ex-Colombo)",
+        "description": "Curated regional and overseas holidays from Colombo to Maldives, Thailand, Singapore, Dubai, Malaysia, and beyond.",
+        "imageUrl": "/images/outbound-island-escape.webp",
+        "features": [
+          "Vetted city hotels & tropical island resorts",
+          "Coordinated airport transfers & day excursions",
+          "Pre-departure checklist & travel timing guidance"
         ],
         "price": 0,
         "priceLabel": "Custom quotation",
         "showPrice": false
       },
       {
-        "id": "wildlife-safaris",
-        "name": "Wildlife Safari Arrangements",
-        "description": "Private 4x4 safari jeeps, park entry logistics, and experienced trackers for Yala, Wilpattu, Udawalawe, and Minneriya.",
-        "imageUrl": "/images/yala-wildlife.webp",
+        "id": "tailor-made-tours",
+        "name": "Tailor-Made Private Itineraries",
+        "description": "Custom-crafted routes built from scratch around your interests — whether tea trails, culinary discovery, photography, or slow coastal rest.",
+        "imageUrl": "/images/hero-tea.webp",
         "features": [
-          "Private open-air 4x4 safari jeep",
-          "Dawn or afternoon game-drive slots",
-          "Respectful wildlife viewing standards"
-        ],
-        "price": 38000,
-        "priceLabel": "Illustrative from (LKR) / half-day jeep",
-        "showPrice": true
-      },
-      {
-        "id": "outbound-holidays",
-        "name": "Outbound Holiday Planning",
-        "description": "Curated regional and international escapes from Colombo to Maldives, Thailand, Singapore, Dubai, and beyond.",
-        "imageUrl": "/images/outbound-island-escape.webp",
-        "features": [
-          "Tailored resort & city stays",
-          "Airport transfers & curated excursions",
-          "Visa & travel checklist guidance"
+          "One-to-one itinerary consultation",
+          "Flexible daily schedule with zero group rush",
+          "Custom mix of stays, rail legs & excursions"
         ],
         "price": 0,
         "priceLabel": "Bespoke quotation",
         "showPrice": false
+      },
+      {
+        "id": "airport-transfers",
+        "name": "Airport & Island-Wide Transfers",
+        "description": "Punctual private air-conditioned transfers connecting Bandaranaike International Airport (CMB), Colombo, Negombo, Kandy, Ella, and coastal resorts.",
+        "imageUrl": "/images/hero-coast.webp",
+        "features": [
+          "Flight-tracked arrivals greeting at CMB",
+          "Clean A/C sedan, KDH high-roof van, or mini-coach",
+          "Expressway tolls, fuel & luggage assistance included"
+        ],
+        "price": 18500,
+        "priceLabel": "Illustrative from / Colombo transfer",
+        "showPrice": true
+      },
+      {
+        "id": "private-chauffeur",
+        "name": "Private Car & Chauffeur-Guide Services",
+        "description": "Explore Sri Lanka at your own pace with an experienced, courteous chauffeur-guide and a comfortable air-conditioned private vehicle.",
+        "imageUrl": "/images/dest-kandy.webp",
+        "features": [
+          "Flexible daily touring & spontaneous photo stops",
+          "Local dining, viewpoint & heritage recommendations",
+          "Driver accommodation & route logistics handled"
+        ],
+        "price": 28000,
+        "priceLabel": "Illustrative from / touring day",
+        "showPrice": true
+      },
+      {
+        "id": "hotel-reservations",
+        "name": "Hotel, Resort & Villa Arrangements",
+        "description": "Handpicked accommodation matching across beach resorts, Galle Fort boutiques, highland tea bungalows, eco lodges, and value guesthouses.",
+        "imageUrl": "/images/stay-mountain-retreat.webp",
+        "features": [
+          "Matched to season, meal plan & budget tier",
+          "Interconnecting family rooms & honeymoon requests",
+          "Aligned smoothly with road & rail transfers"
+        ],
+        "price": 0,
+        "priceLabel": "Quoted per stay",
+        "showPrice": false
+      },
+      {
+        "id": "honeymoon-family-holidays",
+        "name": "Honeymoon & Family Holiday Curation",
+        "description": "Thoughtfully paced journeys celebrating newlyweds with secluded stays or bringing multi-generational families together without travel fatigue.",
+        "imageUrl": "/images/family-beach-holiday.webp",
+        "features": [
+          "Private coastal dining & scenic bungalow stays",
+          "Child-friendly activities, calm beaches & extra beds",
+          "Gentle daily distances for elders & young kids"
+        ],
+        "price": 0,
+        "priceLabel": "Tailored quotation",
+        "showPrice": false
+      },
+      {
+        "id": "group-corporate-travel",
+        "name": "Group & Corporate Travel Arrangements",
+        "description": "Coordinated transport, comfortable group hotels, and team-friendly retreats for corporate outings, extended families, and clubs.",
+        "imageUrl": "/images/exp-villa.webp",
+        "features": [
+          "Luxury coaches, KDH vans & synchronized pickups",
+          "Group dining, conference spaces & team activities",
+          "Single point of contact for transparent billing"
+        ],
+        "price": 0,
+        "priceLabel": "Group quotation",
+        "showPrice": false
+      },
+      {
+        "id": "wildlife-excursions-guidance",
+        "name": "Wildlife Safaris & Travel Documentation Guidance",
+        "description": "Private 4x4 national park safari jeeps, adventure excursions, and practical pre-departure checklist guidance for visas and entry rules.",
+        "imageUrl": "/images/yala-wildlife.webp",
+        "features": [
+          "Private 4x4 jeeps for Yala, Wilpattu & Udawalawe",
+          "Guided hikes, boat safaris & cultural visits",
+          "Practical checklist pointing to official visa portals"
+        ],
+        "price": 38000,
+        "priceLabel": "Illustrative from / half-day jeep",
+        "showPrice": true
       }
     ],
     "contact": {
-      "eyebrow": "CONCIERGE & ENQUIRIES",
-      "heading": "Begin Planning Your Journey",
-      "intro": "Share your preferred dates, destinations, or questions. Replace these illustrative contact details with your agency's real email, telephone, WhatsApp, and office location in Fivora.",
+      "eyebrow": "TRAVEL CONCIERGE",
+      "heading": "Speak With Our Travel Desk",
+      "intro": "Whether you have a quick question about seasonal weather, airport transfers, family holidays, or a full custom itinerary, we are happy to help by WhatsApp, phone, or email.",
       "bannerImageUrl": "/images/hero-galle.webp",
       "phone": "+94 11 234 5678",
       "email": "concierge@ceylon-odyssey.example",
-      "address": "Galle Face Promenade, Colombo 03, Sri Lanka (Illustrative Demo Address)",
+      "address": "Colombo, Sri Lanka (Illustrative Agency Location)",
       "openingHoursHeading": "Business Hours",
       "openingHours": "Mon – Sat, 08:30 – 19:00 (Sri Lanka Time, UTC+5:30)",
       "directionsLabel": "View Location on Map",
       "directionsUrl": "https://maps.google.com/?q=Colombo+Sri+Lanka",
-      "formTitle": "Send a Travel Enquiry",
+      "formTitle": "Send a Travel Inquiry",
       "directInformationTitle": "Direct Contact Details",
-      "enquiryGuidanceHeading": "How Enquiries Work",
-      "enquiryGuidance": "Submitting prepares your complete travel summary for direct delivery via WhatsApp or your email client. No payment is requested and no fake confirmation is shown.",
+      "enquiryGuidanceHeading": "How Inquiries Work",
+      "enquiryGuidance": "Completing the form below prepares a neatly formatted travel inquiry for you to send via WhatsApp or your email application — no payment is requested and no reservation is confirmed until we reply with your quotation.",
       "nameLabel": "Full Name",
       "emailLabel": "Email Address",
-      "messageLabel": "Your Travel Ideas & Requirements",
-      "submitLabel": "Prepare Travel Enquiry",
+      "messageLabel": "Your Travel Ideas & Questions",
+      "submitLabel": "Prepare Inquiry Brief",
       "directMessageText": "Chat on WhatsApp",
-      "whatsapp": "+94 77 123 4567"
+      "whatsapp": "+94 77 123 4567",
+      "breadcrumbLabel": "Contact",
+      "bannerImageAlt": "Historic Galle Fort coastal ramparts at golden twilight in Sri Lanka",
+      "phoneLabel": "Phone or WhatsApp Number",
+      "plannerCtaHeading": "Planning a Multi-Stop Holiday?",
+      "plannerCtaBody": "Prefer to pick destinations, dates, stays, and experiences visually? Launch our 6-step interactive trip planner.",
+      "plannerCtaLabel": "Open Trip Planner",
+      "privacyTermsHeading": "Enquiry Privacy & Terms",
+      "privacyTermsBody": "Contact details entered on this page are used solely to format your WhatsApp or email message and are not stored persistently in your browser. Displayed LKR rates and sample itineraries across the website are illustrative guides until confirmed in a written quotation."
     },
     "products": [
       {
