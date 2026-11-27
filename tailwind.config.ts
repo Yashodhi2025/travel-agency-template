@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,10 +12,20 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          primary: 'var(--brand-primary, #2563eb)',
-          secondary: 'var(--brand-secondary, #0f172a)',
-          accent: 'var(--brand-accent, #14b8a6)',
+          primary: 'var(--brand-color, #FF783D)',
+          secondary: 'var(--brand-secondary, #202B33)',
+          accent: 'var(--brand-accent, #FF783D)',
+          midnight: '#101820',
+          charcoal: '#202B33',
+          sunset: '#FF783D',
+          mist: '#A3B0BA',
+          softwhite: '#F5F5F5',
         },
+      },
+      fontFamily: {
+        display: ['var(--heading-font)', 'Montserrat', 'Inter', 'system-ui', 'sans-serif'],
+        editorial: ['var(--heading-font)', 'Montserrat', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--body-font)', 'Inter', 'system-ui', 'sans-serif'],
       },
     },
   },

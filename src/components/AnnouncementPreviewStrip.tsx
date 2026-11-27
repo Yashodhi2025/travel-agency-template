@@ -14,6 +14,7 @@ import {
   PREVIEW_FOCUS_MESSAGE,
   resolveParentOrigin,
 } from '@deneb-ui/ui';
+import { withBasePath } from '@/lib/utils';
 
 type AnnouncementItem = {
   text: string;
@@ -92,7 +93,7 @@ export default function AnnouncementPreviewStrip() {
     if (!rotating) return;
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % count);
-    }, 5000);
+    }, 5500);
     return () => window.clearInterval(timer);
   }, [rotating, count]);
 
@@ -149,7 +150,7 @@ export default function AnnouncementPreviewStrip() {
   };
 
   const buttonStyle = {
-    color: 'inherit',
+    color: '#C6A46A',
     background: 'transparent',
     border: 0,
     borderRadius: 4,
@@ -168,10 +169,10 @@ export default function AnnouncementPreviewStrip() {
       {count === 0 ? (
         <div
           data-preview-list-path="announcementBarPreview.announcements"
-          className="w-full border border-dashed border-slate-400 p-3 text-center text-sm"
+          className="w-full border-b border-[#C6A46A]/35 bg-[#102D25] p-3 text-center text-sm text-[#F7F3EA]"
         >
           <span data-preview-static="empty-announcements-placeholder">
-            No announcements yet
+            No seasonal announcements configured yet
           </span>
         </div>
       ) : (
@@ -188,15 +189,16 @@ export default function AnnouncementPreviewStrip() {
             }
           }}
           style={{
-            background: '#102a43',
-            color: '#fff',
+            background: '#102D25',
+            color: '#F7F3EA',
+            borderBottom: '1px solid rgba(198, 164, 106, 0.35)',
             width: '100%',
             boxSizing: 'border-box',
-            padding: '6px 12px',
+            padding: '7px 14px',
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+            fontSize: 'clamp(0.75rem, 1.15vw, 0.85rem)',
             lineHeight: 1.5,
           }}
         >
@@ -214,9 +216,7 @@ export default function AnnouncementPreviewStrip() {
           >
             {announcements.map((item, index) => {
               const isVisibleSlide = isEditorPreview || index === activeIndex;
-              if (!isVisibleSlide) {
-                return null;
-              }
+              if (!isVisibleSlide) return null;
               const href = safeHref(item.linkUrl);
               const isHighlighted = index === activeIndex;
 
@@ -234,15 +234,15 @@ export default function AnnouncementPreviewStrip() {
                     flexWrap: 'wrap',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '0.45rem',
-                    minHeight: 32,
+                    gap: '0.5rem',
+                    minHeight: 30,
                     overflowWrap: 'anywhere',
                     textAlign: 'center',
                     padding: isEditorPreview ? '4px 8px' : 0,
-                    borderRadius: isEditorPreview ? 6 : 0,
+                    borderRadius: isEditorPreview ? 4 : 0,
                     background:
                       isEditorPreview && isHighlighted
-                        ? 'rgba(255, 255, 255, 0.12)'
+                        ? 'rgba(198, 164, 106, 0.14)'
                         : 'transparent',
                   }}
                 >
@@ -250,6 +250,7 @@ export default function AnnouncementPreviewStrip() {
                     <span
                       data-preview-field-path={`announcementBarPreview.announcements[${index}].icon`}
                       style={{
+                        color: '#C6A46A',
                         display: 'inline-flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -264,10 +265,13 @@ export default function AnnouncementPreviewStrip() {
                     <span
                       data-preview-field-path={`announcementBarPreview.announcements[${index}].badge`}
                       style={{
-                        border: '1px solid currentColor',
-                        borderRadius: 20,
-                        padding: '0.1rem 0.6rem',
-                        fontSize: '0.8em',
+                        border: '1px solid rgba(198, 164, 106, 0.7)',
+                        color: '#C6A46A',
+                        borderRadius: 2,
+                        padding: '0.08rem 0.55rem',
+                        fontSize: '0.72rem',
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
                         minWidth: '1.5ch',
                         minHeight: '1.2em',
                         display: 'inline-flex',
@@ -285,9 +289,9 @@ export default function AnnouncementPreviewStrip() {
                   </span>
                   {href && item.linkLabel ? (
                     <a
-                      href={href}
+                      href={withBasePath(href)}
                       data-preview-field-path={`announcementBarPreview.announcements[${index}].linkUrl`}
-                      style={{ color: 'inherit', textDecoration: 'underline' }}
+                      style={{ color: '#C6A46A', textDecoration: 'underline' }}
                     >
                       <span
                         data-preview-field-path={`announcementBarPreview.announcements[${index}].linkLabel`}
@@ -297,10 +301,10 @@ export default function AnnouncementPreviewStrip() {
                     </a>
                   ) : isEditorPreview ? (
                     <a
-                      href={href || '#preview-details'}
+                      href={withBasePath(href || '#preview-details')}
                       data-preview-field-path={`announcementBarPreview.announcements[${index}].linkUrl`}
                       style={{
-                        color: 'inherit',
+                        color: '#C6A46A',
                         textDecoration: 'underline',
                         display: 'inline-flex',
                         minWidth: '1.5ch',

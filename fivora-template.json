@@ -11,7 +11,10 @@
       "services[*].id",
       "products[*].currency",
       "about.collageImages[*].id",
-      "contact.whatsapp"
+      "contact.whatsapp",
+      "home.destinations[*].id",
+      "home.destinations[*].mapX",
+      "home.destinations[*].mapY"
     ]
   },
   "siteDataFile": "src/data/site-data.json",
@@ -60,7 +63,7 @@
         "path": "home.countdown",
         "pageKey": "countdown_preview",
         "type": "object",
-        "label": "Flash Sale Countdown",
+        "label": "Seasonal Journey Countdown",
         "fields": [
           {
             "key": "heading",
@@ -75,9 +78,9 @@
           {
             "key": "deadline",
             "type": "text",
-            "label": "Sale end date and time (ISO)",
-            "placeholder": "2026-12-01T23:59+05:30",
-            "description": "Use YYYY-MM-DDTHH:MM with Z or a timezone offset. Example: 2026-12-01T23:59+05:30 (Sri Lanka time). Seconds are optional."
+            "label": "Offer end date and time (ISO)",
+            "placeholder": "2026-12-31T23:59+05:30",
+            "description": "Use YYYY-MM-DDTHH:MM with Z or a timezone offset. Example: 2026-12-31T23:59+05:30 (Sri Lanka time)."
           },
           {
             "key": "expiryMessage",
@@ -105,30 +108,35 @@
           {
             "key": "websiteTitle",
             "type": "text",
-            "label": "Website title",
+            "label": "Agency Name",
             "required": true
+          },
+          {
+            "key": "tagline",
+            "type": "text",
+            "label": "Brand Tagline"
           },
           {
             "key": "shortDescription",
             "type": "textarea",
-            "label": "Short description"
+            "label": "Short Agency Description"
           },
           {
             "key": "logoUrl",
             "type": "image",
-            "label": "Website logo",
+            "label": "Agency Logo",
             "recommendedWidth": 512,
             "recommendedHeight": 512
           },
           {
             "key": "headerCtaLabel",
             "type": "text",
-            "label": "Header contact button"
+            "label": "Header Plan Your Trip CTA"
           },
           {
             "key": "navLabels",
             "type": "object",
-            "label": "Navigation labels",
+            "label": "Navigation Labels",
             "fields": [
               {
                 "key": "home",
@@ -136,9 +144,24 @@
                 "label": "Home label"
               },
               {
+                "key": "destinations",
+                "type": "text",
+                "label": "Destinations label"
+              },
+              {
+                "key": "packages",
+                "type": "text",
+                "label": "Tour Packages label"
+              },
+              {
+                "key": "experiences",
+                "type": "text",
+                "label": "Experiences label"
+              },
+              {
                 "key": "about_us",
                 "type": "text",
-                "label": "About label"
+                "label": "About Us label"
               },
               {
                 "key": "services",
@@ -155,55 +178,97 @@
           {
             "key": "footerHeading",
             "type": "text",
-            "label": "Footer heading"
+            "label": "Footer Heading"
           },
           {
             "key": "newsletterSubscribeLabel",
             "type": "text",
-            "label": "Newsletter subscribe button label"
+            "label": "Newsletter Action Label"
           },
           {
             "key": "newsletterEmailPlaceholder",
             "type": "text",
-            "label": "Newsletter email placeholder"
+            "label": "Newsletter Email Placeholder"
           },
           {
             "key": "newsletterDescription",
             "type": "textarea",
-            "label": "Newsletter description"
+            "label": "Newsletter Description"
           },
           {
             "key": "footerExploreHeading",
             "type": "text",
-            "label": "Footer navigation heading"
+            "label": "Footer Navigation Heading"
+          },
+          {
+            "key": "footerDestinationsHeading",
+            "type": "text",
+            "label": "Footer Regions Heading"
           },
           {
             "key": "footerContactHeading",
             "type": "text",
-            "label": "Footer contact heading"
+            "label": "Footer Contact Heading"
           },
           {
             "key": "footerEmailIcon",
             "type": "text",
             "control": "icon-picker",
-            "label": "Footer email icon"
+            "label": "Footer Email Icon"
           },
           {
             "key": "footerPhoneIcon",
             "type": "text",
             "control": "icon-picker",
-            "label": "Footer phone icon"
+            "label": "Footer Phone Icon"
           },
           {
             "key": "footerLocationIcon",
             "type": "text",
             "control": "icon-picker",
-            "label": "Footer location icon"
+            "label": "Footer Location Icon"
+          },
+          {
+            "key": "footerPolicyLabel",
+            "type": "text",
+            "label": "Footer Policy Link Label"
+          },
+          {
+            "key": "footerPolicyUrl",
+            "type": "url",
+            "label": "Footer Policy Link URL"
           },
           {
             "key": "copyright",
             "type": "text",
-            "label": "Copyright"
+            "label": "Copyright Notice"
+          },
+          {
+            "key": "socialMedia",
+            "type": "object",
+            "label": "Social Media Links",
+            "fields": [
+              {
+                "key": "instagram",
+                "type": "url",
+                "label": "Instagram URL"
+              },
+              {
+                "key": "facebook",
+                "type": "url",
+                "label": "Facebook URL"
+              },
+              {
+                "key": "linkedin",
+                "type": "url",
+                "label": "LinkedIn URL"
+              },
+              {
+                "key": "youtube",
+                "type": "url",
+                "label": "YouTube URL"
+              }
+            ]
           }
         ]
       },
@@ -217,55 +282,148 @@
           {
             "key": "heroEyebrow",
             "type": "text",
-            "label": "Hero eyebrow"
+            "label": "Hero Eyebrow"
           },
           {
             "key": "heroTitle",
             "type": "text",
-            "label": "Hero title",
+            "label": "Hero Headline",
             "required": true
           },
           {
             "key": "heroSummary",
             "type": "textarea",
-            "label": "Hero summary"
+            "label": "Hero Description"
           },
           {
             "key": "bannerImageUrl",
             "type": "image",
-            "label": "Hero image",
+            "label": "Primary Hero Fallback Image",
             "recommendedWidth": 1600,
             "recommendedHeight": 900
           },
           {
             "key": "primaryCtaLabel",
             "type": "text",
-            "label": "Contact button"
+            "label": "Hero Primary CTA Label"
           },
           {
             "key": "secondaryCtaLabel",
             "type": "text",
-            "label": "About button"
+            "label": "Hero Secondary CTA Label"
+          },
+          {
+            "key": "heroSlides",
+            "type": "list",
+            "label": "Hero Coverflow Slides",
+            "itemLabel": "Hero Destination Slide",
+            "minItems": 0,
+            "maxItems": 8,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Destination Name",
+                "required": true
+              },
+              {
+                "key": "location",
+                "type": "text",
+                "label": "Country or Region"
+              },
+              {
+                "key": "caption",
+                "type": "textarea",
+                "label": "Short Description"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Main Vertical Card Image",
+                "recommendedWidth": 1080,
+                "recommendedHeight": 1440
+              },
+              {
+                "key": "backgroundImageUrl",
+                "type": "image",
+                "label": "Full-Screen Background Image",
+                "recommendedWidth": 1600,
+                "recommendedHeight": 900
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alternative Text"
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "Explore CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "Explore CTA Destination"
+              }
+            ]
+          },
+          {
+            "key": "plannerHeading",
+            "type": "text",
+            "label": "Quick Trip Planner Heading"
+          },
+          {
+            "key": "plannerSubtitle",
+            "type": "text",
+            "label": "Quick Trip Planner Subtitle"
+          },
+          {
+            "key": "plannerCtaLabel",
+            "type": "text",
+            "label": "Planner Filter CTA Label"
+          },
+          {
+            "key": "plannerEnquiryLabel",
+            "type": "text",
+            "label": "Planner Enquiry CTA Label"
+          },
+          {
+            "key": "introEyebrow",
+            "type": "text",
+            "label": "Introduction Eyebrow"
           },
           {
             "key": "introTitle",
             "type": "text",
-            "label": "Introduction title"
+            "label": "Introduction Heading"
           },
           {
             "key": "introBody",
             "type": "textarea",
-            "label": "Introduction body"
+            "label": "Introduction Body"
+          },
+          {
+            "key": "introImageUrl",
+            "type": "image",
+            "label": "Introduction Editorial Image",
+            "recommendedWidth": 1200,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "introCtaLabel",
+            "type": "text",
+            "label": "Introduction Learn More CTA"
           },
           {
             "key": "featuresHeading",
             "type": "text",
-            "label": "Features heading"
+            "label": "Value Propositions Heading"
           },
           {
             "key": "features",
             "type": "list",
-            "label": "Features",
+            "label": "Agency Value Propositions",
+            "itemLabel": "Value Proposition",
             "minItems": 0,
             "maxItems": 8,
             "fields": [
@@ -285,8 +443,8 @@
           {
             "key": "demoPreOrderCta",
             "type": "list",
-            "label": "Demo Pre Order Cta",
-            "itemLabel": "Demo Pre Order Cta",
+            "label": "Concierge Quick Action CTAs",
+            "itemLabel": "Action Button",
             "minItems": 0,
             "maxItems": 12,
             "fields": [
@@ -298,19 +456,370 @@
               {
                 "key": "buttonUrl",
                 "type": "url",
-                "label": "Button Url"
+                "label": "Button URL"
               }
             ]
           },
           {
+            "key": "destinationsEyebrow",
+            "type": "text",
+            "label": "Destinations Eyebrow"
+          },
+          {
+            "key": "destinationsHeading",
+            "type": "text",
+            "label": "Destinations Heading"
+          },
+          {
+            "key": "destinationsSummary",
+            "type": "textarea",
+            "label": "Destinations Summary"
+          },
+          {
+            "key": "destinations",
+            "type": "list",
+            "label": "Destinations & Island Map Pins",
+            "itemLabel": "Destination",
+            "minItems": 0,
+            "maxItems": 16,
+            "fields": [
+              {
+                "key": "id",
+                "type": "text",
+                "label": "Destination ID"
+              },
+              {
+                "key": "name",
+                "type": "text",
+                "label": "Destination Name",
+                "required": true
+              },
+              {
+                "key": "region",
+                "type": "text",
+                "label": "Region"
+              },
+              {
+                "key": "category",
+                "type": "text",
+                "label": "Category"
+              },
+              {
+                "key": "bestSeason",
+                "type": "text",
+                "label": "Best Time to Visit"
+              },
+              {
+                "key": "shortDescription",
+                "type": "textarea",
+                "label": "Short Description"
+              },
+              {
+                "key": "detailedDescription",
+                "type": "textarea",
+                "label": "Detailed Description"
+              },
+              {
+                "key": "highlights",
+                "type": "text",
+                "label": "Key Highlights (separated by |)"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Destination Image",
+                "recommendedWidth": 1080,
+                "recommendedHeight": 810
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "Explore CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "Explore CTA URL"
+              },
+              {
+                "key": "mapX",
+                "type": "number",
+                "label": "Map Pin X Position (%)"
+              },
+              {
+                "key": "mapY",
+                "type": "number",
+                "label": "Map Pin Y Position (%)"
+              }
+            ]
+          },
+          {
+            "key": "productsEyebrow",
+            "type": "text",
+            "label": "Tour Packages Eyebrow"
+          },
+          {
             "key": "productsHeading",
             "type": "text",
-            "label": "Featured Products Heading"
+            "label": "Tour Packages Heading"
           },
           {
             "key": "productsSummary",
             "type": "textarea",
-            "label": "Featured Products Summary"
+            "label": "Tour Packages Summary"
+          },
+          {
+            "key": "experiencesEyebrow",
+            "type": "text",
+            "label": "Travel Experiences Eyebrow"
+          },
+          {
+            "key": "experiencesHeading",
+            "type": "text",
+            "label": "Travel Experiences Heading"
+          },
+          {
+            "key": "experiencesSummary",
+            "type": "textarea",
+            "label": "Travel Experiences Summary"
+          },
+          {
+            "key": "experiences",
+            "type": "list",
+            "label": "Travel Experiences",
+            "itemLabel": "Experience",
+            "minItems": 0,
+            "maxItems": 12,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Experience Title",
+                "required": true
+              },
+              {
+                "key": "category",
+                "type": "text",
+                "label": "Category"
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Description"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Experience Image",
+                "recommendedWidth": 1080,
+                "recommendedHeight": 810
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "CTA URL"
+              }
+            ]
+          },
+          {
+            "key": "staysEyebrow",
+            "type": "text",
+            "label": "Accommodation Styles Eyebrow"
+          },
+          {
+            "key": "staysHeading",
+            "type": "text",
+            "label": "Accommodation Styles Heading"
+          },
+          {
+            "key": "staysSummary",
+            "type": "textarea",
+            "label": "Accommodation Styles Summary"
+          },
+          {
+            "key": "stays",
+            "type": "list",
+            "label": "Illustrative Accommodation Styles",
+            "itemLabel": "Accommodation Style",
+            "minItems": 0,
+            "maxItems": 8,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Style Title",
+                "required": true
+              },
+              {
+                "key": "subtitle",
+                "type": "text",
+                "label": "Region / Tone"
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Description"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Style Image",
+                "recommendedWidth": 1080,
+                "recommendedHeight": 810
+              }
+            ]
+          },
+          {
+            "key": "travelTipsHeading",
+            "type": "text",
+            "label": "Travel Planning Notes Heading"
+          },
+          {
+            "key": "travelTips",
+            "type": "list",
+            "label": "Travel Planning Notes",
+            "itemLabel": "Planning Note",
+            "minItems": 0,
+            "maxItems": 8,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Topic",
+                "required": true
+              },
+              {
+                "key": "body",
+                "type": "textarea",
+                "label": "Guidance"
+              }
+            ]
+          },
+          {
+            "key": "tailorMadeEyebrow",
+            "type": "text",
+            "label": "Tailor-Made Section Eyebrow"
+          },
+          {
+            "key": "tailorMadeHeading",
+            "type": "text",
+            "label": "Tailor-Made Heading"
+          },
+          {
+            "key": "tailorMadeBody",
+            "type": "textarea",
+            "label": "Tailor-Made Description"
+          },
+          {
+            "key": "tailorMadeImageUrl",
+            "type": "image",
+            "label": "Tailor-Made Backdrop Image",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "tailorMadeCtaLabel",
+            "type": "text",
+            "label": "Tailor-Made CTA Label"
+          },
+          {
+            "key": "testimonialsEyebrow",
+            "type": "text",
+            "label": "Testimonials Eyebrow"
+          },
+          {
+            "key": "testimonialsHeading",
+            "type": "text",
+            "label": "Testimonials Heading"
+          },
+          {
+            "key": "testimonialsSummary",
+            "type": "textarea",
+            "label": "Testimonials Subtitle"
+          },
+          {
+            "key": "testimonials",
+            "type": "list",
+            "label": "Traveller Testimonials",
+            "itemLabel": "Testimonial",
+            "minItems": 0,
+            "maxItems": 10,
+            "fields": [
+              {
+                "key": "name",
+                "type": "text",
+                "label": "Traveller Name",
+                "required": true
+              },
+              {
+                "key": "country",
+                "type": "text",
+                "label": "Country"
+              },
+              {
+                "key": "journey",
+                "type": "text",
+                "label": "Journey Taken"
+              },
+              {
+                "key": "quote",
+                "type": "textarea",
+                "label": "Review Quote"
+              },
+              {
+                "key": "rating",
+                "type": "number",
+                "label": "Rating (1–5)"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Journey Photo",
+                "recommendedWidth": 600,
+                "recommendedHeight": 600
+              }
+            ]
+          },
+          {
+            "key": "faqEyebrow",
+            "type": "text",
+            "label": "FAQ Eyebrow"
+          },
+          {
+            "key": "faqHeading",
+            "type": "text",
+            "label": "FAQ Heading"
+          },
+          {
+            "key": "faqSummary",
+            "type": "textarea",
+            "label": "FAQ Summary"
+          },
+          {
+            "key": "faqs",
+            "type": "list",
+            "label": "Frequently Asked Questions",
+            "itemLabel": "FAQ",
+            "minItems": 0,
+            "maxItems": 12,
+            "fields": [
+              {
+                "key": "question",
+                "type": "text",
+                "label": "Question",
+                "required": true
+              },
+              {
+                "key": "answer",
+                "type": "textarea",
+                "label": "Answer"
+              }
+            ]
           }
         ]
       },
@@ -322,6 +831,11 @@
         "label": "About Page",
         "fields": [
           {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
             "key": "heading",
             "type": "text",
             "label": "Heading",
@@ -330,34 +844,44 @@
           {
             "key": "body",
             "type": "textarea",
-            "label": "About text"
+            "label": "Agency Story"
           },
           {
             "key": "imageUrl",
             "type": "image",
-            "label": "About image",
-            "recommendedWidth": 1200,
+            "label": "About Hero Image",
+            "recommendedWidth": 1600,
             "recommendedHeight": 900
+          },
+          {
+            "key": "missionHeading",
+            "type": "text",
+            "label": "Mission Heading"
+          },
+          {
+            "key": "missionBody",
+            "type": "textarea",
+            "label": "Mission Description"
           },
           {
             "key": "collageHeading",
             "type": "text",
-            "label": "Collage Heading"
+            "label": "Visual Gallery Heading"
           },
           {
             "key": "collageDescription",
             "type": "textarea",
-            "label": "Collage Description"
+            "label": "Visual Gallery Description"
           },
           {
             "key": "historyHeading",
             "type": "text",
-            "label": "History Heading"
+            "label": "Philosophy Heading"
           },
           {
             "key": "history",
             "type": "textarea",
-            "label": "History"
+            "label": "Philosophy Text"
           },
           {
             "key": "collageImages",
@@ -378,6 +902,98 @@
                 "label": "Caption"
               }
             ]
+          },
+          {
+            "key": "values",
+            "type": "list",
+            "label": "Core Values",
+            "itemLabel": "Value",
+            "minItems": 0,
+            "maxItems": 6,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Value Title",
+                "required": true
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Description"
+              }
+            ]
+          },
+          {
+            "key": "responsibleTravelHeading",
+            "type": "text",
+            "label": "Responsible Travel Heading"
+          },
+          {
+            "key": "responsibleTravelBody",
+            "type": "textarea",
+            "label": "Responsible Travel Statement"
+          },
+          {
+            "key": "credentialsHeading",
+            "type": "text",
+            "label": "Business Credentials Heading"
+          },
+          {
+            "key": "credentialsNote",
+            "type": "textarea",
+            "label": "Registration & Accreditation Details"
+          },
+          {
+            "key": "teamHeading",
+            "type": "text",
+            "label": "Specialists Section Heading"
+          },
+          {
+            "key": "team",
+            "type": "list",
+            "label": "Travel Specialists",
+            "itemLabel": "Specialist",
+            "minItems": 0,
+            "maxItems": 6,
+            "fields": [
+              {
+                "key": "name",
+                "type": "text",
+                "label": "Name",
+                "required": true
+              },
+              {
+                "key": "role",
+                "type": "text",
+                "label": "Role / Specialty"
+              },
+              {
+                "key": "bio",
+                "type": "textarea",
+                "label": "Short Bio"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Editorial Image"
+              }
+            ]
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom CTA Button Label"
           }
         ]
       },
@@ -389,6 +1005,11 @@
         "label": "Services Page",
         "fields": [
           {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
             "key": "heading",
             "type": "text",
             "label": "Heading",
@@ -398,6 +1019,28 @@
             "key": "intro",
             "type": "textarea",
             "label": "Introduction"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Banner Image",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "ctaHeading",
+            "type": "text",
+            "label": "Bottom CTA Heading"
+          },
+          {
+            "key": "ctaBody",
+            "type": "textarea",
+            "label": "Bottom CTA Description"
+          },
+          {
+            "key": "ctaLabel",
+            "type": "text",
+            "label": "Bottom CTA Label"
           }
         ]
       },
@@ -406,7 +1049,8 @@
         "path": "services",
         "pageKey": "services",
         "type": "list",
-        "label": "Services",
+        "label": "Travel Services",
+        "itemLabel": "Service",
         "minItems": 0,
         "maxItems": 12,
         "fields": [
@@ -418,7 +1062,7 @@
           {
             "key": "name",
             "type": "text",
-            "label": "Name",
+            "label": "Service Name",
             "required": true
           },
           {
@@ -430,13 +1074,13 @@
             "key": "imageUrl",
             "type": "image",
             "label": "Image",
-            "recommendedWidth": 800,
-            "recommendedHeight": 600
+            "recommendedWidth": 1080,
+            "recommendedHeight": 810
           },
           {
             "key": "features",
             "type": "list",
-            "label": "Included features",
+            "label": "Included Features",
             "itemField": {
               "type": "text",
               "label": "Feature"
@@ -450,7 +1094,7 @@
           {
             "key": "priceLabel",
             "type": "text",
-            "label": "Price Label (e.g. Starting from, per hour)"
+            "label": "Price Label (e.g. Starting from, per transfer)"
           },
           {
             "key": "showPrice",
@@ -467,6 +1111,11 @@
         "label": "Contact Page",
         "fields": [
           {
+            "key": "eyebrow",
+            "type": "text",
+            "label": "Page Eyebrow"
+          },
+          {
             "key": "heading",
             "type": "text",
             "label": "Heading",
@@ -476,6 +1125,13 @@
             "key": "intro",
             "type": "textarea",
             "label": "Introduction"
+          },
+          {
+            "key": "bannerImageUrl",
+            "type": "image",
+            "label": "Banner Image",
+            "recommendedWidth": 1600,
+            "recommendedHeight": 900
           },
           {
             "key": "phone",
@@ -490,7 +1146,17 @@
           {
             "key": "address",
             "type": "textarea",
-            "label": "Address"
+            "label": "Office Address"
+          },
+          {
+            "key": "openingHoursHeading",
+            "type": "text",
+            "label": "Opening Hours Heading"
+          },
+          {
+            "key": "openingHours",
+            "type": "text",
+            "label": "Business Opening Hours"
           },
           {
             "key": "directionsLabel",
@@ -500,47 +1166,57 @@
           {
             "key": "directionsUrl",
             "type": "url",
-            "label": "Directions Url"
+            "label": "Directions / Map URL"
           },
           {
             "key": "directInformationTitle",
             "type": "text",
-            "label": "Direct information heading"
+            "label": "Direct Information Heading"
+          },
+          {
+            "key": "enquiryGuidanceHeading",
+            "type": "text",
+            "label": "Enquiry Guidance Heading"
+          },
+          {
+            "key": "enquiryGuidance",
+            "type": "textarea",
+            "label": "Enquiry Guidance Note"
           },
           {
             "key": "nameLabel",
             "type": "text",
-            "label": "Name field label"
+            "label": "Name Field Label"
           },
           {
             "key": "emailLabel",
             "type": "text",
-            "label": "Email field label"
+            "label": "Email Field Label"
           },
           {
             "key": "messageLabel",
             "type": "text",
-            "label": "Message field label"
+            "label": "Message Field Label"
           },
           {
             "key": "formTitle",
             "type": "text",
-            "label": "Form heading"
+            "label": "Form Heading"
           },
           {
             "key": "submitLabel",
             "type": "text",
-            "label": "Submit button"
+            "label": "Submit Button Label"
           },
           {
             "key": "directMessageText",
             "type": "text",
-            "label": "Direct message label"
+            "label": "WhatsApp Direct Message Label"
           },
           {
             "key": "whatsapp",
             "type": "tel",
-            "label": "WhatsApp"
+            "label": "WhatsApp Number"
           }
         ]
       },
@@ -549,29 +1225,102 @@
         "path": "products",
         "pageKey": "home",
         "type": "list",
-        "label": "Products",
+        "label": "Tour Packages",
+        "itemLabel": "Tour Package",
         "minItems": 0,
         "fields": [
           {
             "key": "id",
             "type": "text",
-            "label": "Product ID"
+            "label": "Package ID"
           },
           {
             "key": "name",
             "type": "text",
-            "label": "Title",
+            "label": "Tour Name",
             "required": true
           },
           {
             "key": "description",
             "type": "textarea",
-            "label": "Description"
+            "label": "Overview"
+          },
+          {
+            "key": "duration",
+            "type": "text",
+            "label": "Duration (e.g. 10 Days / 9 Nights)"
+          },
+          {
+            "key": "destinations",
+            "type": "text",
+            "label": "Destinations Route"
+          },
+          {
+            "key": "travelStyle",
+            "type": "text",
+            "label": "Travel Style"
+          },
+          {
+            "key": "groupSize",
+            "type": "text",
+            "label": "Group Size"
+          },
+          {
+            "key": "highlights",
+            "type": "textarea",
+            "label": "Tour Highlights (separated by |)"
+          },
+          {
+            "key": "accommodation",
+            "type": "textarea",
+            "label": "Accommodation Overview"
+          },
+          {
+            "key": "inclusions",
+            "type": "textarea",
+            "label": "Included Services (separated by |)"
+          },
+          {
+            "key": "exclusions",
+            "type": "textarea",
+            "label": "Excluded Services (separated by |)"
+          },
+          {
+            "key": "itinerary",
+            "type": "list",
+            "label": "Day-by-Day Itinerary",
+            "itemLabel": "Day",
+            "minItems": 0,
+            "maxItems": 14,
+            "fields": [
+              {
+                "key": "day",
+                "type": "text",
+                "label": "Day Label",
+                "required": true
+              },
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Day Title",
+                "required": true
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Day Description"
+              },
+              {
+                "key": "stay",
+                "type": "text",
+                "label": "Overnight Location / Stay Style"
+              }
+            ]
           },
           {
             "key": "price",
             "type": "number",
-            "label": "Price"
+            "label": "Starting Price"
           },
           {
             "key": "compareAtPrice",
@@ -591,12 +1340,14 @@
           {
             "key": "imageUrl",
             "type": "image",
-            "label": "Product Image"
+            "label": "Tour Cover Photograph",
+            "recommendedWidth": 1200,
+            "recommendedHeight": 900
           },
           {
             "key": "badge",
             "type": "text",
-            "label": "Badge"
+            "label": "Editorial Badge"
           },
           {
             "key": "showPrice",
@@ -688,20 +1439,20 @@
     ],
     "defaults": {
       "colors": {
-        "primary": "#2563eb",
-        "secondary": "#0f172a",
-        "accent": "#14b8a6",
-        "background": "#ffffff",
-        "text": "#0f172a"
+        "primary": "#101820",
+        "secondary": "#202B33",
+        "accent": "#FF783D",
+        "background": "#F5F5F5",
+        "text": "#101820"
       },
       "typography": {
-        "headingFont": "Inter",
+        "headingFont": "Montserrat",
         "bodyFont": "Inter",
         "baseSize": "16px"
       },
       "spacing": {
-        "heroMinHeight": "72vh",
-        "sectionPadding": "5rem"
+        "heroMinHeight": "100vh",
+        "sectionPadding": "5.5rem"
       }
     }
   }

@@ -3,26 +3,28 @@ export default function AnnouncementBarPreviewPage() {
     <section
       id="preview-details"
       data-preview-page-key="announcement_bar_preview"
-      style={{ maxWidth: 960, margin: '0 auto', padding: 'clamp(3rem, 8vw, 7rem) 1.5rem', textAlign: 'center' }}
+      className="lux-section"
     >
-      <p
-        data-preview-static="announcement-preview-eyebrow"
-        style={{ fontSize: '0.75rem', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 16 }}
-      >
-        A fresh perspective
-      </p>
-      <h1
-        data-preview-static="announcement-preview-heading"
-        style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)', lineHeight: 1.15, marginBottom: 24 }}
-      >
-        Good things, thoughtfully chosen.
-      </h1>
-      <p
-        data-preview-static="announcement-preview-description"
-        style={{ maxWidth: 540, margin: '0 auto', lineHeight: 1.8 }}
-      >
-        Discover the latest arrivals, enjoy a little extra with every order, and find something to make your day.
-      </p>
+      <div className="lux-container max-w-3xl text-center">
+        <p
+          data-preview-static="announcement-preview-eyebrow"
+          className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--lux-gold-deep)] dark:text-[#C6A46A]"
+        >
+          Seasonal Travel Notice Preview
+        </p>
+        <h1
+          data-preview-static="announcement-preview-heading"
+          className="font-editorial m-0 mb-5 text-4xl font-medium leading-[1.12] text-[var(--lux-text)] sm:text-5xl"
+        >
+          Refined Announcements for Every Season.
+        </h1>
+        <p
+          data-preview-static="announcement-preview-description"
+          className="mx-auto max-w-xl text-base leading-relaxed text-[var(--lux-text-muted)]"
+        >
+          Use the ribbon above in Fivora to highlight dry-season travel windows, east or south coast recommendations, or bespoke planning notices.
+        </p>
+      </div>
     </section>
   );
 }

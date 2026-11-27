@@ -2,26 +2,34 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-16 text-center">
-      <div className="mx-auto max-w-md space-y-4">
-        <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wider text-primary uppercase">
-          404 Error
+    <section className="lux-section">
+      <div className="lux-container flex min-h-[55vh] max-w-xl flex-col items-center justify-center text-center">
+        <span
+          data-preview-static="not-found-eyebrow"
+          className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--lux-gold-deep)] dark:text-[#C6A46A]"
+        >
+          404 · Page Not Found
         </span>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          Page Not Found
+        <h1
+          data-preview-static="not-found-heading"
+          className="font-editorial m-0 mb-4 text-4xl font-medium text-[var(--lux-text)] sm:text-5xl"
+        >
+          This Path Leads Beyond the Map.
         </h1>
-        <p className="text-sm text-muted-foreground">
-          The page you are looking for doesn&apos;t exist or has been moved.
+        <p
+          data-preview-static="not-found-body"
+          className="m-0 mb-8 text-sm leading-relaxed text-[var(--lux-text-muted)]"
+        >
+          The page you are looking for may have moved or no longer exists. Return to the homepage to continue exploring curated journeys.
         </p>
-        <div className="pt-4">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-          >
-            Back to Home
-          </Link>
-        </div>
+        <Link
+          href="/"
+          data-preview-static="not-found-home-link"
+          className="lux-btn-primary"
+        >
+          Return Home
+        </Link>
       </div>
-    </div>
+    </section>
   );
 }
