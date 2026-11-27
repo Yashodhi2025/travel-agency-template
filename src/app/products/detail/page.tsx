@@ -39,25 +39,29 @@ function TourItineraryDetailView({ product }: { product: Record<string, unknown>
   const destinations = contentText(product.destinations);
   const travelStyle = contentText(product.travelStyle);
   const groupSize = contentText(product.groupSize);
+  const tourType = contentText(product.tourType);
+  const pricingLabel = contentText(product.pricingLabel);
   const accommodation = contentText(product.accommodation);
+  const transport = contentText(product.transport);
   const highlights = splitDelimitedItems(contentText(product.highlights));
   const inclusions = splitDelimitedItems(contentText(product.inclusions));
   const exclusions = splitDelimitedItems(contentText(product.exclusions));
   const itinerary = contentList(product.itinerary).map((raw) => contentObject(raw));
+  const gallery = contentList(product.photoGallery).map((raw) => contentObject(raw));
 
-  const currency = contentText(product.currency) || 'USD';
+  const currency = contentText(product.currency) || 'LKR';
   const price = typeof product.price === 'number' ? product.price : parseFloat(String(product.price || 0));
   const itemShowPrice = product.showPrice !== undefined ? Boolean(product.showPrice) : true;
   const isRange = Boolean(
     product.isPriceRange ||
-      (product.minPrice !== undefined &&
-        product.maxPrice !== undefined &&
-        Number(product.maxPrice) > Number(product.minPrice)) ||
-      contentText(product.priceRange),
+    (product.minPrice !== undefined &&
+      product.maxPrice !== undefined &&
+      Number(product.maxPrice) > Number(product.minPrice)) ||
+    contentText(product.priceRange),
   );
   const displayPrice = isRange
     ? contentText(product.priceRange) ||
-      `${formatMoney(Number(product.minPrice ?? price), currency)} – ${formatMoney(Number(product.maxPrice ?? price), currency)}`
+    `${formatMoney(Number(product.minPrice ?? price), currency)} – ${formatMoney(Number(product.maxPrice ?? price), currency)}`
     : formatMoney(price, currency);
 
   const brandName = contentText(common.websiteTitle) || 'Ceylon Odyssey';
@@ -135,16 +139,24 @@ function TourItineraryDetailView({ product }: { product: Record<string, unknown>
           </div>
 
           <div className="mb-3 flex flex-wrap items-center gap-2.5">
+            {tourType && (
+              <span
+                data-preview-static="tour-detail-market"
+                className="rounded-full bg-[#101820]/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#FAF9F6] backdrop-blur-sm"
+              >
+                {tourType}
+              </span>
+            )}
             <span
               data-preview-static="tour-detail-category"
-              className="bg-[#C6A46A] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#101917]"
+              className="rounded-full bg-[#FF783D] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white"
             >
               {category}
             </span>
             {badge && (
               <span
                 data-preview-static="tour-detail-badge"
-                className="border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#F7F3EA]"
+                className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#FAF9F6]"
               >
                 {badge}
               </span>
@@ -307,14 +319,56 @@ function TourItineraryDetailView({ product }: { product: Record<string, unknown>
               </section>
             )}
 
-            {accommodation && (
+            {(accommodation || transport) && (
+              <section className="grid grid-cols-1 gap-6 border-t border-[var(--lux-border)] pt-10 sm:grid-cols-2">
+                {accommodation && (
+                  <div>
+                    <h2 data-preview-static="tour-accom-heading" className="font-display mb-3 text-xl font-bold text-[var(--lux-text)]">
+                      Accommodation Overview
+                    </h2>
+                    <p data-preview-static="tour-accom-body" className="m-0 text-sm leading-relaxed text-[var(--lux-text-muted)]">
+                      {accommodation}
+                    </p>
+                  </div>
+                )}
+                {transport && (
+                  <div>
+                    <h2 data-preview-static="tour-transport-heading" className="font-display mb-3 text-xl font-bold text-[var(--lux-text)]">
+                      Transport Overview
+                    </h2>
+                    <p data-preview-static="tour-transport-body" className="m-0 text-sm leading-relaxed text-[var(--lux-text-muted)]">
+                      {transport}
+                    </p>
+                  </div>
+                )}
+              </section>
+            )}
+
+            {gallery.length > 0 && (
               <section className="border-t border-[var(--lux-border)] pt-10">
-                <h2 data-preview-static="tour-accom-heading" className="font-editorial mb-3 text-2xl font-medium text-[var(--lux-text)]">
-                  Accommodation Style
+                <h2 data-preview-static="tour-gallery-heading" className="font-display mb-5 text-2xl font-bold text-[var(--lux-text)]">
+                  Journey Photo Gallery
                 </h2>
-                <p data-preview-static="tour-accom-body" className="m-0 text-sm leading-relaxed text-[var(--lux-text-muted)]">
-                  {accommodation}
-                </p>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  {gallery.map((photo, idx) => (
+                    <figure key={idx} className="m-0 overflow-hidden rounded-lg border border-[var(--lux-border)]">
+                      <img
+                        src={withBasePath(contentText(photo.imageUrl) || imageUrl)}
+                        alt={contentText(photo.caption) || `${name} photo ${idx + 1}`}
+                        data-preview-static="tour-gallery-image"
+                        className="aspect-[4/3] w-full object-cover"
+                      />
+                      {contentText(photo.caption) && (
+                        <figcaption
+                          data-preview-static="tour-gallery-caption"
+                          className="bg-[var(--lux-surface)] px-3 py-2 text-xs text-[var(--lux-text-muted)]"
+                        >
+                          {contentText(photo.caption)}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ))}
+                </div>
               </section>
             )}
 
@@ -360,9 +414,14 @@ function TourItineraryDetailView({ product }: { product: Record<string, unknown>
               >
                 Tailor This Journey
               </span>
-              <h3 data-preview-static="tour-sidebar-heading" className="font-editorial mb-2 text-2xl font-medium text-[var(--lux-text)]">
+              <h3 data-preview-static="tour-sidebar-heading" className="font-display mb-1 text-2xl font-bold text-[var(--lux-text)]">
                 {itemShowPrice ? displayPrice : 'Price on Request'}
               </h3>
+              {pricingLabel && itemShowPrice && (
+                <p data-preview-static="tour-sidebar-pricing-basis" className="m-0 mb-3 text-xs font-medium text-[#167D91] dark:text-[#4AB4C8]">
+                  {pricingLabel}
+                </p>
+              )}
               <p data-preview-static="tour-sidebar-note" className="mb-6 text-xs leading-relaxed text-[var(--lux-text-muted)]">
                 Illustrative private guide. Every itinerary is adjusted to your exact dates, hotel tier, and party size with a transparent custom proposal.
               </p>

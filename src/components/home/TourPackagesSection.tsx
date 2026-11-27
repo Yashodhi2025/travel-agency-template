@@ -11,18 +11,14 @@ import {
   useSiteData,
 } from '@/lib/siteDataContext';
 import { useIsEditorPreview } from '@/lib/useIsEditorPreview';
-import {
-  extractDaysCount,
-  formatMoney,
-  splitDelimitedItems,
-  type TripEnquiryDraft,
-} from '@/lib/travelHelpers';
+import { formatMoney, type TripEnquiryDraft } from '@/lib/travelHelpers';
 import { Reveal } from '../Reveal';
+
+const TOUR_MARKET_TABS = ['All', 'Domestic', 'Inbound', 'Outbound'] as const;
 
 interface TourPackagesSectionProps {
   externalRegionFilter: string;
   externalStyleFilter: string;
-  externalDurationFilter: string;
   onResetExternalFilters: () => void;
   onEnquirePackage: (draft: TripEnquiryDraft) => void;
 }
@@ -30,7 +26,6 @@ interface TourPackagesSectionProps {
 export function TourPackagesSection({
   externalRegionFilter,
   externalStyleFilter,
-  externalDurationFilter,
   onResetExternalFilters,
   onEnquirePackage,
 }: TourPackagesSectionProps) {
@@ -39,17 +34,11 @@ export function TourPackagesSection({
   const home = contentObject(contentObject(siteData?.content).home);
   const products = useProducts();
 
-  const [categoryFilter, setCategoryFilter] = useState('All');
-  const [durationFilter, setDurationFilter] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [marketFilter, setMarketFilter] = useState<string>('All');
+  const [showAll, setShowAll] = useState(false);
 
-  const effectiveCategory = externalStyleFilter || (categoryFilter === 'All' ? '' : categoryFilter);
-  const effectiveDuration = externalDurationFilter || durationFilter;
-
-  const categories = useMemo(
-    () => ['All', ...Array.from(new Set(products.map((p) => contentText((p as any).category)).filter(Boolean)))],
-    [products],
-  );
+  const rawLimit = Number(home.featuredPackagesCount);
+  const featuredLimit = Number.isFinite(rawLimit) && rawLimit > 0 ? Math.round(rawLimit) : 3;
 
   const filteredEntries = useMemo(() => {
     const entries = products.map((rawProduct, index) => ({
@@ -60,39 +49,37 @@ export function TourPackagesSection({
     if (isEditorPreview) return entries;
 
     return entries.filter(({ product }) => {
-      if (effectiveCategory) {
-        const cat = contentText(product.category).toLowerCase();
-        if (cat !== effectiveCategory.toLowerCase()) return false;
+      if (marketFilter !== 'All') {
+        const market = contentText(product.tourType).toLowerCase();
+        if (market !== marketFilter.toLowerCase()) return false;
+      }
+      if (externalStyleFilter) {
+        const haystack = `${contentText(product.category)} ${contentText(product.travelStyle)} ${contentText(product.tourType)} ${contentText(product.name)}`.toLowerCase();
+        if (!haystack.includes(externalStyleFilter.toLowerCase())) return false;
       }
       if (externalRegionFilter) {
         const haystack = `${contentText(product.destinations)} ${contentText(product.name)} ${contentText(product.description)}`.toLowerCase();
         if (!haystack.includes(externalRegionFilter.toLowerCase())) return false;
       }
-      if (effectiveDuration) {
-        const days = extractDaysCount(contentText(product.duration));
-        if (days !== null) {
-          if (effectiveDuration === 'short' && days > 7) return false;
-          if (effectiveDuration === 'medium' && (days < 8 || days > 10)) return false;
-          if (effectiveDuration === 'long' && days < 11) return false;
-        }
-      }
-      if (searchQuery.trim()) {
-        const q = searchQuery.trim().toLowerCase();
-        const haystack = `${contentText(product.name)} ${contentText(product.destinations)} ${contentText(product.category)} ${contentText(product.description)}`.toLowerCase();
-        if (!haystack.includes(q)) return false;
-      }
       return true;
     });
-  }, [products, isEditorPreview, effectiveCategory, externalRegionFilter, effectiveDuration, searchQuery]);
+  }, [products, isEditorPreview, marketFilter, externalStyleFilter, externalRegionFilter]);
 
-  const hasActiveFilters = Boolean(
-    effectiveCategory || externalRegionFilter || effectiveDuration || searchQuery.trim(),
+  const hasActiveFilter = Boolean(
+    marketFilter !== 'All' || externalRegionFilter || externalStyleFilter,
   );
 
+  // On live storefront, display only 3 featured packages by default (keeping homepage concise & editorial)
+  const visibleEntries =
+    isEditorPreview || showAll || hasActiveFilter
+      ? filteredEntries
+      : filteredEntries.slice(0, featuredLimit);
+
+  const hasMoreToShow = !isEditorPreview && !hasActiveFilter && filteredEntries.length > featuredLimit;
+
   const clearAllFilters = () => {
-    setCategoryFilter('All');
-    setDurationFilter('');
-    setSearchQuery('');
+    setMarketFilter('All');
+    setShowAll(false);
     onResetExternalFilters();
   };
 
@@ -100,165 +87,131 @@ export function TourPackagesSection({
     <section
       id="packages"
       data-design-section="home-products"
-      className="lux-section"
+      className="lux-section border-b border-[var(--lux-border)] bg-[var(--lux-bg)]"
     >
       <div className="lux-container">
-        <Reveal>
-          <div className="mb-10 max-w-2xl">
-            <div className="mb-3">
+        <Reveal variant="fade-up">
+          <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-xl">
+              <div className="mb-2.5">
+                <EditableText
+                  as="span"
+                  className="lux-eyebrow-tropical"
+                  data-preview-field-path="home.productsEyebrow"
+                  defaultValue={contentText(home.productsEyebrow) || 'FEATURED TOUR PACKAGES'}
+                />
+              </div>
               <EditableText
-                as="span"
-                className="lux-eyebrow"
-                data-preview-field-path="home.productsEyebrow"
-                defaultValue={contentText(home.productsEyebrow) || 'CURATED ITINERARIES'}
+                as="h2"
+                variant="h2"
+                className="font-display m-0 text-2xl font-bold tracking-[-0.025em] text-[var(--lux-text)] sm:text-3xl lg:text-[2.25rem]"
+                data-preview-field-path="home.productsHeading"
+                defaultValue={contentText(home.productsHeading) || 'Curated Domestic, Inbound & Outbound Tours'}
+              />
+              <EditableText
+                as="p"
+                className="mt-2 m-0 text-sm leading-relaxed text-[var(--lux-text-muted)] sm:text-[15px]"
+                data-preview-field-path="home.productsSummary"
+                defaultValue={contentText(home.productsSummary)}
               />
             </div>
-            <EditableText
-              as="h2"
-              variant="h2"
-              className="font-editorial m-0 text-3xl font-medium text-[var(--lux-text)] sm:text-4xl lg:text-5xl"
-              data-preview-field-path="home.productsHeading"
-              defaultValue={contentText(home.productsHeading) || 'Signature Sri Lankan Journeys'}
-            />
-            <EditableText
-              as="p"
-              className="mt-4 text-base leading-relaxed text-[var(--lux-text-muted)]"
-              data-preview-field-path="home.productsSummary"
-              defaultValue={contentText(home.productsSummary)}
-            />
+
+            {/* Clean Market Filter Tabs */}
+            {!isEditorPreview && products.length > 0 && (
+              <div className="flex flex-wrap items-center gap-1.5">
+                {TOUR_MARKET_TABS.map((tab) => {
+                  const active = marketFilter === tab;
+                  return (
+                    <button
+                      key={tab}
+                      type="button"
+                      data-preview-static="package-market-tab"
+                      aria-pressed={active}
+                      onClick={() => setMarketFilter(tab)}
+                      className={`min-h-[36px] rounded border px-3.5 py-1 text-xs font-semibold transition-colors ${
+                        active
+                          ? 'border-[var(--brand-secondary,#154C42)] bg-[var(--brand-secondary,#154C42)] text-[#FAF8F3] dark:border-[var(--brand-accent,#FF783D)] dark:bg-[var(--brand-accent,#FF783D)] dark:text-white'
+                          : 'border-[var(--lux-border-strong)] bg-transparent text-[var(--lux-text-muted)] hover:border-[var(--brand-accent,#FF783D)] hover:text-[var(--lux-text)]'
+                      }`}
+                    >
+                      {tab === 'All' ? 'Featured' : tab}
+                    </button>
+                  );
+                })}
+                {hasActiveFilter && (
+                  <button
+                    type="button"
+                    data-preview-static="package-reset-filters"
+                    onClick={clearAllFilters}
+                    className="border-0 bg-transparent px-2 text-xs font-semibold text-[var(--brand-accent,#FF783D)] underline"
+                  >
+                    Reset
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </Reveal>
 
-        {/* Live Storefront Filtering Bar */}
-        {!isEditorPreview && products.length > 0 && (
-          <div className="mb-10 flex flex-col gap-4 border-y border-[var(--lux-border)] py-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => {
-                const isSelected =
-                  (cat === 'All' && !effectiveCategory) ||
-                  effectiveCategory.toLowerCase() === cat.toLowerCase();
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    data-preview-static="package-category-tab"
-                    onClick={() => {
-                      if (externalStyleFilter) onResetExternalFilters();
-                      setCategoryFilter(cat);
-                    }}
-                    className={`min-h-[38px] border px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.11em] transition ${
-                      isSelected
-                        ? 'border-[#102D25] bg-[#102D25] text-[#F7F3EA] dark:border-[#C6A46A] dark:bg-[#C6A46A] dark:text-[#101917]'
-                        : 'border-[var(--lux-border-strong)] bg-transparent text-[var(--lux-text-muted)] hover:border-[#C6A46A] hover:text-[var(--lux-text)]'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <select
-                aria-label="Filter tours by duration"
-                data-preview-static="package-duration-select"
-                value={effectiveDuration}
-                onChange={(e) => {
-                  if (externalDurationFilter) onResetExternalFilters();
-                  setDurationFilter(e.target.value);
-                }}
-                className="lux-select !min-h-[40px] sm:w-44"
-              >
-                <option value="">Any Duration</option>
-                <option value="short">Up to 7 Days</option>
-                <option value="medium">8 – 10 Days</option>
-                <option value="long">11+ Days</option>
-              </select>
-
-              <input
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search destination or tour..."
-                aria-label="Search tour packages"
-                data-preview-static="package-search-input"
-                className="lux-input !min-h-[40px] sm:w-56"
-              />
-
-              {hasActiveFilters && (
-                <button
-                  type="button"
-                  data-preview-static="package-reset-filters"
-                  onClick={clearAllFilters}
-                  className="lux-btn-outline !min-h-[40px] !px-4 !text-xs"
-                >
-                  Reset
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Active Region Indicator */}
-        {!isEditorPreview && externalRegionFilter && (
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-2 border border-[#C6A46A]/45 bg-[#C6A46A]/10 px-4 py-3 text-sm">
+        {/* Active Region / Style Context Chip */}
+        {!isEditorPreview && (externalRegionFilter || externalStyleFilter) && (
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-2 rounded border border-[var(--lux-border-strong)] bg-[var(--lux-surface-alt)] px-4 py-2.5 text-xs">
             <span data-preview-static="package-region-filter-notice">
-              Showing journeys featuring <strong>{externalRegionFilter}</strong>
+              Filtered by <strong>{externalRegionFilter || externalStyleFilter}</strong>
             </span>
             <button
               type="button"
               data-preview-static="package-clear-region-btn"
               onClick={clearAllFilters}
-              className="border-0 bg-transparent text-xs font-semibold uppercase tracking-[0.12em] text-[var(--lux-forest)] underline"
+              className="border-0 bg-transparent text-xs font-semibold text-[var(--brand-accent,#FF783D)] underline"
             >
-              Show all journeys
+              Show featured tours
             </button>
           </div>
         )}
 
-        {/* Tour Packages Grid */}
+        {/* Featured Tour Cards (Essential Information Only on Homepage) */}
         <div
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
           data-preview-list-path="products"
         >
           {products.length === 0 && (
             <p
               data-preview-static="packages-empty-collection"
-              className="col-span-full border border-dashed border-[var(--lux-border-strong)] p-10 text-center text-sm text-[var(--lux-text-muted)]"
+              className="col-span-full border border-dashed border-[var(--lux-border-strong)] p-8 text-center text-sm text-[var(--lux-text-muted)]"
             >
-              No tour packages configured yet. Add packages in Fivora to showcase your itineraries.
+              No tour packages configured yet. Add packages in Fivora.
             </p>
           )}
 
-          {products.length > 0 && filteredEntries.length === 0 && !isEditorPreview && (
-            <div className="col-span-full flex flex-col items-center gap-4 border border-[var(--lux-border-strong)] bg-[var(--lux-surface)] p-10 text-center">
-              <p data-preview-static="packages-no-match-title" className="font-editorial m-0 text-2xl text-[var(--lux-text)]">
-                No Sample Itineraries Match That Exact Combination
+          {products.length > 0 && visibleEntries.length === 0 && !isEditorPreview && (
+            <div className="col-span-full flex flex-col items-center gap-3 border border-[var(--lux-border-strong)] bg-[var(--lux-surface)] p-8 text-center">
+              <p data-preview-static="packages-no-match-title" className="font-display m-0 text-lg font-bold text-[var(--lux-text)]">
+                No Sample Packages Match That Filter
               </p>
-              <p data-preview-static="packages-no-match-body" className="m-0 max-w-lg text-sm text-[var(--lux-text-muted)]">
-                Because every journey we arrange is privately crafted, we can still design this exact route for your dates.
+              <p data-preview-static="packages-no-match-body" className="m-0 max-w-md text-xs text-[var(--lux-text-muted)]">
+                Every itinerary can be customised around your exact dates, pickup point, and budget.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2.5">
                 <button
                   type="button"
                   data-preview-static="packages-no-match-reset"
                   onClick={clearAllFilters}
-                  className="lux-btn-outline"
+                  className="lux-btn-outline !min-h-[38px]"
                 >
-                  Show All Journeys
+                  Show Featured Tours
                 </button>
                 <button
                   type="button"
                   data-preview-static="packages-no-match-tailor"
                   onClick={() => {
                     onEnquirePackage({
-                      destination: externalRegionFilter || searchQuery || undefined,
-                      travelStyle: effectiveCategory || undefined,
-                      duration: effectiveDuration || undefined,
+                      destination: externalRegionFilter || undefined,
+                      travelStyle: externalStyleFilter || undefined,
                     });
                     document.getElementById('tailor-made')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="lux-btn-primary"
+                  className="lux-btn-sunset !min-h-[38px]"
                 >
                   Request Custom Route
                 </button>
@@ -266,17 +219,20 @@ export function TourPackagesSection({
             </div>
           )}
 
-          {filteredEntries.map(({ product, index }) => {
+          {visibleEntries.map(({ product, index }) => {
             const productId =
-              typeof product.id === 'string' || typeof product.id === 'number'
-                ? product.id
-                : null;
-            const price = typeof product.price === 'number' ? product.price : parseFloat(String(product.price || 0));
+              typeof product.id === 'string' || typeof product.id === 'number' ? product.id : null;
+            const price =
+              typeof product.price === 'number'
+                ? product.price
+                : parseFloat(String(product.price || 0));
             const compareAt =
               typeof product.compareAtPrice === 'number'
                 ? product.compareAtPrice
                 : parseFloat(String(product.compareAtPrice || 0));
-            const currency = contentText(product.currency) || 'USD';
+            const currency = contentText(product.currency) || 'LKR';
+            const pricingLabel = contentText(product.pricingLabel) || 'Illustrative guide';
+            const tourType = contentText(product.tourType);
             const badge = contentText(product.badge);
             const category = contentText(product.category);
             const duration = contentText(product.duration);
@@ -285,22 +241,27 @@ export function TourPackagesSection({
             const groupSize = contentText(product.groupSize);
             const highlights = contentText(product.highlights);
             const accommodation = contentText(product.accommodation);
+            const transport = contentText(product.transport);
             const inclusions = contentText(product.inclusions);
             const exclusions = contentText(product.exclusions);
+            const imageAlt = contentText(product.imageAlt) || contentText(product.name);
             const itinerary = contentList(product.itinerary);
+            const photoGallery = contentList(product.photoGallery);
 
+            const prodRecord = product as Record<string, unknown>;
+            const customData = contentObject(prodRecord.customData);
             const itemShowPrice =
-              (product as any)?.showPrice !== undefined
-                ? Boolean((product as any).showPrice)
-                : (product as any)?.customData?.showPrice !== undefined
-                  ? Boolean((product as any).customData.showPrice)
+              prodRecord.showPrice !== undefined
+                ? Boolean(prodRecord.showPrice)
+                : customData.showPrice !== undefined
+                  ? Boolean(customData.showPrice)
                   : true;
 
             const isRange = Boolean(
-              (product as any)?.isPriceRange ||
-                ((product as any)?.minPrice !== undefined &&
-                  (product as any)?.maxPrice !== undefined &&
-                  Number((product as any).maxPrice) > Number((product as any).minPrice)) ||
+              prodRecord.isPriceRange ||
+                (prodRecord.minPrice !== undefined &&
+                  prodRecord.maxPrice !== undefined &&
+                  Number(prodRecord.maxPrice) > Number(prodRecord.minPrice)) ||
                 contentText(product.priceRange),
             );
 
@@ -309,33 +270,32 @@ export function TourPackagesSection({
               if (contentText(product.priceRange)) {
                 displayPrice = contentText(product.priceRange);
               } else {
-                const min = (product as any).minPrice !== undefined ? Number((product as any).minPrice) : price;
-                const max = (product as any).maxPrice !== undefined ? Number((product as any).maxPrice) : price;
+                const min = prodRecord.minPrice !== undefined ? Number(prodRecord.minPrice) : price;
+                const max = prodRecord.maxPrice !== undefined ? Number(prodRecord.maxPrice) : price;
                 displayPrice = `${formatMoney(min, currency)} – ${formatMoney(max, currency)}`;
               }
             }
 
             const detailHref = platformProductDetailHref(productId);
-            const highlightChips = splitDelimitedItems(highlights).slice(0, 3);
 
             return (
               <EditableCard
                 key={productId ?? index}
-                className="lux-card flex flex-col overflow-hidden !p-0"
-                item={product as any}
+                className="flex flex-col overflow-hidden rounded-[6px] border border-[var(--lux-border)] bg-[var(--lux-surface)] !p-0 transition-shadow duration-300 hover:shadow-[var(--lux-shadow-md)]"
+                item={product as Record<string, unknown>}
                 itemPath={`products[${index}]`}
                 imageKey="__custom__"
                 data-preview-item-path={`products[${index}]`}
                 balance
-                radius="md"
+                radius="sm"
                 style={{ display: 'flex', flexDirection: 'column' }}
               >
-                {/* Media */}
-                <div className="lux-image-zoom relative aspect-[4/3] w-full overflow-hidden">
+                {/* Clean High-Quality Tour Photograph */}
+                <div className="lux-image-zoom relative aspect-[16/10] w-full overflow-hidden bg-[#101820]">
                   {isEditorPreview ? (
                     <EditableImage
                       src={contentText(product.imageUrl) || '/images/hero-sigiriya.webp'}
-                      alt={contentText(product.name)}
+                      alt={imageAlt}
                       data-preview-field-path={`products[${index}].imageUrl`}
                       fit="cover"
                       className="h-full w-full object-cover"
@@ -344,7 +304,7 @@ export function TourPackagesSection({
                     <a href={detailHref} className="block h-full w-full">
                       <EditableImage
                         src={contentText(product.imageUrl) || '/images/hero-sigiriya.webp'}
-                        alt={contentText(product.name)}
+                        alt={imageAlt}
                         data-preview-field-path={`products[${index}].imageUrl`}
                         fit="cover"
                         className="h-full w-full object-cover"
@@ -352,22 +312,36 @@ export function TourPackagesSection({
                     </a>
                   )}
 
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/65 to-transparent" />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#101820]/75 to-transparent"
+                  />
 
-                  {(badge || isEditorPreview) && (
-                    <span
-                      data-preview-field-path={`products[${index}].badge`}
-                      className="absolute left-3 top-3 z-10 bg-[#C6A46A] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#101917]"
-                      style={{ minWidth: '1.5ch', minHeight: '1.2em' }}
-                    >
-                      {badge}
-                    </span>
-                  )}
+                  <div className="absolute left-3 top-3 z-10 flex flex-wrap gap-1.5">
+                    {(tourType || isEditorPreview) && (
+                      <span
+                        data-preview-field-path={`products[${index}].tourType`}
+                        className="rounded bg-[#101820]/82 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#FAF8F3] backdrop-blur-sm"
+                        style={{ minWidth: '1.5ch', minHeight: '1.2em' }}
+                      >
+                        {tourType}
+                      </span>
+                    )}
+                    {isEditorPreview && (
+                      <span
+                        data-preview-field-path={`products[${index}].badge`}
+                        className="rounded bg-[#C5A46D] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#101820]"
+                        style={{ minWidth: '1.5ch', minHeight: '1.2em' }}
+                      >
+                        {badge}
+                      </span>
+                    )}
+                  </div>
 
                   {(duration || isEditorPreview) && (
                     <span
                       data-preview-field-path={`products[${index}].duration`}
-                      className="absolute bottom-3 left-3 z-10 bg-[#102D25]/90 px-2.5 py-1 text-[11px] font-medium tracking-[0.06em] text-[#F7F3EA] backdrop-blur-sm"
+                      className="font-display absolute bottom-2.5 left-3 z-10 text-[11px] font-bold tracking-[0.06em] text-[#FAF8F3]"
                       style={{ minWidth: '1.5ch', minHeight: '1.2em' }}
                     >
                       {duration}
@@ -375,23 +349,22 @@ export function TourPackagesSection({
                   )}
                 </div>
 
-                {/* Content */}
-                <div className="flex flex-1 flex-col gap-3 p-6">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
+                {/* Essential Tour Summary Only (full itinerary & details live on /products/detail) */}
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <div className="flex items-center justify-between gap-2 text-[11px]">
                     {(category || isEditorPreview) && (
                       <span
                         data-preview-field-path={`products[${index}].category`}
-                        className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--lux-gold-deep)] dark:text-[#C6A46A]"
-                        style={{ minWidth: '1.5ch', minHeight: '1.2em' }}
+                        className="font-display font-bold uppercase tracking-[0.14em] text-[var(--lux-tropical)]"
+                        style={{ minWidth: '1.5ch', minHeight: '1.1em' }}
                       >
                         {category}
                       </span>
                     )}
-                    {(groupSize || isEditorPreview) && (
+                    {isEditorPreview && (
                       <span
                         data-preview-field-path={`products[${index}].groupSize`}
-                        className="text-xs text-[var(--lux-text-muted)]"
-                        style={{ minWidth: '1.5ch', minHeight: '1.2em' }}
+                        className="text-[var(--lux-text-muted)]"
                       >
                         {groupSize}
                       </span>
@@ -401,15 +374,15 @@ export function TourPackagesSection({
                   {isEditorPreview ? (
                     <EditableText
                       as="h3"
-                      className="font-editorial m-0 text-2xl font-medium text-[var(--lux-text)]"
+                      className="font-display m-0 text-lg font-bold leading-snug text-[var(--lux-text)]"
                       data-preview-field-path={`products[${index}].name`}
                       defaultValue={contentText(product.name)}
                     />
                   ) : (
-                    <a href={detailHref} className="text-inherit no-underline hover:underline">
+                    <a href={detailHref} className="text-inherit no-underline hover:text-[var(--brand-accent,#FF783D)]">
                       <EditableText
                         as="h3"
-                        className="font-editorial m-0 text-2xl font-medium text-[var(--lux-text)]"
+                        className="font-display m-0 text-lg font-bold leading-snug text-[var(--lux-text)] transition-colors hover:text-[var(--brand-accent,#FF783D)]"
                         data-preview-field-path={`products[${index}].name`}
                         defaultValue={contentText(product.name)}
                       />
@@ -419,35 +392,23 @@ export function TourPackagesSection({
                   {(destinations || isEditorPreview) && (
                     <p
                       data-preview-field-path={`products[${index}].destinations`}
-                      className="m-0 text-xs font-medium tracking-[0.03em] text-[var(--lux-teal)]"
+                      className="m-0 text-xs leading-relaxed text-[var(--lux-text-muted)]"
                       style={{ minHeight: '1.2em' }}
                     >
                       {destinations}
                     </p>
                   )}
 
-                  <EditableText
-                    as="p"
-                    className="m-0 text-sm leading-relaxed text-[var(--lux-text-muted)]"
-                    data-preview-field-path={`products[${index}].description`}
-                    defaultValue={contentText(product.description)}
-                  />
-
-                  {!isEditorPreview && highlightChips.length > 0 && (
-                    <ul className="m-0 mt-1 flex list-none flex-col gap-1.5 p-0 text-xs text-[var(--lux-text-muted)]">
-                      {highlightChips.map((chip, cIdx) => (
-                        <li key={cIdx} className="flex items-start gap-2">
-                          <span aria-hidden="true" className="mt-0.5 text-[#C6A46A]">✦</span>
-                          <span data-preview-static="package-highlight-bullet">{chip}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* Editor-only complete pricing + itinerary field bindings (keeps all product schema paths editable & visible on /) */}
+                  {/* Full Editable Product Details & Itinerary preserved in Fivora Editor Preview */}
                   {isEditorPreview && (
-                    <div className="mt-2 space-y-3 rounded border border-dashed border-[var(--lux-border-strong)] bg-[var(--lux-surface-alt)] p-3.5 text-xs">
-                      <div className="grid gap-1.5">
+                    <div className="mt-2 space-y-2.5 rounded border border-dashed border-[var(--lux-border-strong)] bg-[var(--lux-surface-alt)] p-3 text-xs">
+                      <EditableText
+                        as="p"
+                        className="m-0 text-xs text-[var(--lux-text-muted)]"
+                        data-preview-field-path={`products[${index}].description`}
+                        defaultValue={contentText(product.description)}
+                      />
+                      <div className="grid gap-1 border-t border-[var(--lux-border)] pt-2">
                         <strong data-preview-static="product-pricing-settings-heading">Pricing settings</strong>
                         <div>
                           <span data-preview-static="product-show-price-label">Show price: </span>
@@ -464,21 +425,27 @@ export function TourPackagesSection({
                           </div>
                         )}
                         <div>
+                          <span data-preview-static="product-pricing-basis-label">Pricing basis: </span>
+                          <span data-preview-field-path={`products[${index}].pricingLabel`}>
+                            {pricingLabel}
+                          </span>
+                        </div>
+                        <div>
                           <span data-preview-static="product-price-range-enabled-label">Price range enabled: </span>
                           <span data-preview-field-path={`products[${index}].isPriceRange`}>
-                            {String(product.isPriceRange ?? false)}
+                            {String(prodRecord.isPriceRange ?? false)}
                           </span>
                         </div>
                         <div>
                           <span data-preview-static="product-min-price-label">Minimum price: </span>
                           <span data-preview-field-path={`products[${index}].minPrice`}>
-                            {String(product.minPrice ?? 0)}
+                            {String(prodRecord.minPrice ?? 0)}
                           </span>
                         </div>
                         <div>
                           <span data-preview-static="product-max-price-label">Maximum price: </span>
                           <span data-preview-field-path={`products[${index}].maxPrice`}>
-                            {String(product.maxPrice ?? 0)}
+                            {String(prodRecord.maxPrice ?? 0)}
                           </span>
                         </div>
                         <div>
@@ -488,15 +455,19 @@ export function TourPackagesSection({
                           </span>
                         </div>
                         <div>
-                          <span data-preview-static="product-compare-at-price-label">Compare at price: </span>
+                          <span data-preview-static="product-compare-at-price-label">Previous price: </span>
                           <span data-preview-field-path={`products[${index}].compareAtPrice`}>
                             {compareAt}
                           </span>
                         </div>
                       </div>
 
-                      <div className="grid gap-1.5 border-t border-[var(--lux-border)] pt-2.5">
-                        <strong data-preview-static="product-details-settings-heading">Itinerary & detail fields</strong>
+                      <div className="grid gap-1 border-t border-[var(--lux-border)] pt-2">
+                        <strong data-preview-static="product-details-settings-heading">Tour detail page fields</strong>
+                        <div>
+                          <span data-preview-static="product-alt-label">Cover alt: </span>
+                          <span data-preview-field-path={`products[${index}].imageAlt`}>{imageAlt}</span>
+                        </div>
                         <div>
                           <span data-preview-static="product-travel-style-label">Travel style: </span>
                           <span data-preview-field-path={`products[${index}].travelStyle`}>{travelStyle}</span>
@@ -510,6 +481,10 @@ export function TourPackagesSection({
                           <span data-preview-field-path={`products[${index}].accommodation`}>{accommodation}</span>
                         </div>
                         <div>
+                          <span data-preview-static="product-transport-label">Transport: </span>
+                          <span data-preview-field-path={`products[${index}].transport`}>{transport}</span>
+                        </div>
+                        <div>
                           <span data-preview-static="product-inclusions-label">Inclusions: </span>
                           <span data-preview-field-path={`products[${index}].inclusions`}>{inclusions}</span>
                         </div>
@@ -520,8 +495,41 @@ export function TourPackagesSection({
                       </div>
 
                       <div
+                        data-preview-list-path={`products[${index}].photoGallery`}
+                        className="space-y-1 border-t border-[var(--lux-border)] pt-2"
+                      >
+                        <strong data-preview-static="product-gallery-heading">Package gallery</strong>
+                        {photoGallery.length === 0 && (
+                          <p data-preview-static="product-gallery-empty" className="m-0 opacity-75">
+                            No gallery photos added yet.
+                          </p>
+                        )}
+                        {photoGallery.map((rawPhoto, photoIdx) => {
+                          const photoObj = contentObject(rawPhoto);
+                          return (
+                            <div
+                              key={photoIdx}
+                              data-preview-item-path={`products[${index}].photoGallery[${photoIdx}]`}
+                              className="flex items-center gap-2 rounded border border-[var(--lux-border)] bg-[var(--lux-surface)] p-1.5"
+                            >
+                              <EditableImage
+                                src={contentText(photoObj.imageUrl) || '/images/hero-sigiriya.webp'}
+                                alt={contentText(photoObj.caption) || `Gallery ${photoIdx + 1}`}
+                                data-preview-field-path={`products[${index}].photoGallery[${photoIdx}].imageUrl`}
+                                fit="cover"
+                                className="h-7 w-10 shrink-0 rounded object-cover"
+                              />
+                              <span data-preview-field-path={`products[${index}].photoGallery[${photoIdx}].caption`}>
+                                {contentText(photoObj.caption)}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div
                         data-preview-list-path={`products[${index}].itinerary`}
-                        className="space-y-1.5 border-t border-[var(--lux-border)] pt-2.5"
+                        className="space-y-1 border-t border-[var(--lux-border)] pt-2"
                       >
                         <strong data-preview-static="product-itinerary-heading">Day-by-day itinerary</strong>
                         {itinerary.length === 0 && (
@@ -553,7 +561,7 @@ export function TourPackagesSection({
                               </p>
                               <span
                                 data-preview-field-path={`products[${index}].itinerary[${dayIdx}].stay`}
-                                className="mt-1 inline-block text-[11px] text-[var(--lux-teal)]"
+                                className="mt-1 inline-block text-[11px] text-[#167D91]"
                               >
                                 {contentText(dayObj.stay)}
                               </span>
@@ -564,89 +572,85 @@ export function TourPackagesSection({
                     </div>
                   )}
 
-                  {/* Pricing Footer */}
-                  <div className="mt-auto border-t border-[var(--lux-border)] pt-4">
-                    {itemShowPrice ? (
-                      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-                        <span
-                          data-preview-static="package-price-prefix"
-                          className="text-[11px] uppercase tracking-[0.14em] text-[var(--lux-text-muted)]"
-                        >
-                          Illustrative Guide
-                        </span>
-                        <div className="flex items-baseline gap-2">
+                  {/* Concise Price & Single Primary Action Row */}
+                  <div className="mt-auto flex items-end justify-between gap-3 border-t border-[var(--lux-border)] pt-3.5">
+                    <div>
+                      {itemShowPrice ? (
+                        <>
                           <EditableText
                             as="span"
-                            className="font-editorial text-xl font-semibold text-[var(--lux-forest)]"
+                            className="font-display block text-base font-bold text-[var(--lux-text)]"
                             data-preview-field-path={`products[${index}].price`}
                             defaultValue={displayPrice}
                           />
-                          {compareAt > 0 && !isRange && (
-                            isEditorPreview ? (
-                              <span
-                                data-preview-static="product-compare-at-price-display"
-                                className="text-xs text-[var(--lux-text-muted)] line-through"
-                              >
-                                {formatMoney(compareAt, currency)}
-                              </span>
-                            ) : (
-                              <EditableText
-                                as="span"
-                                className="text-xs text-[var(--lux-text-muted)] line-through"
-                                data-preview-field-path={`products[${index}].compareAtPrice`}
-                                defaultValue={formatMoney(compareAt, currency)}
-                              />
-                            )
+                          {!isEditorPreview && (
+                            <span
+                              data-preview-field-path={`products[${index}].pricingLabel`}
+                              className="block text-[10.5px] text-[var(--lux-text-muted)]"
+                            >
+                              {pricingLabel}
+                            </span>
                           )}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="mb-4 flex items-center justify-between">
-                        <span
-                          data-preview-static="package-bespoke-prefix"
-                          className="text-[11px] uppercase tracking-[0.14em] text-[var(--lux-text-muted)]"
-                        >
-                          Bespoke Quotation
-                        </span>
+                        </>
+                      ) : (
                         <span
                           data-preview-static="product-price-on-request"
-                          className="border border-[#C6A46A]/55 bg-[#C6A46A]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--lux-forest)]"
+                          className="font-display inline-block text-xs font-bold uppercase tracking-[0.08em] text-[var(--lux-tropical)]"
                         >
-                          Price on Request
+                          Request a Quote
                         </span>
-                      </div>
-                    )}
-
-                    <div className="grid grid-cols-2 gap-2.5">
-                      <a
-                        href={detailHref}
-                        data-preview-static="Open the stable live product detail page"
-                        className="lux-btn-primary !min-h-[42px] !px-3 !text-[11px]"
-                      >
-                        View Itinerary
-                      </a>
-                      <button
-                        type="button"
-                        data-preview-static="package-enquire-button"
-                        onClick={() => {
-                          onEnquirePackage({
-                            packageName: contentText(product.name),
-                            destination: destinations || undefined,
-                            duration: duration || undefined,
-                            travelStyle: category || undefined,
-                          });
-                          document.getElementById('tailor-made')?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className="lux-btn-outline !min-h-[42px] !px-3 !text-[11px]"
-                      >
-                        Enquire
-                      </button>
+                      )}
                     </div>
+
+                    <a
+                      href={detailHref}
+                      data-preview-static="Open the stable live product detail page"
+                      className="lux-link-underline shrink-0"
+                    >
+                      Explore Tour →
+                    </a>
                   </div>
                 </div>
               </EditableCard>
             );
           })}
+        </div>
+
+        {/* Bottom Pricing Disclaimer + Prominent "View All Tours" CTA */}
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-[var(--lux-border)] pt-6 sm:flex-row sm:items-center">
+          <EditableText
+            as="p"
+            className="m-0 max-w-xl text-xs leading-relaxed text-[var(--lux-text-muted)]"
+            data-preview-field-path="home.productsPricingNote"
+            defaultValue={
+              contentText(home.productsPricingNote) ||
+              'Displayed LKR rates are illustrative template guides. Configure verified rates in Fivora.'
+            }
+          />
+
+          {hasMoreToShow && (
+            <button
+              type="button"
+              onClick={() => setShowAll((prev) => !prev)}
+              className="lux-btn-tropical shrink-0"
+            >
+              <span data-preview-field-path="home.productsViewAllLabel">
+                {showAll
+                  ? 'Show Featured Only'
+                  : contentText(home.productsViewAllLabel) || 'View All Tours'}
+              </span>
+              <span aria-hidden="true">{showAll ? '↑' : '→'}</span>
+            </button>
+          )}
+
+          {isEditorPreview && (
+            <span
+              data-preview-field-path="home.productsViewAllLabel"
+              className="lux-btn-tropical shrink-0"
+            >
+              {contentText(home.productsViewAllLabel) || 'View All Tours'}
+            </span>
+          )}
         </div>
       </div>
     </section>

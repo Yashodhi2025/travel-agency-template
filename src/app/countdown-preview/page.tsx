@@ -78,16 +78,16 @@ function CountdownTimerCard() {
 
   const { cssVars: cardVars } = useComponentStyle('home.countdown.card', 'card');
   const { cssVars: textVars } = useComponentStyle('home.countdown.text', 'text');
-  const { cssVars: headingVars } = useComponentStyle('home.countdown.heading', 'text', { color: '#C6A46A' });
+  const { cssVars: headingVars } = useComponentStyle('home.countdown.heading', 'text', { color: '#FF783D' });
   const { cssVars: digitCardVars } = useComponentStyle('home.countdown.digits.card', 'card', {
-    backgroundColor: '#F7F3EA',
-    borderRadius: 6,
+    backgroundColor: '#FAF9F6',
+    borderRadius: 8,
   });
-  const { cssVars: digitTextVars } = useComponentStyle('home.countdown.digits.text', 'text', { color: '#102D25' });
+  const { cssVars: digitTextVars } = useComponentStyle('home.countdown.digits.text', 'text', { color: '#101820' });
   const { cssVars: ctaVars } = useComponentStyle('home.countdown.cta', 'button', {
-    backgroundColor: '#C6A46A',
-    textColor: '#101917',
-    borderRadius: 2,
+    backgroundColor: '#FF783D',
+    textColor: '#FFFFFF',
+    borderRadius: 999,
   });
 
   useEffect(() => {

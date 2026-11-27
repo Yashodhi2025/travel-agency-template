@@ -3,20 +3,26 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useIsEditorPreview } from '@/lib/useIsEditorPreview';
 
+export type RevealVariant = 'fade-up' | 'mask-reveal' | 'slide-left' | 'soft-scale';
+
 interface RevealProps {
   children: ReactNode;
   className?: string;
   delayMs?: number;
+  variant?: RevealVariant;
 }
 
 /**
- * Editorial scroll-reveal wrapper.
- * - Always renders visible on SSR and in Fivora visual editor preview (no hidden targets,
- *   no hydration mismatch).
- * - On live storefronts, gently animates below-the-fold sections into view once while
- *   respecting prefers-reduced-motion and guaranteeing visibility with a safety fallback.
+ * Editorial scroll-reveal wrapper supporting distinct motion variants.
+ * - Always renders visible on SSR and inside the Fivora visual editor preview.
+ * - Respects prefers-reduced-motion and guarantees visibility via a safety fallback timer.
  */
-export function Reveal({ children, className = '', delayMs = 0 }: RevealProps) {
+export function Reveal({
+  children,
+  className = '',
+  delayMs = 0,
+  variant = 'fade-up',
+}: RevealProps) {
   const isEditorPreview = useIsEditorPreview();
   const ref = useRef<HTMLDivElement | null>(null);
   const [state, setState] = useState<'visible' | 'pending'>('visible');
@@ -51,11 +57,11 @@ export function Reveal({ children, className = '', delayMs = 0 }: RevealProps) {
           observer.disconnect();
         }
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+      { rootMargin: '0px 0px -6% 0px', threshold: 0.04 },
     );
 
     observer.observe(el);
-    const safetyTimer = window.setTimeout(() => setState('visible'), 1800);
+    const safetyTimer = window.setTimeout(() => setState('visible'), 1600);
 
     return () => {
       observer.disconnect();
@@ -68,7 +74,8 @@ export function Reveal({ children, className = '', delayMs = 0 }: RevealProps) {
       ref={ref}
       className={`lux-reveal ${className}`.trim()}
       data-reveal-state={isEditorPreview ? 'visible' : state}
-      style={delayMs > 0 ? { transitionDelay: `${delayMs}ms` } : undefined}
+      data-reveal-variant={variant}
+      style={delayMs > 0 && !isEditorPreview ? { transitionDelay: `${delayMs}ms` } : undefined}
     >
       {children}
     </div>

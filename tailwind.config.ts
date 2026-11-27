@@ -12,14 +12,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          primary: 'var(--brand-color, #FF783D)',
-          secondary: 'var(--brand-secondary, #202B33)',
+          primary: 'var(--brand-color, #101820)',
+          secondary: 'var(--brand-secondary, #154C42)',
           accent: 'var(--brand-accent, #FF783D)',
           midnight: '#101820',
-          charcoal: '#202B33',
+          charcoal: '#1B252E',
+          tropical: '#154C42',
           sunset: '#FF783D',
-          mist: '#A3B0BA',
-          softwhite: '#F5F5F5',
+          ivory: '#FAF8F3',
+          gold: '#C5A46D',
+          ocean: '#167D91',
+          mist: '#9AA7B2',
         },
       },
       fontFamily: {

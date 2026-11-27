@@ -14,7 +14,15 @@
       "contact.whatsapp",
       "home.destinations[*].id",
       "home.destinations[*].mapX",
-      "home.destinations[*].mapY"
+      "home.destinations[*].mapY",
+      "home.travelStyles[*].id",
+      "home.mapMarkers[*].id",
+      "home.mapMarkers[*].mapX",
+      "home.mapMarkers[*].mapY",
+      "home.featuredDestinationsCount",
+      "home.featuredPackagesCount",
+      "home.featuredStaysCount",
+      "home.featuredOffersCount"
     ]
   },
   "siteDataFile": "src/data/site-data.json",
@@ -178,7 +186,7 @@
           {
             "key": "footerHeading",
             "type": "text",
-            "label": "Footer Heading"
+            "label": "Footer Newsletter Heading"
           },
           {
             "key": "newsletterSubscribeLabel",
@@ -203,7 +211,12 @@
           {
             "key": "footerDestinationsHeading",
             "type": "text",
-            "label": "Footer Regions Heading"
+            "label": "Footer Destinations Heading"
+          },
+          {
+            "key": "footerCategoriesHeading",
+            "type": "text",
+            "label": "Footer Travel Categories Heading"
           },
           {
             "key": "footerContactHeading",
@@ -231,12 +244,22 @@
           {
             "key": "footerPolicyLabel",
             "type": "text",
-            "label": "Footer Policy Link Label"
+            "label": "Footer Privacy Policy Label"
           },
           {
             "key": "footerPolicyUrl",
             "type": "url",
-            "label": "Footer Policy Link URL"
+            "label": "Footer Privacy Policy URL"
+          },
+          {
+            "key": "footerTermsLabel",
+            "type": "text",
+            "label": "Footer Terms Label"
+          },
+          {
+            "key": "footerTermsUrl",
+            "type": "url",
+            "label": "Footer Terms URL"
           },
           {
             "key": "copyright",
@@ -370,12 +393,12 @@
           {
             "key": "plannerHeading",
             "type": "text",
-            "label": "Quick Trip Planner Heading"
+            "label": "Quick Trip Finder Heading"
           },
           {
             "key": "plannerSubtitle",
             "type": "text",
-            "label": "Quick Trip Planner Subtitle"
+            "label": "Quick Trip Finder Subtitle"
           },
           {
             "key": "plannerCtaLabel",
@@ -390,63 +413,74 @@
           {
             "key": "introEyebrow",
             "type": "text",
-            "label": "Introduction Eyebrow"
+            "label": "Ayubowan Welcome Eyebrow"
           },
           {
             "key": "introTitle",
             "type": "text",
-            "label": "Introduction Heading"
+            "label": "Ayubowan Welcome Headline"
           },
           {
             "key": "introBody",
             "type": "textarea",
-            "label": "Introduction Body"
+            "label": "Ayubowan Agency Introduction"
+          },
+          {
+            "key": "introSupportingBody",
+            "type": "textarea",
+            "label": "Ayubowan Supporting Description"
           },
           {
             "key": "introImageUrl",
             "type": "image",
-            "label": "Introduction Editorial Image",
-            "recommendedWidth": 1200,
-            "recommendedHeight": 900
+            "label": "Ayubowan Hospitality Photograph",
+            "recommendedWidth": 1400,
+            "recommendedHeight": 1050
+          },
+          {
+            "key": "introImageAlt",
+            "type": "text",
+            "label": "Ayubowan Photograph Alt Text"
           },
           {
             "key": "introCtaLabel",
             "type": "text",
-            "label": "Introduction Learn More CTA"
+            "label": "Discover Our Story CTA Label"
           },
           {
-            "key": "featuresHeading",
-            "type": "text",
-            "label": "Value Propositions Heading"
-          },
-          {
-            "key": "features",
+            "key": "welcomeHighlights",
             "type": "list",
-            "label": "Agency Value Propositions",
-            "itemLabel": "Value Proposition",
+            "label": "Ayubowan Welcome Highlights",
+            "itemLabel": "Highlight",
             "minItems": 0,
-            "maxItems": 8,
+            "maxItems": 6,
             "fields": [
+              {
+                "key": "icon",
+                "type": "text",
+                "control": "icon-picker",
+                "label": "Highlight Icon"
+              },
               {
                 "key": "title",
                 "type": "text",
-                "label": "Title",
+                "label": "Highlight Title",
                 "required": true
               },
               {
-                "key": "body",
-                "type": "textarea",
-                "label": "Description"
+                "key": "description",
+                "type": "text",
+                "label": "Short Note"
               }
             ]
           },
           {
             "key": "demoPreOrderCta",
             "type": "list",
-            "label": "Concierge Quick Action CTAs",
+            "label": "Welcome Secondary Action CTAs",
             "itemLabel": "Action Button",
             "minItems": 0,
-            "maxItems": 12,
+            "maxItems": 6,
             "fields": [
               {
                 "key": "buttonLabel",
@@ -461,24 +495,185 @@
             ]
           },
           {
+            "key": "travelStylesEyebrow",
+            "type": "text",
+            "label": "Travel Styles Eyebrow"
+          },
+          {
+            "key": "travelStylesHeading",
+            "type": "text",
+            "label": "Travel Styles Heading"
+          },
+          {
+            "key": "travelStylesSummary",
+            "type": "textarea",
+            "label": "Travel Styles Summary"
+          },
+          {
+            "key": "travelStyles",
+            "type": "list",
+            "label": "Find Your Travel Style Categories",
+            "itemLabel": "Travel Style",
+            "minItems": 0,
+            "maxItems": 12,
+            "fields": [
+              {
+                "key": "id",
+                "type": "text",
+                "label": "Category Identifier"
+              },
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Category Title",
+                "required": true
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Short Description"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Category Photograph",
+                "recommendedWidth": 1080,
+                "recommendedHeight": 1350
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "Explore Link Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "Destination Link"
+              }
+            ]
+          },
+          {
+            "key": "mapEyebrow",
+            "type": "text",
+            "label": "Discovery Map Eyebrow"
+          },
+          {
+            "key": "mapHeading",
+            "type": "text",
+            "label": "Discovery Map Heading"
+          },
+          {
+            "key": "mapSummary",
+            "type": "textarea",
+            "label": "Discovery Map Summary"
+          },
+          {
+            "key": "mapMarkers",
+            "type": "list",
+            "label": "Interactive Sri Lanka Map Markers",
+            "itemLabel": "Map Location",
+            "minItems": 0,
+            "maxItems": 20,
+            "fields": [
+              {
+                "key": "id",
+                "type": "text",
+                "label": "Location ID"
+              },
+              {
+                "key": "name",
+                "type": "text",
+                "label": "Location Name",
+                "required": true
+              },
+              {
+                "key": "region",
+                "type": "text",
+                "label": "Region"
+              },
+              {
+                "key": "category",
+                "type": "text",
+                "label": "Primary Experience Category"
+              },
+              {
+                "key": "categories",
+                "type": "text",
+                "label": "Matching Categories (comma-separated)"
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Location Description"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Location Photograph",
+                "recommendedWidth": 1200,
+                "recommendedHeight": 800
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "Explore CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "Explore CTA Link"
+              },
+              {
+                "key": "mapX",
+                "type": "number",
+                "label": "Map Pin X Position (%)"
+              },
+              {
+                "key": "mapY",
+                "type": "number",
+                "label": "Map Pin Y Position (%)"
+              }
+            ]
+          },
+          {
             "key": "destinationsEyebrow",
             "type": "text",
-            "label": "Destinations Eyebrow"
+            "label": "Popular Destinations Eyebrow"
           },
           {
             "key": "destinationsHeading",
             "type": "text",
-            "label": "Destinations Heading"
+            "label": "Popular Destinations Heading"
           },
           {
             "key": "destinationsSummary",
             "type": "textarea",
-            "label": "Destinations Summary"
+            "label": "Popular Destinations Summary"
+          },
+          {
+            "key": "featuredDestinationsCount",
+            "type": "number",
+            "label": "Homepage Featured Destinations Count"
+          },
+          {
+            "key": "destinationsViewAllLabel",
+            "type": "text",
+            "label": "View All Destinations CTA Label"
           },
           {
             "key": "destinations",
             "type": "list",
-            "label": "Destinations & Island Map Pins",
+            "label": "Popular Destinations Gallery",
             "itemLabel": "Destination",
             "minItems": 0,
             "maxItems": 16,
@@ -528,8 +723,13 @@
                 "key": "imageUrl",
                 "type": "image",
                 "label": "Destination Image",
-                "recommendedWidth": 1080,
-                "recommendedHeight": 810
+                "recommendedWidth": 1200,
+                "recommendedHeight": 900
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
               },
               {
                 "key": "ctaLabel",
@@ -539,7 +739,7 @@
               {
                 "key": "ctaUrl",
                 "type": "url",
-                "label": "Explore CTA URL"
+                "label": "Detail Page / Explore URL"
               },
               {
                 "key": "mapX",
@@ -569,24 +769,39 @@
             "label": "Tour Packages Summary"
           },
           {
+            "key": "productsPricingNote",
+            "type": "text",
+            "label": "Sample Pricing Disclaimer"
+          },
+          {
+            "key": "featuredPackagesCount",
+            "type": "number",
+            "label": "Homepage Featured Packages Count"
+          },
+          {
+            "key": "productsViewAllLabel",
+            "type": "text",
+            "label": "View All Tours CTA Label"
+          },
+          {
             "key": "experiencesEyebrow",
             "type": "text",
-            "label": "Travel Experiences Eyebrow"
+            "label": "Authentic Experiences Eyebrow"
           },
           {
             "key": "experiencesHeading",
             "type": "text",
-            "label": "Travel Experiences Heading"
+            "label": "Authentic Experiences Heading"
           },
           {
             "key": "experiencesSummary",
             "type": "textarea",
-            "label": "Travel Experiences Summary"
+            "label": "Authentic Experiences Summary"
           },
           {
             "key": "experiences",
             "type": "list",
-            "label": "Travel Experiences",
+            "label": "Authentic Sri Lankan Experiences",
             "itemLabel": "Experience",
             "minItems": 0,
             "maxItems": 12,
@@ -611,8 +826,13 @@
                 "key": "imageUrl",
                 "type": "image",
                 "label": "Experience Image",
-                "recommendedWidth": 1080,
-                "recommendedHeight": 810
+                "recommendedWidth": 1200,
+                "recommendedHeight": 900
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
               },
               {
                 "key": "ctaLabel",
@@ -629,36 +849,56 @@
           {
             "key": "staysEyebrow",
             "type": "text",
-            "label": "Accommodation Styles Eyebrow"
+            "label": "Hotels & Stays Eyebrow"
           },
           {
             "key": "staysHeading",
             "type": "text",
-            "label": "Accommodation Styles Heading"
+            "label": "Hotels & Stays Heading"
           },
           {
             "key": "staysSummary",
             "type": "textarea",
-            "label": "Accommodation Styles Summary"
+            "label": "Hotels & Stays Summary"
+          },
+          {
+            "key": "staysDisclaimer",
+            "type": "text",
+            "label": "Accommodation Illustrative Notice"
+          },
+          {
+            "key": "featuredStaysCount",
+            "type": "number",
+            "label": "Homepage Featured Stays Count"
+          },
+          {
+            "key": "staysViewAllLabel",
+            "type": "text",
+            "label": "View All Stays CTA Label"
           },
           {
             "key": "stays",
             "type": "list",
-            "label": "Illustrative Accommodation Styles",
-            "itemLabel": "Accommodation Style",
+            "label": "Hotels & Stays Showcase",
+            "itemLabel": "Stay",
             "minItems": 0,
-            "maxItems": 8,
+            "maxItems": 12,
             "fields": [
               {
                 "key": "title",
                 "type": "text",
-                "label": "Style Title",
+                "label": "Property or Stay Style Name",
                 "required": true
               },
               {
                 "key": "subtitle",
                 "type": "text",
-                "label": "Region / Tone"
+                "label": "Location / Region"
+              },
+              {
+                "key": "category",
+                "type": "text",
+                "label": "Stay Category"
               },
               {
                 "key": "description",
@@ -668,9 +908,164 @@
               {
                 "key": "imageUrl",
                 "type": "image",
-                "label": "Style Image",
-                "recommendedWidth": 1080,
-                "recommendedHeight": 810
+                "label": "Stay Photograph",
+                "recommendedWidth": 1200,
+                "recommendedHeight": 900
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
+              },
+              {
+                "key": "priceLabel",
+                "type": "text",
+                "label": "Optional Illustrative Rate"
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "Inquiry CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "Inquiry CTA Link"
+              }
+            ]
+          },
+          {
+            "key": "offersEyebrow",
+            "type": "text",
+            "label": "Seasonal Offers Eyebrow"
+          },
+          {
+            "key": "offersHeading",
+            "type": "text",
+            "label": "Seasonal Offers Heading"
+          },
+          {
+            "key": "offersSummary",
+            "type": "textarea",
+            "label": "Seasonal Offers Summary"
+          },
+          {
+            "key": "featuredOffersCount",
+            "type": "number",
+            "label": "Homepage Featured Offers Count"
+          },
+          {
+            "key": "seasonalOffers",
+            "type": "list",
+            "label": "Seasonal & Holiday Offers",
+            "itemLabel": "Seasonal Offer",
+            "minItems": 0,
+            "maxItems": 8,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Offer Title",
+                "required": true
+              },
+              {
+                "key": "category",
+                "type": "text",
+                "label": "Offer Type (e.g. Avurudu / Weekend / Honeymoon)"
+              },
+              {
+                "key": "discountLabel",
+                "type": "text",
+                "label": "Discount / Highlight Label"
+              },
+              {
+                "key": "description",
+                "type": "textarea",
+                "label": "Offer Description"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Offer Photograph",
+                "recommendedWidth": 1200,
+                "recommendedHeight": 900
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
+              },
+              {
+                "key": "currency",
+                "type": "text",
+                "label": "Offer Currency"
+              },
+              {
+                "key": "priceLabel",
+                "type": "text",
+                "label": "Illustrative Offer Price"
+              },
+              {
+                "key": "terms",
+                "type": "text",
+                "label": "Offer Terms / Illustrative Note"
+              },
+              {
+                "key": "expiryDate",
+                "type": "text",
+                "label": "Offer Expiry Date (ISO YYYY-MM-DD or full ISO)"
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "CTA Link"
+              }
+            ]
+          },
+          {
+            "key": "featuresEyebrow",
+            "type": "text",
+            "label": "Why Travel With Us Eyebrow"
+          },
+          {
+            "key": "featuresHeading",
+            "type": "text",
+            "label": "Why Travel With Us Heading"
+          },
+          {
+            "key": "featuresSummary",
+            "type": "textarea",
+            "label": "Why Travel With Us Summary"
+          },
+          {
+            "key": "features",
+            "type": "list",
+            "label": "Why Travel With Us Benefits",
+            "itemLabel": "Benefit",
+            "minItems": 0,
+            "maxItems": 8,
+            "fields": [
+              {
+                "key": "icon",
+                "type": "text",
+                "control": "icon-picker",
+                "label": "Benefit Icon"
+              },
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Title",
+                "required": true
+              },
+              {
+                "key": "body",
+                "type": "textarea",
+                "label": "Description"
               }
             ]
           },
@@ -701,52 +1096,98 @@
             ]
           },
           {
-            "key": "tailorMadeEyebrow",
+            "key": "journalEyebrow",
             "type": "text",
-            "label": "Tailor-Made Section Eyebrow"
+            "label": "Travel Journal Eyebrow"
           },
           {
-            "key": "tailorMadeHeading",
+            "key": "journalHeading",
             "type": "text",
-            "label": "Tailor-Made Heading"
+            "label": "Travel Journal Heading"
           },
           {
-            "key": "tailorMadeBody",
+            "key": "journalSummary",
             "type": "textarea",
-            "label": "Tailor-Made Description"
+            "label": "Travel Journal Summary"
           },
           {
-            "key": "tailorMadeImageUrl",
-            "type": "image",
-            "label": "Tailor-Made Backdrop Image",
-            "recommendedWidth": 1600,
-            "recommendedHeight": 900
-          },
-          {
-            "key": "tailorMadeCtaLabel",
-            "type": "text",
-            "label": "Tailor-Made CTA Label"
+            "key": "journalPosts",
+            "type": "list",
+            "label": "Travel Journal Articles",
+            "itemLabel": "Journal Article",
+            "minItems": 0,
+            "maxItems": 8,
+            "fields": [
+              {
+                "key": "title",
+                "type": "text",
+                "label": "Article Title",
+                "required": true
+              },
+              {
+                "key": "category",
+                "type": "text",
+                "label": "Category"
+              },
+              {
+                "key": "excerpt",
+                "type": "textarea",
+                "label": "Excerpt"
+              },
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Article Photograph",
+                "recommendedWidth": 1200,
+                "recommendedHeight": 800
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Image Alt Text"
+              },
+              {
+                "key": "date",
+                "type": "text",
+                "label": "Publish Date"
+              },
+              {
+                "key": "author",
+                "type": "text",
+                "label": "Author"
+              },
+              {
+                "key": "ctaLabel",
+                "type": "text",
+                "label": "Read CTA Label"
+              },
+              {
+                "key": "ctaUrl",
+                "type": "url",
+                "label": "Article Link"
+              }
+            ]
           },
           {
             "key": "testimonialsEyebrow",
             "type": "text",
-            "label": "Testimonials Eyebrow"
+            "label": "Traveller Stories Eyebrow"
           },
           {
             "key": "testimonialsHeading",
             "type": "text",
-            "label": "Testimonials Heading"
+            "label": "Traveller Stories Heading"
           },
           {
             "key": "testimonialsSummary",
             "type": "textarea",
-            "label": "Testimonials Subtitle"
+            "label": "Traveller Stories Subtitle"
           },
           {
             "key": "testimonials",
             "type": "list",
-            "label": "Traveller Testimonials",
-            "itemLabel": "Testimonial",
+            "label": "Traveller Stories",
+            "itemLabel": "Traveller Story",
             "minItems": 0,
             "maxItems": 10,
             "fields": [
@@ -780,10 +1221,52 @@
                 "key": "imageUrl",
                 "type": "image",
                 "label": "Journey Photo",
-                "recommendedWidth": 600,
-                "recommendedHeight": 600
+                "recommendedWidth": 800,
+                "recommendedHeight": 800
+              },
+              {
+                "key": "imageAlt",
+                "type": "text",
+                "label": "Photo Alt Text"
               }
             ]
+          },
+          {
+            "key": "tailorMadeEyebrow",
+            "type": "text",
+            "label": "Plan Your Trip Eyebrow"
+          },
+          {
+            "key": "tailorMadeHeading",
+            "type": "text",
+            "label": "Plan Your Trip Heading"
+          },
+          {
+            "key": "tailorMadeBody",
+            "type": "textarea",
+            "label": "Plan Your Trip Description"
+          },
+          {
+            "key": "tailorMadeImageUrl",
+            "type": "image",
+            "label": "Plan Your Trip Editorial Image",
+            "recommendedWidth": 1400,
+            "recommendedHeight": 900
+          },
+          {
+            "key": "tailorMadeCtaLabel",
+            "type": "text",
+            "label": "Prepare Enquiry Button Label"
+          },
+          {
+            "key": "tailorMadeWhatsappLabel",
+            "type": "text",
+            "label": "WhatsApp Inquiry Button Label"
+          },
+          {
+            "key": "tailorMadeNote",
+            "type": "textarea",
+            "label": "Inquiry Guidance Note"
           },
           {
             "key": "faqEyebrow",
@@ -1241,6 +1724,11 @@
             "required": true
           },
           {
+            "key": "tourType",
+            "type": "text",
+            "label": "Market Type (Domestic / Inbound / Outbound)"
+          },
+          {
             "key": "description",
             "type": "textarea",
             "label": "Overview"
@@ -1274,6 +1762,11 @@
             "key": "accommodation",
             "type": "textarea",
             "label": "Accommodation Overview"
+          },
+          {
+            "key": "transport",
+            "type": "textarea",
+            "label": "Transport Overview"
           },
           {
             "key": "inclusions",
@@ -1318,6 +1811,26 @@
             ]
           },
           {
+            "key": "photoGallery",
+            "type": "list",
+            "label": "Tour Gallery Photos",
+            "itemLabel": "Gallery Photo",
+            "minItems": 0,
+            "maxItems": 6,
+            "fields": [
+              {
+                "key": "imageUrl",
+                "type": "image",
+                "label": "Photo"
+              },
+              {
+                "key": "caption",
+                "type": "text",
+                "label": "Caption"
+              }
+            ]
+          },
+          {
             "key": "price",
             "type": "number",
             "label": "Starting Price"
@@ -1325,12 +1838,17 @@
           {
             "key": "compareAtPrice",
             "type": "number",
-            "label": "Compare Price"
+            "label": "Previous / Compare Price"
           },
           {
             "key": "currency",
             "type": "text",
             "label": "Currency"
+          },
+          {
+            "key": "pricingLabel",
+            "type": "text",
+            "label": "Pricing Basis (e.g. Per person / Per group)"
           },
           {
             "key": "category",
@@ -1343,6 +1861,11 @@
             "label": "Tour Cover Photograph",
             "recommendedWidth": 1200,
             "recommendedHeight": 900
+          },
+          {
+            "key": "imageAlt",
+            "type": "text",
+            "label": "Cover Image Alt Text"
           },
           {
             "key": "badge",
@@ -1440,9 +1963,9 @@
     "defaults": {
       "colors": {
         "primary": "#101820",
-        "secondary": "#202B33",
+        "secondary": "#154C42",
         "accent": "#FF783D",
-        "background": "#F5F5F5",
+        "background": "#FAF8F3",
         "text": "#101820"
       },
       "typography": {
@@ -1452,7 +1975,7 @@
       },
       "spacing": {
         "heroMinHeight": "100vh",
-        "sectionPadding": "5.5rem"
+        "sectionPadding": "4.5rem"
       }
     }
   }

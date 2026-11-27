@@ -1,17 +1,23 @@
 'use client';
 
+import { formatLocalizedNumber } from './i18n';
+
 export interface TripEnquiryDraft {
+  travelType?: 'Domestic' | 'Inbound' | 'Outbound';
   destination?: string;
   travelStyle?: string;
   duration?: string;
   travellers?: string;
   travelDate?: string;
   budget?: string;
+  pickupLocation?: string;
+  accommodation?: string;
   packageName?: string;
   serviceName?: string;
+  offerName?: string;
 }
 
-const DRAFT_STORAGE_KEY = 'ceylon_odyssey_trip_draft_v1';
+const DRAFT_STORAGE_KEY = 'ceylon_odyssey_trip_draft_v2';
 
 export function saveTripEnquiryDraft(draft: TripEnquiryDraft): void {
   if (typeof window === 'undefined') return;
@@ -66,10 +72,10 @@ export function buildMailtoEnquiryUrl(
   return `mailto:${encodeURIComponent(clean)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export function formatMoney(amount: number, currency = 'USD'): string {
-  const safeCurrency = currency.trim() || 'USD';
+export function formatMoney(amount: number, currency = 'LKR'): string {
+  const safeCurrency = currency.trim() || 'LKR';
   if (!Number.isFinite(amount)) return `${safeCurrency} 0`;
-  return `${safeCurrency} ${amount.toLocaleString('en-US')}`;
+  return `${safeCurrency} ${formatLocalizedNumber(amount)}`;
 }
 
 export function splitDelimitedItems(raw: string | undefined | null): string[] {
@@ -86,4 +92,40 @@ export function extractDaysCount(duration: string | undefined | null): number | 
   if (!match) return null;
   const value = Number(match[1]);
   return Number.isFinite(value) ? value : null;
+}
+
+/**
+ * Parses an ISO date or date-time string safely into a UTC epoch timestamp.
+ * Accepts YYYY-MM-DD (treated as end-of-day Sri Lanka time +05:30) or full ISO strings.
+ */
+export function parseOfferDeadline(raw: string | undefined | null): number | null {
+  if (!raw || typeof raw !== 'string') return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  const dateOnly = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (dateOnly) {
+    const ts = Date.parse(`${trimmed}T23:59:59+05:30`);
+    return Number.isFinite(ts) ? ts : null;
+  }
+  const ts = Date.parse(trimmed);
+  return Number.isFinite(ts) ? ts : null;
+}
+
+export function formatCountdownParts(remainingSeconds: number): {
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+} {
+  const clamped = Math.max(0, Math.floor(remainingSeconds));
+  const days = Math.floor(clamped / 86400);
+  const hours = Math.floor((clamped % 86400) / 3600);
+  const minutes = Math.floor((clamped % 3600) / 60);
+  const seconds = clamped % 60;
+  return {
+    days: String(days).padStart(2, '0'),
+    hours: String(hours).padStart(2, '0'),
+    minutes: String(minutes).padStart(2, '0'),
+    seconds: String(seconds).padStart(2, '0'),
+  };
 }

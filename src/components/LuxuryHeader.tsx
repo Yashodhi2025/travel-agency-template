@@ -37,7 +37,7 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
   const hasContact = requiredPages.includes('contact');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 36);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -70,7 +70,8 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
       const id = target.slice(2);
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        const y = el.getBoundingClientRect().top + window.scrollY - 76;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
         return;
       }
     }
@@ -86,75 +87,75 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
     enabled: boolean;
     active: boolean;
   }> = [
-    {
-      key: 'home',
-      labelKey: 'home',
-      fallback: 'Home',
-      href: '/',
-      targetPage: 'home',
-      enabled: true,
-      active: isHome,
-    },
-    {
-      key: 'destinations',
-      labelKey: 'destinations',
-      fallback: 'Destinations',
-      href: '/#destinations',
-      enabled: true,
-      active: false,
-    },
-    {
-      key: 'packages',
-      labelKey: 'packages',
-      fallback: 'Tour Packages',
-      href: '/#packages',
-      enabled: true,
-      active: false,
-    },
-    {
-      key: 'experiences',
-      labelKey: 'experiences',
-      fallback: 'Experiences',
-      href: '/#experiences',
-      enabled: true,
-      active: false,
-    },
-    {
-      key: 'services',
-      labelKey: 'services',
-      fallback: 'Services',
-      href: '/services/',
-      targetPage: 'services',
-      enabled: hasServices,
-      active: activeRoute.startsWith('/services'),
-    },
-    {
-      key: 'about_us',
-      labelKey: 'about_us',
-      fallback: 'About Us',
-      href: '/about_us/',
-      targetPage: 'about_us',
-      enabled: hasAbout,
-      active: activeRoute.startsWith('/about_us'),
-    },
-    {
-      key: 'contact',
-      labelKey: 'contact',
-      fallback: 'Contact',
-      href: '/contact/',
-      targetPage: 'contact',
-      enabled: hasContact,
-      active: activeRoute.startsWith('/contact'),
-    },
-  ];
+      {
+        key: 'home',
+        labelKey: 'home',
+        fallback: 'Home',
+        href: '/',
+        targetPage: 'home',
+        enabled: true,
+        active: isHome,
+      },
+      {
+        key: 'destinations',
+        labelKey: 'destinations',
+        fallback: 'Destinations',
+        href: '/#destinations',
+        enabled: true,
+        active: false,
+      },
+      {
+        key: 'packages',
+        labelKey: 'packages',
+        fallback: 'Tour Packages',
+        href: '/#packages',
+        enabled: true,
+        active: false,
+      },
+      {
+        key: 'experiences',
+        labelKey: 'experiences',
+        fallback: 'Experiences',
+        href: '/#experiences',
+        enabled: true,
+        active: false,
+      },
+      {
+        key: 'services',
+        labelKey: 'services',
+        fallback: 'Services',
+        href: '/services/',
+        targetPage: 'services',
+        enabled: hasServices,
+        active: activeRoute.startsWith('/services'),
+      },
+      {
+        key: 'about_us',
+        labelKey: 'about_us',
+        fallback: 'About Us',
+        href: '/about_us/',
+        targetPage: 'about_us',
+        enabled: hasAbout,
+        active: activeRoute.startsWith('/about_us'),
+      },
+      {
+        key: 'contact',
+        labelKey: 'contact',
+        fallback: 'Contact',
+        href: '/contact/',
+        targetPage: 'contact',
+        enabled: hasContact,
+        active: activeRoute.startsWith('/contact'),
+      },
+    ];
 
   const isOverlayHero = isHome && !scrolled && !menuOpen;
 
   const headerClasses = isHome
     ? isOverlayHero
-      ? 'fixed inset-x-0 top-0 z-50 w-full bg-gradient-to-b from-[#101820]/85 via-[#101820]/45 to-transparent text-[#F5F5F5] transition-all duration-300'
-      : 'fixed inset-x-0 top-0 z-50 w-full border-b border-black/10 bg-[#F5F5F5]/92 text-[#101820] shadow-sm backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-[#101820]/90 dark:text-[#F5F5F5]'
-    : 'sticky top-0 z-50 w-full border-b border-[var(--lux-border)] bg-[var(--lux-bg)]/94 text-[var(--lux-text)] shadow-sm backdrop-blur-xl transition-all duration-300';
+      ? 'fixed inset-x-0 top-0 z-50 w-full bg-gradient-to-b from-[#101820]/75 via-[#101820]/30 to-transparent text-[#FAF8F3] transition-all duration-300'
+      : 'fixed inset-x-0 top-0 z-50 w-full border-b border-[var(--lux-border)] bg-[#FAF8F3]/96 text-[#101820] shadow-[0_2px_16px_rgba(16,24,32,0.06)] backdrop-blur-md transition-all duration-300 dark:bg-[#101820]/96 dark:text-[#FAF8F3]'
+    : 'sticky top-0 z-50 w-full border-b border-[var(--lux-border)] bg-[var(--lux-bg)]/96 text-[var(--lux-text)] shadow-[0_2px_12px_rgba(16,24,32,0.05)] backdrop-blur-md transition-all duration-300';
 
   const renderNavButton = (item: (typeof navItems)[number], labelNode: ReactNode) => {
     if (!item.enabled) {
@@ -175,22 +176,20 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
           type="button"
           onClick={() => navigateTo(item.href)}
           aria-current={item.active ? 'page' : undefined}
-          className={`group relative whitespace-nowrap border-0 bg-transparent px-2.5 py-2 text-[13px] font-medium tracking-[0.02em] transition-colors xl:px-3 ${
-            item.active
-              ? isOverlayHero
-                ? 'text-[#F5F5F5]'
-                : 'text-[#101820] dark:text-[#F5F5F5]'
-              : isOverlayHero
-                ? 'text-[#F5F5F5]/78 hover:text-[#F5F5F5]'
-                : 'text-[#52616D] hover:text-[#101820] dark:text-[#A3B0BA] dark:hover:text-[#F5F5F5]'
-          }`}
+          className={`group relative whitespace-nowrap border-0 bg-transparent px-2.5 py-2 text-[13px] font-medium tracking-[0.015em] transition-colors xl:px-3 ${item.active
+            ? isOverlayHero
+              ? 'font-semibold text-[#FAF8F3]'
+              : 'font-semibold text-[#154C42] dark:text-[#FAF8F3]'
+            : isOverlayHero
+              ? 'text-[#FAF8F3]/82 hover:text-[#FAF8F3]'
+              : 'text-[#4E5B66] hover:text-[#101820] dark:text-[#A3B0BA] dark:hover:text-[#FAF8F3]'
+            }`}
         >
           {labelNode}
           <span
             aria-hidden="true"
-            className={`absolute inset-x-2.5 bottom-0.5 h-[2px] rounded-full bg-[#FF783D] transition-transform duration-300 ${
-              item.active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-            }`}
+            className={`absolute inset-x-2.5 bottom-0.5 h-[1.5px] bg-[var(--brand-accent,#FF783D)] transition-transform duration-300 ${item.active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+              }`}
           />
         </button>
       </span>
@@ -199,40 +198,39 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
 
   return (
     <header data-design-section="navbar" className={headerClasses}>
-      <div className="lux-container flex h-[78px] items-center justify-between gap-4">
-        {/* Brand Lockup — never truncated or wrapped */}
+      <div className="lux-container flex h-[72px] items-center justify-between gap-4">
+        {/* Brand Lockup — clean editorial proportion, zero truncation */}
         <button
           type="button"
           onClick={() => navigateTo('/')}
-          className="group flex shrink-0 items-center gap-3 border-0 bg-transparent p-0 text-left"
+          className="group flex shrink-0 items-center gap-2.5 border-0 bg-transparent p-0 text-left"
         >
           <img
             src={withBasePath(logoUrl)}
             alt={siteTitle}
             data-preview-field-path="common.logoUrl"
-            className="h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-8 w-8 shrink-0 rounded object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <span className="flex flex-col whitespace-nowrap">
             <span
               data-preview-field-path="common.websiteTitle"
-              className="font-display text-[15px] font-extrabold uppercase leading-tight tracking-[0.14em] sm:text-base"
+              className="font-display text-[14px] font-bold uppercase leading-tight tracking-[0.16em] sm:text-[15px]"
             >
               {siteTitle}
             </span>
             <span
               data-preview-field-path="common.tagline"
-              className={`text-[10px] font-medium uppercase tracking-[0.2em] ${
-                isOverlayHero ? 'text-[#A3B0BA]' : 'text-[#52616D] dark:text-[#A3B0BA]'
-              }`}
-              style={{ minHeight: '1.1em' }}
+              className={`text-[9.5px] font-medium uppercase tracking-[0.2em] ${isOverlayHero ? 'text-[#C5A46D]' : 'text-[#967742] dark:text-[#C5A46D]'
+                }`}
+              style={{ minHeight: '1.05em' }}
             >
               {tagline}
             </span>
           </span>
         </button>
 
-        {/* Single-line Compact Desktop Navigation */}
-        <nav className="hidden items-center gap-0.5 whitespace-nowrap lg:flex xl:gap-1">
+        {/* Single-line Desktop Navigation */}
+        <nav className="hidden items-center gap-0.5 whitespace-nowrap lg:flex xl:gap-1.5">
           {renderNavButton(
             navItems[0],
             <span data-preview-field-path="common.navLabels.home">
@@ -277,13 +275,13 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
           )}
         </nav>
 
-        {/* Right Controls: Theme Toggle + Rounded Sunset Orange CTA + Mobile Trigger */}
+        {/* Right Controls: Theme Toggle + Refined Plan Your Trip CTA + Mobile Trigger */}
         <div className="flex shrink-0 items-center gap-2.5">
           <ThemeToggle
             className={
               isOverlayHero
-                ? '!rounded-full !border-white/20 !bg-white/10 !text-[#F5F5F5] backdrop-blur-md hover:!border-[#FF783D] hover:!text-[#FF783D]'
-                : '!rounded-full !border-[var(--lux-border-strong)] !bg-transparent hover:!border-[#FF783D] hover:!text-[#FF783D]'
+                ? '!rounded-md !border-white/25 !bg-[#101820]/35 !text-[#FAF8F3] backdrop-blur-sm hover:!border-[#C5A46D] hover:!text-[#C5A46D]'
+                : '!rounded-md !border-[var(--lux-border-strong)] !bg-transparent hover:!border-[var(--brand-accent,#FF783D)] hover:!text-[var(--brand-accent,#FF783D)]'
             }
           />
 
@@ -292,7 +290,7 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
               <button
                 type="button"
                 onClick={() => navigateTo('/#tailor-made')}
-                className="font-display inline-flex min-h-[40px] items-center justify-center whitespace-nowrap rounded-full border border-[#FF783D] bg-[#FF783D] px-5 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_8px_22px_rgba(255,120,61,0.34)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FF8A56]"
+                className="font-display inline-flex min-h-[38px] items-center justify-center whitespace-nowrap rounded-md border border-[var(--brand-accent,#FF783D)] bg-[var(--brand-accent,#FF783D)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.11em] text-white transition-colors duration-200 hover:bg-[#EA662C]"
               >
                 <span data-preview-field-path="common.headerCtaLabel">{headerCtaLabel}</span>
               </button>
@@ -314,13 +312,12 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
             aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden ${
-              isOverlayHero
-                ? 'border-white/25 bg-white/10 text-[#F5F5F5] backdrop-blur-md hover:border-[#FF783D]'
-                : 'border-[var(--lux-border-strong)] bg-transparent text-[var(--lux-text)] hover:border-[#FF783D]'
-            }`}
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-md border transition lg:hidden ${isOverlayHero
+              ? 'border-white/25 bg-[#101820]/35 text-[#FAF8F3] backdrop-blur-sm hover:border-[#C5A46D]'
+              : 'border-[var(--lux-border-strong)] bg-transparent text-[var(--lux-text)] hover:border-[var(--brand-accent,#FF783D)]'
+              }`}
           >
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {menuOpen ? (
                 <path d="M18 6L6 18M6 6l12 12" />
               ) : (
@@ -331,15 +328,15 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
         </div>
       </div>
 
-      {/* Accessible Mobile Drawer */}
+      {/* Accessible Mobile Navigation Drawer */}
       {menuOpen && (
-        <div className="fixed inset-x-0 top-[78px] z-50 max-h-[calc(100vh-78px)] overflow-y-auto border-b border-white/10 bg-[#101820]/98 px-6 py-6 text-[#F5F5F5] shadow-2xl backdrop-blur-xl lg:hidden">
+        <div className="fixed inset-x-0 top-[72px] z-50 max-h-[calc(100vh-72px)] overflow-y-auto border-b border-white/10 bg-[#101820]/98 px-6 py-6 text-[#FAF8F3] shadow-xl backdrop-blur-lg lg:hidden">
           <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
             <span
               data-preview-static="mobile-menu-heading"
-              className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-[#FF783D]"
+              className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A46D]"
             >
-              Navigation
+              Explore Ceylon Odyssey
             </span>
             <button
               ref={drawerCloseRef}
@@ -350,7 +347,7 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
                 setMenuOpen(false);
                 menuButtonRef.current?.focus();
               }}
-              className="rounded-full border border-white/20 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F5F5F5] hover:border-[#FF783D]"
+              className="rounded border border-white/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#FAF8F3] hover:border-[#FF783D]"
             >
               Close
             </button>
@@ -365,12 +362,11 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
                   key={`mobile-${item.key}`}
                   type="button"
                   onClick={() => navigateTo(item.href)}
-                  className={`flex min-h-[48px] w-full items-center justify-between border-0 border-b border-white/10 bg-transparent px-1 py-2.5 text-left text-sm font-semibold tracking-[0.06em] ${
-                    item.active ? 'text-[#FF783D]' : 'text-[#F5F5F5]/90 hover:text-[#FF783D]'
-                  }`}
+                  className={`flex min-h-[48px] w-full items-center justify-between border-0 border-b border-white/10 bg-transparent px-1 py-2.5 text-left text-sm font-semibold tracking-[0.04em] ${item.active ? 'text-[#FF783D]' : 'text-[#FAF8F3]/90 hover:text-[#FF783D]'
+                    }`}
                 >
                   <span>{label}</span>
-                  <span aria-hidden="true" className="text-[#FF783D]">→</span>
+                  <span aria-hidden="true" className="text-[#C5A46D]">→</span>
                 </button>
               );
             })}
@@ -381,7 +377,7 @@ export function LuxuryHeader({ activeRoute }: LuxuryHeaderProps) {
               type="button"
               data-preview-static="mobile-menu-plan-cta"
               onClick={() => navigateTo('/#tailor-made')}
-              className="lux-btn-sunset mt-6 w-full"
+              className="lux-btn-sunset mt-5 w-full"
             >
               {headerCtaLabel}
             </button>
